@@ -1,49 +1,60 @@
 export function getDashboardHtml(): string {
   return `<!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DEV-HARNESS v2.0 - Astrolabe Knowledge Galaxy & Swarm</title>
+  <title>DEV-HARNESS v2.0 - Obsidian-Style Knowledge Graph & Agent Swarm</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-base: #fcfdfd;
-      --bg-surface: #ffffff;
-      --bg-sidebar: #fafbfd;
-      --border-soft: #edf2f7;
-      --border-subtle: #e2e8f0;
+      --bg-base: #0d1117;
+      --bg-surface: #161b22;
+      --bg-sidebar: #0e131b;
+      --border-soft: #21262d;
+      --border-subtle: #30363d;
       
-      --text-main: #0f172a;
-      --text-muted: #64748b;
-      --text-faint: #94a3b8;
-      --ring-guide: rgba(226, 232, 240, 0.8);
+      --text-main: #f0f6fc;
+      --text-muted: #8b949e;
+      --text-faint: #484f58;
 
-      --c-kernel: #eab308;
-      --c-infra: #8b5cf6;
-      --c-sandbox: #10b981;
-      --c-security: #0d9488;
-      --c-verifier: #ef4444;
-      --c-adapters: #f97316;
-      --c-graph: #0284c7;
-      --c-mcp: #06b6d4;
-      --c-router: #ec4899;
-      --c-ui: #6366f1;
-      --c-spec: #64748b;
+      /* Obsidian-style vibrant palette */
+      --c-kernel: #f1e05a;
+      --c-infra: #a371f7;
+      --c-sandbox: #3fb950;
+      --c-security: #2ea043;
+      --c-verifier: #f85149;
+      --c-adapters: #ff7b72;
+      --c-graph: #58a6ff;
+      --c-mcp: #38bdf8;
+      --c-router: #f43f5e;
+      --c-ui: #79c0ff;
+      --c-spec: #8b949e;
     }
 
-    [data-theme="dark"] {
-      --bg-base: #080c14;
-      --bg-surface: #0f172a;
-      --bg-sidebar: #0b1120;
-      --border-soft: #172033;
-      --border-subtle: #1e293b;
-      --text-main: #f8fafc;
-      --text-muted: #94a3b8;
-      --text-faint: #64748b;
-      --ring-guide: rgba(30, 41, 59, 0.7);
+    [data-theme="light"] {
+      --bg-base: #f6f8fa;
+      --bg-surface: #ffffff;
+      --bg-sidebar: #f6f8fa;
+      --border-soft: #d0d7de;
+      --border-subtle: #afb8c1;
+      --text-main: #1f2328;
+      --text-muted: #656d76;
+      --text-faint: #8c959f;
+
+      --c-kernel: #b08800;
+      --c-infra: #8250df;
+      --c-sandbox: #1a7f37;
+      --c-security: #116329;
+      --c-verifier: #cf222e;
+      --c-adapters: #bc4c00;
+      --c-graph: #0969da;
+      --c-mcp: #059669;
+      --c-router: #d12453;
+      --c-ui: #0550ae;
+      --c-spec: #57606a;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -65,12 +76,11 @@ export function getDashboardHtml(): string {
       border-right: 1px solid var(--border-soft);
       background: var(--bg-surface);
       z-index: 30;
-      box-shadow: 2px 0 16px rgba(0, 0, 0, 0.02);
     }
 
     .sidebar-primary {
-      width: 230px;
-      min-width: 230px;
+      width: 220px;
+      min-width: 220px;
       border-right: 1px solid var(--border-soft);
       display: flex;
       flex-direction: column;
@@ -79,8 +89,8 @@ export function getDashboardHtml(): string {
     }
 
     .sidebar-secondary {
-      width: 280px;
-      min-width: 280px;
+      width: 270px;
+      min-width: 270px;
       display: flex;
       flex-direction: column;
       height: 100%;
@@ -89,7 +99,7 @@ export function getDashboardHtml(): string {
     }
 
     .org-header {
-      padding: 14px 16px;
+      padding: 12px 14px;
       border-bottom: 1px solid var(--border-soft);
       display: flex;
       align-items: center;
@@ -98,33 +108,32 @@ export function getDashboardHtml(): string {
     }
 
     .org-avatar {
-      width: 28px;
-      height: 28px;
-      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-      border-radius: 7px;
+      width: 26px;
+      height: 26px;
+      background: linear-gradient(135deg, #238636 0%, #196c2e 100%);
+      border-radius: 6px;
       display: flex;
       align-items: center;
       justify-content: center;
       color: #ffffff;
       font-weight: 800;
-      font-size: 13px;
-      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.15);
+      font-size: 12px;
     }
 
     .org-meta h2 {
-      font-size: 13px;
+      font-size: 12.5px;
       font-weight: 800;
       color: var(--text-main);
       line-height: 1.2;
     }
 
     .org-meta p {
-      font-size: 10.5px;
+      font-size: 10px;
       color: var(--text-muted);
     }
 
     .search-wrap {
-      padding: 8px 12px;
+      padding: 8px 10px;
       border-bottom: 1px solid var(--border-soft);
       background: var(--bg-surface);
     }
@@ -136,7 +145,7 @@ export function getDashboardHtml(): string {
       background: var(--bg-base);
       border: 1px solid var(--border-soft);
       border-radius: 6px;
-      padding: 5px 8px;
+      padding: 4px 8px;
     }
 
     .search-box input {
@@ -144,7 +153,7 @@ export function getDashboardHtml(): string {
       background: transparent;
       outline: none;
       font-family: inherit;
-      font-size: 11.5px;
+      font-size: 11px;
       width: 100%;
       color: var(--text-main);
     }
@@ -152,26 +161,26 @@ export function getDashboardHtml(): string {
     .sidebar-scroll {
       flex: 1;
       overflow-y: auto;
-      padding: 10px 6px;
+      padding: 8px 6px;
     }
 
     .sec-label {
-      font-size: 9.5px;
+      font-size: 9px;
       font-weight: 700;
       color: var(--text-faint);
       text-transform: uppercase;
       letter-spacing: 0.6px;
       padding: 6px 8px 2px;
-      margin-top: 4px;
+      margin-top: 2px;
     }
 
     .nav-item {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 5px 8px;
-      border-radius: 6px;
-      font-size: 12px;
+      padding: 4px 8px;
+      border-radius: 5px;
+      font-size: 11.5px;
       font-weight: 600;
       color: var(--text-muted);
       cursor: pointer;
@@ -187,14 +196,14 @@ export function getDashboardHtml(): string {
     .nav-item.active {
       background: var(--bg-surface);
       color: var(--text-main);
-      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
       border: 1px solid var(--border-soft);
+      font-weight: 700;
     }
 
     .nav-left {
       display: flex;
       align-items: center;
-      gap: 7px;
+      gap: 6px;
     }
 
     .dot {
@@ -204,14 +213,14 @@ export function getDashboardHtml(): string {
     }
 
     .count-pill {
-      font-size: 10.5px;
+      font-size: 10px;
       font-weight: 600;
       color: var(--text-faint);
     }
 
     /* SECONDARY COLUMN */
     .dep-header {
-      padding: 14px 16px;
+      padding: 12px 14px;
       border-bottom: 1px solid var(--border-soft);
       display: flex;
       align-items: center;
@@ -219,26 +228,26 @@ export function getDashboardHtml(): string {
     }
 
     .dep-badge {
-      width: 28px;
-      height: 28px;
+      width: 26px;
+      height: 26px;
       background: var(--c-kernel);
       color: #ffffff;
-      border-radius: 7px;
+      border-radius: 6px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 13px;
+      font-size: 12px;
     }
 
     .dep-meta h3 {
-      font-size: 13px;
+      font-size: 12.5px;
       font-weight: 800;
       color: var(--text-main);
       line-height: 1.2;
     }
 
     .dep-meta p {
-      font-size: 9.5px;
+      font-size: 9px;
       color: var(--text-faint);
       text-transform: uppercase;
       font-weight: 700;
@@ -247,9 +256,9 @@ export function getDashboardHtml(): string {
     .detail-item {
       display: flex;
       align-items: center;
-      gap: 8px;
-      padding: 5px 8px;
-      font-size: 11.5px;
+      gap: 7px;
+      padding: 4px 8px;
+      font-size: 11px;
       font-weight: 600;
       color: var(--text-muted);
       border-radius: 5px;
@@ -263,33 +272,33 @@ export function getDashboardHtml(): string {
 
     .code-tag {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 10.5px;
-      color: #2563eb;
+      font-size: 10px;
+      color: #58a6ff;
     }
 
-    /* 2. MAIN CANVAS VIEW */
+    /* 2. MAIN OBSIDIAN GRAPH CANVAS */
     #main-content {
       flex: 1;
       display: flex;
       flex-direction: column;
       height: 100vh;
       position: relative;
-      background: var(--bg-surface);
+      background: var(--bg-base);
     }
 
     .top-toolbar {
-      height: 48px;
+      height: 44px;
       background: var(--bg-surface);
       border-bottom: 1px solid var(--border-soft);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 18px;
+      padding: 0 16px;
       z-index: 10;
     }
 
     .breadcrumbs {
-      font-size: 12.5px;
+      font-size: 12px;
       font-weight: 600;
       color: var(--text-muted);
       display: flex;
@@ -300,54 +309,57 @@ export function getDashboardHtml(): string {
     .breadcrumbs strong { color: var(--text-main); }
 
     .tag-badge {
-      font-size: 11px;
+      font-size: 10.5px;
       background: var(--bg-base);
       border: 1px solid var(--border-soft);
-      padding: 2px 7px;
+      padding: 2px 6px;
       border-radius: 9999px;
       color: var(--text-muted);
     }
 
-    .fsm-hud {
+    /* OBSIDIAN GRAPH CONTROLS PILL */
+    .obsidian-controls {
+      position: absolute;
+      top: 56px;
+      left: 16px;
+      background: rgba(22, 27, 34, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border-soft);
+      border-radius: 8px;
+      padding: 6px 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      z-index: 20;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+    }
+
+    .obsidian-toggle {
       display: flex;
       align-items: center;
       gap: 4px;
-      background: var(--bg-base);
-      padding: 3px 8px;
-      border-radius: 8px;
-      border: 1px solid var(--border-soft);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      font-weight: 600;
+      cursor: pointer;
     }
 
-    .fsm-step-pill {
-      padding: 2px 6px;
-      border-radius: 4px;
-      color: var(--text-faint);
-    }
-
-    .fsm-step-pill.passed { color: #10b981; }
-    .fsm-step-pill.active {
-      background: #eab308;
-      color: #ffffff;
-      box-shadow: 0 0 8px rgba(234, 179, 8, 0.4);
-    }
+    .obsidian-toggle input { cursor: pointer; }
 
     /* CANVAS AREA */
     #canvas-container {
       flex: 1;
       width: 100%;
-      height: calc(100vh - 48px);
+      height: calc(100vh - 44px);
       position: relative;
       overflow: hidden;
-      background: radial-gradient(circle at center, var(--bg-surface) 0%, var(--bg-base) 100%);
+      background: var(--bg-base);
       cursor: grab;
     }
 
     #canvas-container:active { cursor: grabbing; }
 
-    #galaxy-canvas {
+    #obsidian-canvas {
       width: 100%;
       height: 100%;
       display: block;
@@ -356,17 +368,17 @@ export function getDashboardHtml(): string {
     /* CODE INSPECTOR DRAWER */
     #inspector-drawer {
       position: absolute;
-      top: 48px;
+      top: 44px;
       right: 0;
-      width: 380px;
-      height: calc(100vh - 48px);
+      width: 360px;
+      height: calc(100vh - 44px);
       background: var(--bg-surface);
       border-left: 1px solid var(--border-soft);
-      box-shadow: -6px 0 24px rgba(0, 0, 0, 0.05);
-      padding: 24px;
+      box-shadow: -6px 0 24px rgba(0, 0, 0, 0.3);
+      padding: 20px;
       overflow-y: auto;
       transform: translateX(100%);
-      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
       z-index: 35;
     }
 
@@ -376,23 +388,23 @@ export function getDashboardHtml(): string {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding-bottom: 12px;
+      padding-bottom: 10px;
       border-bottom: 1px solid var(--border-soft);
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
 
     .insp-badge {
-      font-size: 10.5px;
+      font-size: 10px;
       font-weight: 700;
       text-transform: uppercase;
-      padding: 3px 8px;
-      border-radius: 5px;
+      padding: 2px 7px;
+      border-radius: 4px;
     }
 
     .close-btn {
       background: transparent;
       border: none;
-      font-size: 16px;
+      font-size: 15px;
       cursor: pointer;
       color: var(--text-muted);
     }
@@ -400,17 +412,17 @@ export function getDashboardHtml(): string {
     .action-row {
       display: flex;
       gap: 8px;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
 
     .action-btn {
       flex: 1;
-      background: #0f172a;
+      background: #238636;
       color: #ffffff;
       border: none;
       border-radius: 6px;
-      padding: 8px 10px;
-      font-size: 11.5px;
+      padding: 7px 10px;
+      font-size: 11px;
       font-weight: 700;
       cursor: pointer;
       display: flex;
@@ -429,12 +441,13 @@ export function getDashboardHtml(): string {
     .action-btn:hover { opacity: 0.9; }
 
     .code-box {
-      background: #0f172a;
-      color: #e2e8f0;
-      padding: 12px;
-      border-radius: 8px;
+      background: #0d1117;
+      color: #e6edf3;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid var(--border-soft);
       font-family: 'JetBrains Mono', monospace;
-      font-size: 11.5px;
+      font-size: 11px;
       overflow-x: auto;
       white-space: pre-wrap;
     }
@@ -442,8 +455,8 @@ export function getDashboardHtml(): string {
     /* HUD CONTROLS */
     .hud-controls {
       position: absolute;
-      bottom: 20px;
-      left: 20px;
+      bottom: 16px;
+      left: 16px;
       display: flex;
       gap: 6px;
       z-index: 15;
@@ -453,37 +466,37 @@ export function getDashboardHtml(): string {
       background: var(--bg-surface);
       border: 1px solid var(--border-soft);
       border-radius: 6px;
-      padding: 5px 11px;
-      font-size: 11.5px;
+      padding: 4px 10px;
+      font-size: 11px;
       font-weight: 600;
       color: var(--text-main);
-      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
       cursor: pointer;
       display: flex;
       align-items: center;
       gap: 4px;
     }
 
-    .hud-btn:hover { background: var(--bg-base); }
+    .hud-btn:hover { background: var(--border-soft); }
 
-    /* 🎯 SNUG, COMPACT POPOVER HOVER (Öm sát con trỏ, không che node) */
+    /* 🎯 SNUG OBSIDIAN HOVER TOOLTIP */
     #tooltip {
       position: absolute;
       pointer-events: none;
-      background: rgba(15, 23, 42, 0.95);
+      background: rgba(13, 17, 23, 0.95);
       backdrop-filter: blur(10px);
-      color: #ffffff;
-      padding: 4px 9px;
+      color: #f0f6fc;
+      padding: 4px 8px;
       border-radius: 5px;
       font-size: 10.5px;
       font-weight: 600;
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.18);
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.4);
       opacity: 0;
-      transform: translate(6px, -18px);
-      transition: opacity 0.08s ease, transform 0.08s ease;
+      transform: translate(6px, -20px);
+      transition: opacity 0.08s ease;
       z-index: 40;
       white-space: nowrap;
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      border: 1px solid var(--border-subtle);
     }
   </style>
 </head>
@@ -503,17 +516,15 @@ export function getDashboardHtml(): string {
       <div class="search-wrap">
         <div class="search-box">
           <span>🔍</span>
-          <input type="text" placeholder="Search symbols, packages..." id="search-input" oninput="handleSearch()">
+          <input type="text" placeholder="Search nodes..." id="search-input" oninput="handleSearch()">
         </div>
       </div>
 
       <div class="sidebar-scroll">
-        <div class="sec-label">Runtime Overview</div>
+        <div class="sec-label">Graph Overview</div>
         <div class="nav-item active" onclick="selectSubsystem(null)"><div class="nav-left"><span>🪐</span><span>All Subsystems</span></div><span class="count-pill" id="cnt-all">215</span></div>
         <div class="nav-item"><div class="nav-left"><span>⚙️</span><span>AST Symbols</span></div><span class="count-pill" id="cnt-symbols">198</span></div>
         <div class="nav-item"><div class="nav-left"><span>🤖</span><span>AI Agents</span></div><span class="count-pill">4</span></div>
-        <div class="nav-item"><div class="nav-left"><span>🧠</span><span>Failure Memories</span></div><span class="count-pill" id="cnt-failures">0</span></div>
-        <div class="nav-item"><div class="nav-left"><span>📦</span><span>Sealed Handoffs</span></div><span class="count-pill" id="cnt-handoffs">1</span></div>
 
         <div class="sec-label">11 Monorepo Packages</div>
         <div class="nav-item active" onclick="selectSubsystem('kernel')"><div class="nav-left"><span class="dot" style="background:var(--c-kernel);"></span><span>@dev-harness/kernel</span></div></div>
@@ -540,27 +551,22 @@ export function getDashboardHtml(): string {
       </div>
 
       <div class="sidebar-scroll">
-        <div class="sec-label">Core Classes & State Machines</div>
+        <div class="sec-label">Classes & Constructs</div>
         <div id="sub-classes-list">
-          <div class="detail-item" onclick="inspectSymbol('StateMachine')"><span class="code-tag">class</span><span>StateMachine (12 FSM States)</span></div>
-          <div class="detail-item" onclick="inspectSymbol('CapabilityResolver')"><span class="code-tag">class</span><span>CapabilityResolver (Monotonic)</span></div>
-          <div class="detail-item" onclick="inspectSymbol('PolicyEvaluator')"><span class="code-tag">class</span><span>PolicyEvaluator (Scoped Deny)</span></div>
-          <div class="detail-item" onclick="inspectSymbol('Hasher')"><span class="code-tag">class</span><span>Hasher (Canonical SHA-256)</span></div>
-          <div class="detail-item" onclick="inspectSymbol('EventStore')"><span class="code-tag">class</span><span>EventStore (Append-Only)</span></div>
+          <div class="detail-item" onclick="inspectSymbol('StateMachine')"><span class="code-tag">class</span><span>StateMachine</span></div>
+          <div class="detail-item" onclick="inspectSymbol('CapabilityResolver')"><span class="code-tag">class</span><span>CapabilityResolver</span></div>
+          <div class="detail-item" onclick="inspectSymbol('PolicyEvaluator')"><span class="code-tag">class</span><span>PolicyEvaluator</span></div>
+          <div class="detail-item" onclick="inspectSymbol('Hasher')"><span class="code-tag">class</span><span>Hasher</span></div>
+          <div class="detail-item" onclick="inspectSymbol('EventStore')"><span class="code-tag">class</span><span>EventStore</span></div>
         </div>
 
         <div class="sec-label">Parsed AST Methods</div>
         <div id="sub-methods-list">
-          <div class="detail-item" onclick="inspectSymbol('transition')"><span>⚡</span><span>transition(event: DomainEvent)</span></div>
-          <div class="detail-item" onclick="inspectSymbol('resolveCapabilities')"><span>⚡</span><span>resolveCapabilities(task, agent)</span></div>
-          <div class="detail-item" onclick="inspectSymbol('evaluatePolicies')"><span>⚡</span><span>evaluatePolicies(action)</span></div>
-          <div class="detail-item" onclick="inspectSymbol('commitEvent')"><span>⚡</span><span>commitEvent(event: DomainEvent)</span></div>
+          <div class="detail-item" onclick="inspectSymbol('transition')"><span>⚡</span><span>transition()</span></div>
+          <div class="detail-item" onclick="inspectSymbol('resolveCapabilities')"><span>⚡</span><span>resolveCapabilities()</span></div>
+          <div class="detail-item" onclick="inspectSymbol('evaluatePolicies')"><span>⚡</span><span>evaluatePolicies()</span></div>
+          <div class="detail-item" onclick="inspectSymbol('commitEvent')"><span>⚡</span><span>commitEvent()</span></div>
         </div>
-
-        <div class="sec-label">Verification Invariant Gates</div>
-        <div class="detail-item"><span>🛡️</span><span>Gate 1: State Machine Determinism</span></div>
-        <div class="detail-item"><span>🛡️</span><span>Gate 2: Monotonic Restriction</span></div>
-        <div class="detail-item"><span>🛡️</span><span>Gate 3: Pure Domain Zero I/O</span></div>
       </div>
     </aside>
   </div>
@@ -569,19 +575,10 @@ export function getDashboardHtml(): string {
   <main id="main-content">
     <div class="top-toolbar">
       <div class="breadcrumbs">
-        <span>DEV-HARNESS v2.0</span>
+        <span>DEV-HARNESS</span>
         <span>/</span>
-        <strong>Continuous Astrolabe Knowledge Galaxy</strong>
-        <span class="tag-badge">55 Verified Tests • 11 Packages</span>
-      </div>
-
-      <div class="fsm-hud">
-        <span class="fsm-step-pill passed">RECEIVED</span> →
-        <span class="fsm-step-pill passed">PLANNED</span> →
-        <span class="fsm-step-pill passed">AUTHORIZED</span> →
-        <span class="fsm-step-pill passed">EXECUTING</span> →
-        <span class="fsm-step-pill passed">VERIFYING</span> →
-        <span class="fsm-step-pill active">● COMPLETED</span>
+        <strong>Obsidian-Style Force Graph</strong>
+        <span class="tag-badge">55 Tests Passed</span>
       </div>
 
       <div style="display: flex; align-items: center; gap: 8px;">
@@ -589,37 +586,44 @@ export function getDashboardHtml(): string {
       </div>
     </div>
 
+    <!-- OBSIDIAN GRAPH CONTROLS PILL -->
+    <div class="obsidian-controls">
+      <label class="obsidian-toggle"><input type="checkbox" id="chk-labels" checked onchange="toggleLabels()"> Text Labels</label>
+      <label class="obsidian-toggle"><input type="checkbox" id="chk-forces" checked onchange="toggleForces()"> Physics Jiggle</label>
+      <span style="opacity: 0.5;">|</span>
+      <span>Nodes: <strong id="lbl-nodes">215</strong></span>
+      <span>Edges: <strong id="lbl-edges">284</strong></span>
+    </div>
+
     <div id="canvas-container">
-      <canvas id="galaxy-canvas"></canvas>
+      <canvas id="obsidian-canvas"></canvas>
 
       <div class="hud-controls">
         <button class="hud-btn" onclick="zoomIn()">➕ Zoom In</button>
         <button class="hud-btn" onclick="zoomOut()">➖ Zoom Out</button>
-        <button class="hud-btn" onclick="fitView()">🎯 Fit View</button>
-        <button class="hud-btn" onclick="toggleRotation()">🔄 <span id="rot-lbl">Pause</span></button>
+        <button class="hud-btn" onclick="resetPhysics()">🎯 Recenter Graph</button>
       </div>
 
       <div id="tooltip"></div>
     </div>
 
-    <!-- CODE INSPECTOR DRAWER WITH ACTIONABLE IDE & COPY BUTTONS -->
+    <!-- CODE INSPECTOR DRAWER -->
     <aside id="inspector-drawer">
       <div class="insp-head">
         <span class="insp-badge" id="insp-badge" style="background:#eab30822; color:#eab308;">CLASS</span>
         <button class="close-btn" onclick="closeInspector()">✕</button>
       </div>
 
-      <h3 id="insp-title" style="font-size: 16px; font-weight: 800; margin-bottom: 4px;">StateMachine</h3>
+      <h3 id="insp-title" style="font-size: 15px; font-weight: 800; margin-bottom: 4px;">StateMachine</h3>
       <p id="insp-file" style="font-family:'JetBrains Mono',monospace; font-size: 11px; color:var(--text-muted); margin-bottom: 12px;">packages/kernel/src/StateMachine.ts</p>
 
-      <!-- Actionable Buttons: Open in VS Code & Copy Path -->
       <div class="action-row">
         <a id="insp-ide-link" href="#" class="action-btn">💻 Open in IDE</a>
         <button class="action-btn secondary" onclick="copyFilePath()">📋 Copy Path</button>
       </div>
 
       <div style="margin-bottom: 16px;">
-        <h4 style="font-size: 11px; font-weight: 700; color: var(--text-faint); text-transform: uppercase; margin-bottom: 6px;">TypeScript Signature</h4>
+        <h4 style="font-size: 10.5px; font-weight: 700; color: var(--text-faint); text-transform: uppercase; margin-bottom: 6px;">TypeScript Signature</h4>
         <div class="code-box" id="insp-signature">export class StateMachine {
   public transition(event: DomainEvent): StateMachineResult
 }</div>
@@ -628,32 +632,33 @@ export function getDashboardHtml(): string {
   </main>
 
   <script>
-    const canvas = document.getElementById('galaxy-canvas');
+    const canvas = document.getElementById('obsidian-canvas');
     const ctx = canvas.getContext('2d');
     const tooltip = document.getElementById('tooltip');
 
     let nodes = [];
+    let links = [];
     let camera = { x: 0, y: 0, zoom: 0.95 };
-    let isDragging = false;
+    let isDraggingCanvas = false;
+    let draggedNode = null;
     let dragStart = { x: 0, y: 0 };
     let hoveredNode = null;
     let activeSubsystem = 'kernel';
-    let rotationAngle = 0;
-    let isRotating = true;
-    let waveTime = 0;
+    let showLabels = true;
+    let enableForces = true;
 
     const SUBSYSTEMS = [
-      { name: 'kernel', color: '#eab308', title: '@dev-harness/kernel', desc: '12-State FSM & Sole Commit Authority', classes: ['StateMachine', 'CapabilityResolver', 'PolicyEvaluator', 'Hasher', 'EventStore'] },
-      { name: 'infrastructure', color: '#8b5cf6', title: '@dev-harness/infrastructure', desc: 'RunStore, Shadow Git, Context & Swarm', classes: ['FileRunStore', 'GitWorkspace', 'ContextEngine', 'SwarmCoordinator', 'WorktreeManager'] },
-      { name: 'sandbox', color: '#10b981', title: '@dev-harness/sandbox', desc: 'Docker & LocalProcess Sandbox Isolation', classes: ['LocalProcessSandboxProvider', 'DockerSandboxProvider', 'ProcessSupervisor'] },
-      { name: 'security', color: '#0d9488', title: '@dev-harness/security', desc: 'SecretBroker & Scoped Token Redaction', classes: ['SecretBroker', 'NetworkPolicyEvaluator', 'TokenRedactor'] },
-      { name: 'verifier', color: '#ef4444', title: '@dev-harness/verifier', desc: 'Sandboxed Test Runner & Gate Evaluator', classes: ['VerifierRunner', 'GateEvaluator', 'TddCycleValidator'] },
-      { name: 'adapters', color: '#f97316', title: '@dev-harness/adapters', desc: 'Claude, Cursor, Ollama & DeepSeek Adapters', classes: ['ClaudeCodeAdapter', 'CursorAiderAdapter', 'OllamaLocalAdapter', 'DeepSeekReasoningAdapter'] },
-      { name: 'graph', color: '#0284c7', title: '@dev-harness/graph', desc: 'Sub-AST Code Graph & Vector Search', classes: ['CodeGraphParser', 'AstExtractor', 'SemanticVectorIndex', 'AutoFailureSynthesizer'] },
-      { name: 'mcp-server', color: '#06b6d4', title: '@dev-harness/mcp-server', desc: 'Official JSON-RPC MCP Server (8 Tools)', classes: ['McpServer', 'ToolRegistry', 'ResourceRegistry', 'JsonRpc'] },
-      { name: 'router', color: '#ec4899', title: '@dev-harness/router', desc: 'Dynamic Model Router & Cost Optimizer', classes: ['ModelRouter', 'TaskComplexityClassifier', 'CostBudgetOptimizer'] },
-      { name: 'ui', color: '#6366f1', title: '@dev-harness/ui', desc: 'Real-Time Web Observer Dashboard', classes: ['HttpServer', 'ApiRouter', 'DashboardHtml'] },
-      { name: 'spec', color: '#64748b', title: '@dev-harness/spec', desc: 'Portable TypeScript Contracts & Types', classes: ['AgentAdapter', 'RunRecord', 'ContextBundle', 'HandoffPackage'] }
+      { name: 'kernel', color: '#f1e05a', title: '@dev-harness/kernel', desc: '12-State FSM & Sole Commit Authority', classes: ['StateMachine', 'CapabilityResolver', 'PolicyEvaluator', 'Hasher', 'EventStore'] },
+      { name: 'infrastructure', color: '#a371f7', title: '@dev-harness/infrastructure', desc: 'RunStore, Shadow Git, Context & Swarm', classes: ['FileRunStore', 'GitWorkspace', 'ContextEngine', 'SwarmCoordinator', 'WorktreeManager'] },
+      { name: 'sandbox', color: '#3fb950', title: '@dev-harness/sandbox', desc: 'Docker & LocalProcess Sandbox Isolation', classes: ['LocalProcessSandboxProvider', 'DockerSandboxProvider', 'ProcessSupervisor'] },
+      { name: 'security', color: '#2ea043', title: '@dev-harness/security', desc: 'SecretBroker & Scoped Token Redaction', classes: ['SecretBroker', 'NetworkPolicyEvaluator', 'TokenRedactor'] },
+      { name: 'verifier', color: '#f85149', title: '@dev-harness/verifier', desc: 'Sandboxed Test Runner & Gate Evaluator', classes: ['VerifierRunner', 'GateEvaluator', 'TddCycleValidator'] },
+      { name: 'adapters', color: '#ff7b72', title: '@dev-harness/adapters', desc: 'Claude, Cursor, Ollama & DeepSeek Adapters', classes: ['ClaudeCodeAdapter', 'CursorAiderAdapter', 'OllamaLocalAdapter', 'DeepSeekReasoningAdapter'] },
+      { name: 'graph', color: '#58a6ff', title: '@dev-harness/graph', desc: 'Sub-AST Code Graph & Vector Search', classes: ['CodeGraphParser', 'AstExtractor', 'SemanticVectorIndex', 'AutoFailureSynthesizer'] },
+      { name: 'mcp-server', color: '#38bdf8', title: '@dev-harness/mcp-server', desc: 'Official JSON-RPC MCP Server (8 Tools)', classes: ['McpServer', 'ToolRegistry', 'ResourceRegistry', 'JsonRpc'] },
+      { name: 'router', color: '#f43f5e', title: '@dev-harness/router', desc: 'Dynamic Model Router & Cost Optimizer', classes: ['ModelRouter', 'TaskComplexityClassifier', 'CostBudgetOptimizer'] },
+      { name: 'ui', color: '#79c0ff', title: '@dev-harness/ui', desc: 'Real-Time Web Observer Dashboard', classes: ['HttpServer', 'ApiRouter', 'DashboardHtml'] },
+      { name: 'spec', color: '#8b949e', title: '@dev-harness/spec', desc: 'Portable TypeScript Contracts & Types', classes: ['AgentAdapter', 'RunRecord', 'ContextBundle', 'HandoffPackage'] }
     ];
 
     function resizeCanvas() {
@@ -673,124 +678,186 @@ export function getDashboardHtml(): string {
           fetch('/api/handoffs').then(r => r.json())
         ]);
 
-        buildContinuousAstrolabeGalaxy(statusRes, graphRes, failuresRes, handoffsRes);
+        buildObsidianForceGraph(statusRes, graphRes, failuresRes, handoffsRes);
       } catch (err) {
         console.error('Failed to fetch data:', err);
       }
     }
 
-    function buildContinuousAstrolabeGalaxy(status, graph, failures, handoffs) {
+    // 🌟 BUILD OBSIDIAN-STYLE FORCE-DIRECTED GRAPH NETWORK
+    function buildObsidianForceGraph(status, graph, failures, handoffs) {
       nodes = [];
+      links = [];
 
-      nodes.push({
+      // 1. Root Kernel Node
+      const rootNode = {
         id: 'node-root-kernel',
         name: 'DEV-HARNESS Kernel',
         kind: 'core',
-        color: '#0f172a',
-        radius: 20,
-        orbitR: 0,
-        angle: 0,
-        shape: 'avatar'
-      });
+        color: '#f1e05a',
+        radius: 12,
+        x: 0,
+        y: 0,
+        vx: 0,
+        vy: 0,
+        isHub: true
+      };
+      nodes.push(rootNode);
 
+      // 2. Package Hub Nodes (11 Packages clustered around center)
       SUBSYSTEMS.forEach((sub, sIdx) => {
         const angle = (sIdx / SUBSYSTEMS.length) * Math.PI * 2;
-        nodes.push({
+        const dist = 140;
+        const subNode = {
           id: 'sub-' + sub.name,
           name: sub.title,
           subsystem: sub.name,
           kind: 'subsystem',
           color: sub.color,
-          radius: 9,
-          orbitR: 0.20,
-          angle: angle,
-          shape: 'circle'
+          radius: 8,
+          x: Math.cos(angle) * dist,
+          y: Math.sin(angle) * dist,
+          vx: (Math.random() - 0.5) * 2,
+          vy: (Math.random() - 0.5) * 2,
+          isHub: true
+        };
+        nodes.push(subNode);
+        links.push({ source: rootNode.id, target: subNode.id, length: 140, strength: 0.8 });
+
+        // Add 8-12 child symbols orbiting each package hub
+        sub.classes.forEach((clsName, cIdx) => {
+          const cAngle = angle + (cIdx - 2) * 0.3;
+          const cDist = dist + 60 + Math.random() * 30;
+          const clsNode = {
+            id: \`cls-\${sub.name}-\${cIdx}\`,
+            name: clsName,
+            subsystem: sub.name,
+            kind: 'class',
+            color: sub.color,
+            radius: 4.5,
+            x: Math.cos(cAngle) * cDist,
+            y: Math.sin(cAngle) * cDist,
+            vx: (Math.random() - 0.5) * 2,
+            vy: (Math.random() - 0.5) * 2
+          };
+          nodes.push(clsNode);
+          links.push({ source: subNode.id, target: clsNode.id, length: 70, strength: 0.6 });
         });
       });
 
-      const totalRing2 = 88;
-      for (let i = 0; i < totalRing2; i++) {
-        const angle = (i / totalRing2) * Math.PI * 2;
-        const subIdx = Math.floor((i / totalRing2) * SUBSYSTEMS.length);
-        const sub = SUBSYSTEMS[subIdx];
-
-        nodes.push({
-          id: \`ribbon-\${i}\`,
-          name: \`\${sub.title} Construct #\${(i % 8) + 1}\`,
-          subsystem: sub.name,
-          kind: 'class',
-          color: sub.color,
-          radius: 3.8,
-          orbitR: 0.38 + (i % 2) * 0.015,
-          angle: angle,
-          shape: (i % 3 === 0) ? 'square' : 'circle',
-          jitterPhase: Math.random() * Math.PI * 2
-        });
-      }
-
+      // 3. Parsed AST Symbols from actual files (connected organically)
       const allSymbols = graph.symbols || [];
-      const totalRing3 = 144;
-      for (let j = 0; j < totalRing3; j++) {
-        const angle = (j / totalRing3) * Math.PI * 2;
-        const subIdx = Math.floor((j / totalRing3) * SUBSYSTEMS.length);
-        const sub = SUBSYSTEMS[subIdx];
-        const sym = allSymbols[j % Math.max(1, allSymbols.length)] || { name: \`AST_Symbol_\${j}\` };
+      allSymbols.slice(0, 100).forEach((sym, sIdx) => {
+        const subIdx = sIdx % SUBSYSTEMS.length;
+        const parentHub = nodes.find(n => n.id === 'sub-' + SUBSYSTEMS[subIdx].name);
+        if (!parentHub) return;
 
-        nodes.push({
-          id: \`ast-pearl-\${j}\`,
+        const symAngle = Math.random() * Math.PI * 2;
+        const symDist = 80 + Math.random() * 50;
+        const symNode = {
+          id: \`ast-\${sIdx}\`,
           name: sym.name,
-          subsystem: sub.name,
+          subsystem: SUBSYSTEMS[subIdx].name,
           kind: 'symbol',
-          color: sub.color,
-          radius: 3.2,
-          orbitR: 0.56 + (j % 3) * 0.018,
-          angle: angle,
-          shape: 'circle',
-          data: sym,
-          jitterPhase: Math.random() * Math.PI * 2
-        });
-      }
+          color: SUBSYSTEMS[subIdx].color,
+          radius: 3,
+          x: parentHub.x + Math.cos(symAngle) * symDist,
+          y: parentHub.y + Math.sin(symAngle) * symDist,
+          vx: (Math.random() - 0.5) * 1.5,
+          vy: (Math.random() - 0.5) * 1.5,
+          data: sym
+        };
+        nodes.push(symNode);
+        links.push({ source: parentHub.id, target: symNode.id, length: 65, strength: 0.4 });
+      });
 
-      const totalRing4 = 64;
-      for (let k = 0; k < totalRing4; k++) {
-        const angle = (k / totalRing4) * Math.PI * 2;
-        const subIdx = Math.floor((k / totalRing4) * SUBSYSTEMS.length);
-        const sub = SUBSYSTEMS[subIdx];
+      // 4. Cross-Package Dependency Links (Obsidian Web interconnectivity!)
+      links.push({ source: 'sub-infrastructure', target: 'sub-kernel', length: 110, strength: 0.5 });
+      links.push({ source: 'sub-router', target: 'sub-adapters', length: 100, strength: 0.5 });
+      links.push({ source: 'sub-verifier', target: 'sub-sandbox', length: 100, strength: 0.5 });
+      links.push({ source: 'sub-mcp-server', target: 'sub-graph', length: 110, strength: 0.5 });
+      links.push({ source: 'sub-security', target: 'sub-sandbox', length: 90, strength: 0.5 });
 
-        nodes.push({
-          id: \`outer-\${k}\`,
-          name: (k % 4 === 0) ? \`Agent Swarm Node #\${k}\` : \`Verified Proof Artifact #\${k}\`,
-          subsystem: sub.name,
-          kind: (k % 4 === 0) ? 'agent' : 'handoff',
-          color: (k % 4 === 0) ? '#10b981' : sub.color,
-          radius: (k % 4 === 0) ? 5.5 : 3.6,
-          orbitR: 0.76 + (k % 2) * 0.02,
-          angle: angle,
-          shape: 'diamond',
-          jitterPhase: Math.random() * Math.PI * 2
-        });
-      }
-
+      document.getElementById('lbl-nodes').innerText = nodes.length;
+      document.getElementById('lbl-edges').innerText = links.length;
       document.getElementById('cnt-all').innerText = nodes.length;
-      document.getElementById('cnt-symbols').innerText = (graph.symbols || []).length;
-      document.getElementById('cnt-failures').innerText = failures.length;
-      document.getElementById('cnt-handoffs').innerText = handoffs.length;
+      document.getElementById('cnt-symbols').innerText = allSymbols.length;
+    }
+
+    // ⚡ OBSIDIAN FORCE PHYSICS SIMULATION
+    function updatePhysics() {
+      if (!enableForces) return;
+
+      const nodeMap = new Map();
+      nodes.forEach(n => nodeMap.set(n.id, n));
+
+      // 1. Repulsion between all nodes (Coulomb electrostatic force)
+      for (let i = 0; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+          const n1 = nodes[i];
+          const n2 = nodes[j];
+          const dx = n2.x - n1.x;
+          const dy = n2.y - n1.y;
+          const distSq = dx * dx + dy * dy + 1;
+          if (distSq < 40000) {
+            const dist = Math.sqrt(distSq);
+            const force = (n1.isHub || n2.isHub ? 1200 : 350) / distSq;
+            const fx = (dx / dist) * force;
+            const fy = (dy / dist) * force;
+
+            if (n1 !== draggedNode) { n1.vx -= fx; n1.vy -= fy; }
+            if (n2 !== draggedNode) { n2.vx += fx; n2.vy += fy; }
+          }
+        }
+      }
+
+      // 2. Spring attraction along links (Hooke's law)
+      links.forEach(link => {
+        const n1 = nodeMap.get(link.source);
+        const n2 = nodeMap.get(link.target);
+        if (!n1 || !n2) return;
+
+        const dx = n2.x - n1.x;
+        const dy = n2.y - n1.y;
+        const dist = Math.hypot(dx, dy) || 1;
+        const displacement = dist - link.length;
+        const force = displacement * 0.035 * link.strength;
+
+        const fx = (dx / dist) * force;
+        const fy = (dy / dist) * force;
+
+        if (n1 !== draggedNode) { n1.vx += fx; n1.vy += fy; }
+        if (n2 !== draggedNode) { n2.vx -= fx; n2.vy -= fy; }
+      });
+
+      // 3. Center Gravity (Pull toward center 0,0)
+      nodes.forEach(node => {
+        if (node === draggedNode) return;
+        const distToCenter = Math.hypot(node.x, node.y);
+        const grav = 0.015;
+        node.vx -= node.x * grav * 0.1;
+        node.vy -= node.y * grav * 0.1;
+
+        // Velocity damping (Friction)
+        node.vx *= 0.88;
+        node.vy *= 0.88;
+
+        node.x += node.vx;
+        node.y += node.vy;
+      });
     }
 
     function animate() {
-      if (isRotating) {
-        rotationAngle += 0.0005;
-      }
-      waveTime += 0.015;
+      updatePhysics();
       render();
       requestAnimationFrame(animate);
     }
 
+    // 🎨 RENDER OBSIDIAN GRAPH VIEW (Easy on the eyes, organic & luminous)
     function render() {
       const container = document.getElementById('canvas-container');
       const width = container.clientWidth;
       const height = container.clientHeight;
-      const baseDim = Math.min(width, height) / 2;
 
       ctx.clearRect(0, 0, width, height);
 
@@ -801,148 +868,80 @@ export function getDashboardHtml(): string {
       ctx.translate(centerX, centerY);
       ctx.scale(camera.zoom, camera.zoom);
 
-      const centerAura = ctx.createRadialGradient(0, 0, 0, 0, 0, 110);
-      centerAura.addColorStop(0, 'rgba(234, 179, 8, 0.16)');
-      centerAura.addColorStop(0.5, 'rgba(234, 179, 8, 0.05)');
-      centerAura.addColorStop(1, 'rgba(234, 179, 8, 0)');
-      ctx.fillStyle = centerAura;
-      ctx.beginPath();
-      ctx.arc(0, 0, 110, 0, Math.PI * 2);
-      ctx.fill();
+      const nodeMap = new Map();
+      nodes.forEach(n => nodeMap.set(n.id, n));
 
-      const ringsNorm = [0.20, 0.38, 0.56, 0.76];
-      ringsNorm.forEach((rn, rIdx) => {
-        const radius = baseDim * rn;
+      // 1. Draw Obsidian Delicate Link Lines
+      links.forEach(link => {
+        const from = nodeMap.get(link.source);
+        const to = nodeMap.get(link.target);
+        if (!from || !to) return;
+
+        const isHovered = hoveredNode && (hoveredNode.id === from.id || hoveredNode.id === to.id);
+        const isSubSelected = activeSubsystem && (from.subsystem === activeSubsystem || to.subsystem === activeSubsystem);
+
         ctx.beginPath();
-        ctx.arc(0, 0, radius, 0, Math.PI * 2);
-        ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--ring-guide');
-        ctx.lineWidth = 1;
-        ctx.setLineDash([4, 8]);
-        ctx.stroke();
-        ctx.setLineDash([]);
+        ctx.moveTo(from.x, from.y);
+        ctx.lineTo(to.x, to.y);
 
-        if (rIdx === ringsNorm.length - 1) {
-          for (let deg = 0; deg < 360; deg += 30) {
-            const rad = (deg * Math.PI) / 180;
-            const tx1 = Math.cos(rad) * (radius - 4);
-            const ty1 = Math.sin(rad) * (radius - 4);
-            const tx2 = Math.cos(rad) * (radius + 4);
-            const ty2 = Math.sin(rad) * (radius + 4);
-
-            ctx.beginPath();
-            ctx.moveTo(tx1, ty1);
-            ctx.lineTo(tx2, ty2);
-            ctx.strokeStyle = 'rgba(148, 163, 184, 0.4)';
-            ctx.lineWidth = 1;
-            ctx.stroke();
-          }
+        if (isHovered) {
+          ctx.strokeStyle = '#58a6ff';
+          ctx.lineWidth = 1.8;
+        } else if (isSubSelected) {
+          ctx.strokeStyle = from.color + '66';
+          ctx.lineWidth = 1.2;
+        } else {
+          ctx.strokeStyle = 'rgba(139, 148, 158, 0.15)';
+          ctx.lineWidth = 0.6;
         }
+        ctx.stroke();
       });
 
-      if (activeSubsystem) {
-        const subNode = nodes.find(n => n.kind === 'subsystem' && n.subsystem === activeSubsystem);
-        if (subNode) {
-          const curAngle = subNode.angle + rotationAngle;
-          const subR = baseDim * subNode.orbitR;
-          const dx = Math.cos(curAngle) * subR;
-          const dy = Math.sin(curAngle) * subR;
+      // 2. Draw Obsidian Glowing Nodes & Labels
+      nodes.forEach(node => {
+        const isHovered = hoveredNode && hoveredNode.id === node.id;
+        const isSubSelected = !activeSubsystem || node.subsystem === activeSubsystem || node.kind === 'core';
+        const alpha = isSubSelected ? 'ff' : '44';
 
-          const glow = ctx.createRadialGradient(dx, dy, 0, dx, dy, 75);
-          glow.addColorStop(0, subNode.color + '26');
-          glow.addColorStop(1, subNode.color + '00');
+        // Soft Radial Glow on Hub Nodes
+        if (node.isHub) {
+          const glow = ctx.createRadialGradient(node.x, node.y, 0, node.x, node.y, node.radius * 3);
+          glow.addColorStop(0, node.color + (isHovered ? '66' : '22'));
+          glow.addColorStop(1, node.color + '00');
           ctx.fillStyle = glow;
           ctx.beginPath();
-          ctx.arc(dx, dy, 75, 0, Math.PI * 2);
+          ctx.arc(node.x, node.y, node.radius * 3, 0, Math.PI * 2);
           ctx.fill();
-
-          ctx.beginPath();
-          ctx.moveTo(0, 0);
-          ctx.quadraticCurveTo(dx * 0.5 + Math.sin(curAngle) * 14, dy * 0.5 - Math.cos(curAngle) * 14, dx, dy);
-          ctx.strokeStyle = subNode.color + 'aa';
-          ctx.lineWidth = 2.4;
-          ctx.stroke();
-
-          nodes.forEach(node => {
-            if (node.subsystem === activeSubsystem && node.orbitR > 0.20) {
-              const nAngle = node.angle + rotationAngle;
-              const nR = baseDim * node.orbitR;
-              const nx = Math.cos(nAngle) * nR;
-              const ny = Math.sin(nAngle) * nR;
-
-              const midX = (dx + nx) / 2 + Math.sin(nAngle) * 6;
-              const midY = (dy + ny) / 2 - Math.cos(nAngle) * 6;
-
-              ctx.beginPath();
-              ctx.moveTo(dx, dy);
-              ctx.quadraticCurveTo(midX, midY, nx, ny);
-              ctx.strokeStyle = subNode.color + '38';
-              ctx.lineWidth = 0.9;
-              ctx.stroke();
-            }
-          });
         }
-      }
 
-      nodes.forEach(node => {
-        const curAngle = (node.orbitR === 0) ? 0 : (node.angle + rotationAngle);
-        const breath = (node.jitterPhase) ? Math.sin(waveTime + node.jitterPhase) * 1.2 : 0;
-        const curR = baseDim * node.orbitR + breath;
-        const nx = Math.cos(curAngle) * curR;
-        const ny = Math.sin(curAngle) * curR;
-        node.currentX = nx;
-        node.currentY = ny;
+        // Main Node Circle
+        ctx.beginPath();
+        ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+        ctx.fillStyle = node.color + alpha;
+        ctx.fill();
 
-        const isRelated = (!activeSubsystem || node.subsystem === activeSubsystem || node.kind === 'core');
-        const alpha = isRelated ? 'ff' : '66';
-
-        if (node.shape === 'avatar') {
-          ctx.beginPath();
-          ctx.arc(0, 0, node.radius, 0, Math.PI * 2);
-          ctx.fillStyle = '#0f172a';
-          ctx.fill();
+        if (node.isHub) {
           ctx.strokeStyle = '#ffffff';
-          ctx.lineWidth = 3;
-          ctx.stroke();
-
-          ctx.fillStyle = '#ffffff';
-          ctx.font = '800 13px "Plus Jakarta Sans", sans-serif';
-          ctx.textAlign = 'center';
-          ctx.textBaseline = 'middle';
-          ctx.fillText('🏛️', 0, 0);
-          ctx.textBaseline = 'alphabetic';
-        } else if (node.shape === 'square') {
-          ctx.fillStyle = node.color + alpha;
-          ctx.fillRect(nx - node.radius, ny - node.radius, node.radius * 2, node.radius * 2);
-        } else if (node.shape === 'diamond') {
-          ctx.beginPath();
-          ctx.moveTo(nx, ny - node.radius);
-          ctx.lineTo(nx + node.radius, ny);
-          ctx.lineTo(nx, ny + node.radius);
-          ctx.lineTo(nx - node.radius, ny);
-          ctx.closePath();
-          ctx.fillStyle = node.color + alpha;
-          ctx.fill();
-        } else {
-          ctx.beginPath();
-          ctx.arc(nx, ny, node.radius, 0, Math.PI * 2);
-          ctx.fillStyle = node.color + alpha;
-          ctx.fill();
-        }
-
-        if (node.subsystem === activeSubsystem && node.kind === 'subsystem') {
-          ctx.beginPath();
-          ctx.arc(nx, ny, node.radius + 5, 0, Math.PI * 2);
-          ctx.strokeStyle = node.color;
-          ctx.lineWidth = 2.2;
+          ctx.lineWidth = 1.5;
           ctx.stroke();
         }
 
-        if (hoveredNode && hoveredNode.id === node.id) {
+        // Hover Ring
+        if (isHovered) {
           ctx.beginPath();
-          ctx.arc(nx, ny, node.radius + 4, 0, Math.PI * 2);
-          ctx.strokeStyle = '#0f172a';
+          ctx.arc(node.x, node.y, node.radius + 4, 0, Math.PI * 2);
+          ctx.strokeStyle = '#ffffff';
           ctx.lineWidth = 2;
           ctx.stroke();
+        }
+
+        // 3. Obsidian Text Labels (Floating cleanly next to hub nodes)
+        if (showLabels && (node.isHub || isHovered)) {
+          ctx.font = node.isHub ? '700 10.5px "Plus Jakarta Sans", sans-serif' : '600 9.5px "Plus Jakarta Sans", sans-serif';
+          ctx.fillStyle = isHovered ? '#ffffff' : (isSubSelected ? 'var(--text-main)' : 'var(--text-faint)');
+          ctx.textAlign = 'left';
+          ctx.textBaseline = 'middle';
+          ctx.fillText(node.name, node.x + node.radius + 6, node.y);
         }
       });
 
@@ -959,8 +958,8 @@ export function getDashboardHtml(): string {
 
       for (let i = nodes.length - 1; i >= 0; i--) {
         const node = nodes[i];
-        const dist = Math.hypot(node.currentX - localX, node.currentY - localY);
-        if (dist <= Math.max(9, node.radius + 3)) {
+        const dist = Math.hypot(node.x - localX, node.y - localY);
+        if (dist <= Math.max(10, node.radius + 4)) {
           return node;
         }
       }
@@ -970,23 +969,35 @@ export function getDashboardHtml(): string {
     const container = document.getElementById('canvas-container');
 
     container.addEventListener('mousedown', e => {
-      isDragging = true;
-      dragStart = { x: e.clientX - camera.x, y: e.clientY - camera.y };
+      const rect = canvas.getBoundingClientRect();
+      const hit = getNodeAt(e.clientX - rect.left, e.clientY - rect.top);
+      if (hit) {
+        draggedNode = hit;
+      } else {
+        isDraggingCanvas = true;
+        dragStart = { x: e.clientX - camera.x, y: e.clientY - camera.y };
+      }
     });
 
     window.addEventListener('mousemove', e => {
-      if (isDragging) {
+      const rect = canvas.getBoundingClientRect();
+      if (draggedNode) {
+        const centerX = container.clientWidth / 2 + camera.x;
+        const centerY = container.clientHeight / 2 + camera.y;
+        draggedNode.x = (e.clientX - rect.left - centerX) / camera.zoom;
+        draggedNode.y = (e.clientY - rect.top - centerY) / camera.zoom;
+        draggedNode.vx = 0;
+        draggedNode.vy = 0;
+      } else if (isDraggingCanvas) {
         camera.x = e.clientX - dragStart.x;
         camera.y = e.clientY - dragStart.y;
       } else {
-        const rect = canvas.getBoundingClientRect();
         const hit = getNodeAt(e.clientX - rect.left, e.clientY - rect.top);
         hoveredNode = hit;
         if (hit) {
           tooltip.style.opacity = '1';
-          // 🎯 Snug, close placement right next to cursor
           tooltip.style.left = (e.clientX + 6) + 'px';
-          tooltip.style.top = (e.clientY - 24) + 'px';
+          tooltip.style.top = (e.clientY - 20) + 'px';
           tooltip.innerHTML = '<strong>' + hit.name + '</strong> • <span style="font-size:9.5px;opacity:0.85;">' + (hit.subsystem || hit.kind).toUpperCase() + '</span>';
         } else {
           tooltip.style.opacity = '0';
@@ -994,12 +1005,15 @@ export function getDashboardHtml(): string {
       }
     });
 
-    window.addEventListener('mouseup', () => { isDragging = false; });
+    window.addEventListener('mouseup', () => {
+      isDraggingCanvas = false;
+      draggedNode = null;
+    });
 
     container.addEventListener('wheel', e => {
       e.preventDefault();
       const factor = e.deltaY < 0 ? 1.08 : 0.92;
-      camera.zoom = Math.max(0.4, Math.min(3.0, camera.zoom * factor));
+      camera.zoom = Math.max(0.3, Math.min(3.5, camera.zoom * factor));
     });
 
     container.addEventListener('click', e => {
@@ -1037,8 +1051,6 @@ export function getDashboardHtml(): string {
       const pkg = activeSubsystem || 'kernel';
       const filePath = \`packages/\${pkg}/src/\${symName}.ts\`;
       document.getElementById('insp-file').innerText = filePath;
-
-      // Real vscode:// deep link
       document.getElementById('insp-ide-link').href = \`vscode://file/e:/conducting-ai/\${filePath}\`;
 
       document.getElementById('insp-signature').innerText = \`export class \${symName} {
@@ -1050,7 +1062,7 @@ export function getDashboardHtml(): string {
     function copyFilePath() {
       const filePath = document.getElementById('insp-file').innerText;
       navigator.clipboard.writeText(filePath).then(() => {
-        alert('Đã sao chép đường dẫn file: ' + filePath);
+        alert('Đã sao chép đường dẫn: ' + filePath);
       });
     }
 
@@ -1064,29 +1076,31 @@ export function getDashboardHtml(): string {
       document.documentElement.setAttribute('data-theme', next);
     }
 
-    function zoomIn() { camera.zoom = Math.min(3.0, camera.zoom * 1.2); }
-    function zoomOut() { camera.zoom = Math.max(0.4, camera.zoom / 1.2); }
-    function fitView() { camera = { x: 0, y: 0, zoom: 0.95 }; }
+    function toggleLabels() { showLabels = document.getElementById('chk-labels').checked; }
+    function toggleForces() { enableForces = document.getElementById('chk-forces').checked; }
 
-    function toggleRotation() {
-      isRotating = !isRotating;
-      document.getElementById('rot-lbl').innerText = isRotating ? 'Pause' : 'Resume';
+    function zoomIn() { camera.zoom = Math.min(3.5, camera.zoom * 1.2); }
+    function zoomOut() { camera.zoom = Math.max(0.3, camera.zoom / 1.2); }
+    function resetPhysics() {
+      camera = { x: 0, y: 0, zoom: 0.95 };
+      nodes.forEach(n => { n.vx = (Math.random() - 0.5) * 4; n.vy = (Math.random() - 0.5) * 4; });
     }
 
     function handleSearch() {
       const q = document.getElementById('search-input').value.toLowerCase();
       if (!q) { selectSubsystem(null); return; }
-      const match = SUBSYSTEMS.find(s => s.name.toLowerCase().includes(q) || s.title.toLowerCase().includes(q));
+      const match = nodes.find(n => n.name.toLowerCase().includes(q));
       if (match) {
-        selectSubsystem(match.name);
-        inspectSymbol(match.classes[0]);
+        if (match.subsystem) selectSubsystem(match.subsystem);
+        camera.x = -match.x * camera.zoom;
+        camera.y = -match.y * camera.zoom;
+        hoveredNode = match;
       }
     }
 
     resizeCanvas();
     loadRealData();
     animate();
-    fitView();
   </script>
 </body>
 </html>`;

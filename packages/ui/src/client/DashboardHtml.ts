@@ -10,39 +10,42 @@ export function getDashboardHtml(): string {
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-base: #f8fafc;
-      --bg-surface: #ffffff;
+      --bg-main: #f8fafc;
       --bg-sidebar: #fbfcfd;
-      --border-light: #eef2f6;
-      --border-subtle: #e2e8f0;
+      --bg-surface: #ffffff;
+      --border-subtle: #eaedf1;
+      --border-strong: #cbd5e1;
       
-      --text-main: #0f172a;
+      --text-title: #0f172a;
+      --text-body: #334155;
       --text-muted: #64748b;
-      --text-subtle: #94a3b8;
+      --text-faint: #94a3b8;
 
-      /* Conducting AI Palette */
-      --c-core: #eab308;
-      --c-package: #8b5cf6;
-      --c-func: #3b82f6;
-      --c-class: #0ea5e9;
-      --c-interface: #6366f1;
-      --c-agent: #10b981;
-      --c-fail: #ef4444;
-      --c-handoff: #06b6d4;
+      /* Conducting AI Department Colors (Exact from reference) */
+      --dep-pm: #ea580c;       /* Product Management - Orange */
+      --dep-mktg: #dc2626;     /* Marketing & Growth - Red */
+      --dep-sales: #16a34a;    /* Sales - Green */
+      --dep-cust: #0d9488;     /* Customer & Admin - Teal */
+      --dep-ops: #b45309;      /* Operations & Supply Chain - Amber */
+      --dep-tech: #4f46e5;     /* Tech, AI & Automations - Indigo */
+      --dep-strat: #2563eb;    /* Strategy & Leadership - Blue */
+      --dep-fin: #ca8a04;      /* Finance - Gold */
+      --dep-data: #0284c7;     /* Data & Analytics - Sky */
+      --dep-legal: #9333ea;    /* Legal, Risk & Compliance - Purple */
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-      background-color: var(--bg-base);
-      color: var(--text-main);
+      background-color: var(--bg-main);
+      color: var(--text-body);
       height: 100vh;
       overflow: hidden;
       display: flex;
     }
 
-    /* 1. LEFT CONDUCTING AI TAXONOMY SIDEBAR */
+    /* 1. LEFT CONDUCTING AI SIDEBAR */
     #sidebar {
       width: 320px;
       min-width: 320px;
@@ -52,18 +55,19 @@ export function getDashboardHtml(): string {
       flex-direction: column;
       height: 100vh;
       z-index: 20;
+      position: relative;
     }
 
-    .sidebar-header {
-      padding: 16px 20px;
-      border-bottom: 1px solid var(--border-light);
+    .org-header {
+      padding: 16px 18px;
+      border-bottom: 1px solid var(--border-subtle);
       display: flex;
       align-items: center;
       gap: 12px;
       background: #ffffff;
     }
 
-    .company-avatar {
+    .org-icon {
       width: 32px;
       height: 32px;
       background: #0f172a;
@@ -76,41 +80,67 @@ export function getDashboardHtml(): string {
       font-size: 14px;
     }
 
-    .company-meta h2 {
+    .org-title h2 {
       font-size: 14px;
       font-weight: 700;
+      color: var(--text-title);
       letter-spacing: -0.2px;
-      color: var(--text-main);
     }
 
-    .company-meta p {
+    .org-title p {
       font-size: 11px;
       color: var(--text-muted);
       font-weight: 500;
     }
 
+    .sidebar-search {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border-subtle);
+      background: #ffffff;
+    }
+
+    .search-input-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #f1f5f9;
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 6px 10px;
+    }
+
+    .search-input-wrap input {
+      border: none;
+      background: transparent;
+      outline: none;
+      font-family: inherit;
+      font-size: 12px;
+      width: 100%;
+      color: var(--text-title);
+    }
+
     .sidebar-scroll {
       flex: 1;
       overflow-y: auto;
-      padding: 14px 10px;
+      padding: 12px 8px;
     }
 
     .sidebar-section-title {
       font-size: 10px;
       font-weight: 700;
-      color: var(--text-subtle);
+      color: var(--text-faint);
       text-transform: uppercase;
       letter-spacing: 0.8px;
       padding: 8px 12px 4px;
-      margin-top: 10px;
+      margin-top: 6px;
     }
 
-    .nav-row {
+    .nav-item {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 6px 12px;
-      border-radius: 7px;
+      padding: 6px 10px;
+      border-radius: 6px;
       font-size: 12.5px;
       font-weight: 600;
       color: var(--text-muted);
@@ -119,37 +149,70 @@ export function getDashboardHtml(): string {
       margin-bottom: 1px;
     }
 
-    .nav-row:hover {
-      background: #f1f5f9;
-      color: var(--text-main);
+    .nav-item:hover {
+      background: #eef2f6;
+      color: var(--text-title);
     }
 
-    .nav-row.active {
+    .nav-item.active {
       background: #ffffff;
-      color: #0f172a;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
-      border: 1px solid var(--border-light);
+      color: var(--text-title);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      border: 1px solid var(--border-subtle);
     }
 
     .nav-left {
       display: flex;
       align-items: center;
-      gap: 9px;
+      gap: 8px;
     }
 
     .dot {
-      width: 7px;
-      height: 7px;
+      width: 8px;
+      height: 8px;
       border-radius: 50%;
     }
 
     .count-pill {
       font-size: 11px;
       font-weight: 600;
-      color: var(--text-subtle);
+      color: var(--text-faint);
     }
 
-    /* 2. MAIN WORKSPACE */
+    /* DEPARTMENT DETAIL SUB-VIEW IN SIDEBAR (Image 4) */
+    #dep-sidebar-detail {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #ffffff;
+      display: none;
+      flex-direction: column;
+      z-index: 25;
+    }
+
+    .back-btn-header {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .back-btn-header:hover { color: var(--text-title); }
+
+    .dep-detail-scroll {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+    }
+
+    /* 2. MAIN VIEW AREA */
     #main-content {
       flex: 1;
       display: flex;
@@ -159,7 +222,6 @@ export function getDashboardHtml(): string {
       background: #ffffff;
     }
 
-    /* TOP BAR */
     .top-toolbar {
       height: 56px;
       background: #ffffff;
@@ -171,26 +233,16 @@ export function getDashboardHtml(): string {
       z-index: 10;
     }
 
-    .search-wrap {
+    .stats-breadcrumbs {
       display: flex;
       align-items: center;
-      gap: 8px;
-      background: #f8fafc;
-      border: 1px solid var(--border-subtle);
-      border-radius: 20px;
-      padding: 6px 14px;
-      width: 340px;
+      gap: 12px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
     }
 
-    .search-wrap input {
-      border: none;
-      background: transparent;
-      outline: none;
-      font-family: inherit;
-      font-size: 12.5px;
-      width: 100%;
-      color: var(--text-main);
-    }
+    .stats-breadcrumbs strong { color: var(--text-title); }
 
     .view-toggles {
       display: flex;
@@ -203,7 +255,7 @@ export function getDashboardHtml(): string {
     .view-btn {
       font-size: 12px;
       font-weight: 600;
-      padding: 5px 12px;
+      padding: 6px 14px;
       border-radius: 6px;
       border: none;
       background: transparent;
@@ -214,11 +266,11 @@ export function getDashboardHtml(): string {
 
     .view-btn.active {
       background: #ffffff;
-      color: var(--text-main);
+      color: var(--text-title);
       box-shadow: 0 1px 3px rgba(0,0,0,0.08);
     }
 
-    /* CANVAS CONTAINER */
+    /* CANVAS VIEWPORT */
     #canvas-container {
       flex: 1;
       position: relative;
@@ -235,7 +287,7 @@ export function getDashboardHtml(): string {
       display: block;
     }
 
-    /* CANVAS CONTROLS */
+    /* CANVAS CONTROLS HUD */
     .canvas-hud {
       position: absolute;
       bottom: 20px;
@@ -252,7 +304,7 @@ export function getDashboardHtml(): string {
       padding: 6px 12px;
       font-size: 12px;
       font-weight: 600;
-      color: var(--text-main);
+      color: var(--text-title);
       box-shadow: 0 2px 6px rgba(0,0,0,0.04);
       cursor: pointer;
       display: flex;
@@ -262,7 +314,7 @@ export function getDashboardHtml(): string {
 
     .hud-btn:hover { background: #f8fafc; }
 
-    /* 3. DOCUMENT VIEW (Referenced from Image 5) */
+    /* 3. DOCUMENT VIEW (Claude Style - Image 5) */
     #doc-view {
       position: absolute;
       top: 56px;
@@ -271,20 +323,20 @@ export function getDashboardHtml(): string {
       height: calc(100vh - 56px);
       background: #ffffff;
       overflow-y: auto;
-      padding: 32px 48px;
+      padding: 36px 48px;
       display: none;
       z-index: 25;
     }
 
     .doc-container {
-      max-width: 1000px;
+      max-width: 960px;
       margin: 0 auto;
     }
 
     .doc-table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 20px;
+      margin-top: 24px;
       font-size: 13px;
     }
 
@@ -294,248 +346,306 @@ export function getDashboardHtml(): string {
       border-bottom: 2px solid var(--border-subtle);
       font-size: 11px;
       font-weight: 700;
-      color: var(--text-subtle);
+      color: var(--text-faint);
       text-transform: uppercase;
     }
 
     .doc-table td {
-      padding: 12px 14px;
-      border-bottom: 1px solid var(--border-light);
+      padding: 14px;
+      border-bottom: 1px solid var(--border-subtle);
       vertical-align: top;
+      line-height: 1.5;
     }
 
-    .summary-box {
-      margin-top: 32px;
+    .role-badge {
+      font-size: 11px;
+      font-weight: 700;
+      background: #f1f5f9;
+      color: var(--text-muted);
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-left: 6px;
+    }
+
+    .summary-card {
+      margin-top: 36px;
       background: #f8fafc;
       border: 1px solid var(--border-subtle);
       border-radius: 10px;
-      padding: 20px;
-    }
-
-    /* 4. SLIDE-OUT INSPECTOR DRAWER */
-    #inspector {
-      position: absolute;
-      top: 56px;
-      right: 0;
-      width: 380px;
-      height: calc(100vh - 56px);
-      background: #ffffff;
-      border-left: 1px solid var(--border-subtle);
-      box-shadow: -4px 0 24px rgba(0, 0, 0, 0.04);
       padding: 24px;
-      overflow-y: auto;
-      transform: translateX(100%);
-      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-      z-index: 30;
     }
 
-    #inspector.open { transform: translateX(0); }
-
-    .inspector-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-bottom: 14px;
-      border-bottom: 1px solid var(--border-light);
-      margin-bottom: 18px;
-    }
-
-    .type-pill {
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      padding: 3px 8px;
-      border-radius: 5px;
-    }
-
-    .close-btn {
-      background: transparent;
-      border: none;
+    .summary-card h3 {
       font-size: 16px;
-      cursor: pointer;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--text-title);
+    }
+
+    .summary-item {
+      font-size: 13px;
+      color: var(--text-body);
+      margin-bottom: 8px;
+      line-height: 1.6;
+    }
+
+    .prompt-footer {
+      margin-top: 24px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border-subtle);
+      font-size: 12.5px;
       color: var(--text-muted);
+      font-style: italic;
     }
 
-    .code-snippet {
-      background: #0f172a;
-      color: #e2e8f0;
-      padding: 12px;
-      border-radius: 8px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11.5px;
-      overflow-x: auto;
-      white-space: pre-wrap;
-    }
-
-    /* Floating Tooltip */
+    /* 4. FLOATING TOOLTIP */
     #tooltip {
       position: absolute;
       pointer-events: none;
-      background: #0f172a;
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(8px);
       color: #ffffff;
-      padding: 6px 12px;
-      border-radius: 6px;
-      font-size: 11.5px;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 12px;
       font-weight: 600;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.15);
       opacity: 0;
-      transition: opacity 0.1s ease;
+      transition: opacity 0.12s ease;
       z-index: 40;
     }
   </style>
 </head>
 <body>
 
-  <!-- LEFT CONDUCTING AI SIDEBAR -->
+  <!-- 1. CONDUCTING AI SIDEBAR -->
   <aside id="sidebar">
-    <div class="sidebar-header">
-      <div class="company-avatar">D</div>
-      <div class="company-meta">
+    <div class="org-header">
+      <div class="org-icon">D</div>
+      <div class="org-title">
         <h2>Demo Company</h2>
         <p>Organisation Brain</p>
       </div>
     </div>
 
-    <div class="sidebar-scroll">
+    <div class="sidebar-search">
+      <div class="search-input-wrap">
+        <span>🔍</span>
+        <input type="text" id="sidebar-search-box" placeholder="Search entities..." oninput="handleSidebarSearch()">
+      </div>
+    </div>
+
+    <!-- MAIN TREE -->
+    <div class="sidebar-scroll" id="main-sidebar-tree">
       <div class="sidebar-section-title">Overview</div>
-      <div class="nav-row active" onclick="filterByKind('all')">
-        <div class="nav-left">
-          <span>🪐</span>
-          <span>All Entity Brain</span>
-        </div>
-        <span class="count-pill" id="cnt-total">0</span>
+      <div class="nav-item active" onclick="showAllEntities()">
+        <div class="nav-left"><span>🪐</span><span>All Entities</span></div>
+        <span class="count-pill" id="cnt-all">757</span>
       </div>
 
-      <div class="sidebar-section-title">Entity Types</div>
-      <div class="nav-row" onclick="filterByKind('packages')">
-        <div class="nav-left">
-          <span class="dot" style="background: var(--c-package);"></span>
-          <span>Core Subsystems</span>
-        </div>
-        <span class="count-pill" id="cnt-packages">11</span>
+      <div class="sidebar-section-title">By Entity Type</div>
+      <div class="nav-item" onclick="filterByKind('people')">
+        <div class="nav-left"><span>👥</span><span>People</span></div>
+        <span class="count-pill">75</span>
+      </div>
+      <div class="nav-item" onclick="filterByKind('subagents')">
+        <div class="nav-left"><span>🤖</span><span>Sub-Agents</span></div>
+        <span class="count-pill">34</span>
+      </div>
+      <div class="nav-item" onclick="filterByKind('tools')">
+        <div class="nav-left"><span>🛠️</span><span>Tools</span></div>
+        <span class="count-pill">145</span>
+      </div>
+      <div class="nav-item" onclick="filterByKind('workflows')">
+        <div class="nav-left"><span>⚡</span><span>Workflows</span></div>
+        <span class="count-pill">198</span>
+      </div>
+      <div class="nav-item" onclick="filterByKind('sops')">
+        <div class="nav-left"><span>📜</span><span>SOPs</span></div>
+        <span class="count-pill">224</span>
+      </div>
+      <div class="nav-item" onclick="filterByKind('projects')">
+        <div class="nav-left"><span>📁</span><span>Projects</span></div>
+        <span class="count-pill">12</span>
+      </div>
+      <div class="nav-item" onclick="filterByKind('teams')">
+        <div class="nav-left"><span>👥</span><span>Teams</span></div>
+        <span class="count-pill">9</span>
+      </div>
+      <div class="nav-item" onclick="filterByKind('departments')">
+        <div class="nav-left"><span>🏢</span><span>Departments</span></div>
+        <span class="count-pill">11</span>
       </div>
 
-      <div class="nav-row" onclick="filterByKind('symbols')">
-        <div class="nav-left">
-          <span class="dot" style="background: var(--c-func);"></span>
-          <span>AST Code Symbols</span>
-        </div>
-        <span class="count-pill" id="cnt-symbols">0</span>
+      <div class="sidebar-section-title">By Business Function</div>
+      <div class="nav-item" onclick="filterByFunction('core')">
+        <div class="nav-left"><span class="dot" style="background: #3b82f6;"></span><span>Core</span></div>
+        <span class="count-pill">451</span>
+      </div>
+      <div class="nav-item" onclick="filterByFunction('enabling')">
+        <div class="nav-left"><span class="dot" style="background: #8b5cf6;"></span><span>Enabling</span></div>
+        <span class="count-pill">306</span>
       </div>
 
-      <div class="nav-row" onclick="filterByKind('agents')">
-        <div class="nav-left">
-          <span class="dot" style="background: var(--c-agent);"></span>
-          <span>AI Agents & Swarm</span>
-        </div>
-        <span class="count-pill" id="cnt-agents">4</span>
+      <div class="sidebar-section-title">By Core Department</div>
+      <div class="nav-item" onclick="openDepartmentView('Product Management', 'var(--dep-pm)')">
+        <div class="nav-left"><span class="dot" style="background: var(--dep-pm);"></span><span>Product Management</span></div>
       </div>
+      <div class="nav-item" onclick="openDepartmentView('Marketing & Growth', 'var(--dep-mktg)')">
+        <div class="nav-left"><span class="dot" style="background: var(--dep-mktg);"></span><span>Marketing & Growth</span></div>
+      </div>
+      <div class="nav-item" onclick="openDepartmentView('Sales', 'var(--dep-sales)')">
+        <div class="nav-left"><span class="dot" style="background: var(--dep-sales);"></span><span>Sales</span></div>
+      </div>
+      <div class="nav-item" onclick="openDepartmentView('Customer & Admin', 'var(--dep-cust)')">
+        <div class="nav-left"><span class="dot" style="background: var(--dep-cust);"></span><span>Customer & Admin</span></div>
+      </div>
+      <div class="nav-item" onclick="openDepartmentView('Operations & Supply Chain', 'var(--dep-ops)')">
+        <div class="nav-left"><span class="dot" style="background: var(--dep-ops);"></span><span>Operations & Supply Chain</span></div>
+      </div>
+      <div class="nav-item" onclick="openDepartmentView('Tech, AI & Automations', 'var(--dep-tech)')">
+        <div class="nav-left"><span class="dot" style="background: var(--dep-tech);"></span><span>Tech, AI & Automations</span></div>
+      </div>
+      <div class="nav-item" onclick="openDepartmentView('Strategy & Leadership', 'var(--dep-strat)')">
+        <div class="nav-left"><span class="dot" style="background: var(--dep-strat);"></span><span>Strategy & Leadership</span></div>
+      </div>
+      <div class="nav-item" onclick="openDepartmentView('Finance', 'var(--dep-fin)')">
+        <div class="nav-left"><span class="dot" style="background: var(--dep-fin);"></span><span>Finance</span></div>
+      </div>
+      <div class="nav-item" onclick="openDepartmentView('Data & Analytics', 'var(--dep-data)')">
+        <div class="nav-left"><span class="dot" style="background: var(--dep-data);"></span><span>Data & Analytics</span></div>
+      </div>
+      <div class="nav-item" onclick="openDepartmentView('Legal, Risk & Compliance', 'var(--dep-legal)')">
+        <div class="nav-left"><span class="dot" style="background: var(--dep-legal);"></span><span>Legal, Risk & Compliance</span></div>
+      </div>
+    </div>
 
-      <div class="nav-row" onclick="filterByKind('failures')">
-        <div class="nav-left">
-          <span class="dot" style="background: var(--c-fail);"></span>
-          <span>Failure Memories</span>
+    <!-- DEPARTMENT SUB-VIEW (Exact match to Reference Image 4) -->
+    <div id="dep-sidebar-detail">
+      <div class="back-btn-header" onclick="closeDepartmentView()">
+        <span>←</span>
+        <span>Back to Organisation Brain</span>
+      </div>
+      <div class="dep-detail-scroll">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 4px;">
+          <div id="dep-detail-dot" class="dot" style="width: 12px; height: 12px;"></div>
+          <h3 id="dep-detail-title" style="font-size: 16px; font-weight: 800;">Sales</h3>
         </div>
-        <span class="count-pill" id="cnt-failures">0</span>
-      </div>
+        <p style="font-size: 11px; color: var(--text-faint); text-transform: uppercase; font-weight: 700; margin-bottom: 20px;">DEPARTMENT • PART OF DEMO COMPANY</p>
 
-      <div class="nav-row" onclick="filterByKind('handoffs')">
-        <div class="nav-left">
-          <span class="dot" style="background: var(--c-handoff);"></span>
-          <span>Sealed Handoffs</span>
+        <div class="sidebar-section-title">AI Systems</div>
+        <div class="nav-item"><div class="nav-left"><span>🤖</span><span id="dep-sys-1">Sales AI Copilot</span></div></div>
+        <div class="nav-item"><div class="nav-left"><span>🧠</span><span id="dep-sys-2">Sales AI Brain</span></div></div>
+        <div class="nav-item"><div class="nav-left"><span>⚡</span><span id="dep-sys-3">Sales Autonomous Agent</span></div></div>
+
+        <div class="sidebar-section-title">People & Leads</div>
+        <div id="dep-people-list">
+          <div class="nav-item"><div class="nav-left"><span>👤</span><span>Michael Torres</span></div></div>
+          <div class="nav-item"><div class="nav-left"><span>👤</span><span>Omar Hassan</span></div></div>
+          <div class="nav-item"><div class="nav-left"><span>👤</span><span>Rachel Green</span></div></div>
         </div>
-        <span class="count-pill" id="cnt-handoffs">0</span>
-      </div>
 
-      <div class="sidebar-section-title">Subsystem Domains</div>
-      <div class="nav-row" onclick="filterByDomain('spec')">
-        <div class="nav-left"><span class="dot" style="background: #f59e0b;"></span><span>Spec & Kernel Core</span></div>
-      </div>
-      <div class="nav-row" onclick="filterByDomain('infrastructure')">
-        <div class="nav-left"><span class="dot" style="background: #8b5cf6;"></span><span>Infrastructure & Git</span></div>
-      </div>
-      <div class="nav-row" onclick="filterByDomain('sandbox')">
-        <div class="nav-left"><span class="dot" style="background: #10b981;"></span><span>Sandbox & Security</span></div>
-      </div>
-      <div class="nav-row" onclick="filterByDomain('mcp-server')">
-        <div class="nav-left"><span class="dot" style="background: #06b6d4;"></span><span>MCP & Tool Registry</span></div>
-      </div>
-      <div class="nav-row" onclick="filterByDomain('router')">
-        <div class="nav-left"><span class="dot" style="background: #ec4899;"></span><span>Dynamic Model Router</span></div>
+        <div class="sidebar-section-title">Sub-Agents & Automations</div>
+        <div id="dep-agents-list">
+          <div class="nav-item"><div class="nav-left"><span>⚙️</span><span>Account Risk and Expansion...</span></div></div>
+          <div class="nav-item"><div class="nav-left"><span>⚙️</span><span>Automated Follow Up Sequence...</span></div></div>
+          <div class="nav-item"><div class="nav-left"><span>⚙️</span><span>Competitor Intelligence Gatherer...</span></div></div>
+        </div>
       </div>
     </div>
   </aside>
 
-  <!-- MAIN CANVAS & VIEWS -->
+  <!-- 2. MAIN CONTENT AREA -->
   <main id="main-content">
     <div class="top-toolbar">
-      <div class="search-wrap">
-        <span>🔍</span>
-        <input type="text" id="search-input" placeholder="Search functions, classes, agents, or failure memories..." oninput="handleSearch()">
+      <div class="stats-breadcrumbs">
+        <span>Demo Company</span>
+        <span>/</span>
+        <strong>Organisation Brain</strong>
+        <span style="font-size: 11px; background: #f1f5f9; padding: 3px 8px; border-radius: 9999px; margin-left: 8px;">Entities: <strong>757</strong> • Connections: <strong>1,847</strong></span>
       </div>
 
       <div class="view-toggles">
-        <button class="view-btn active" id="btn-view-galaxy" onclick="switchView('galaxy')">🪐 Galaxy Orbit</button>
-        <button class="view-btn" id="btn-view-doc" onclick="switchView('doc')">📄 Claude Summary</button>
+        <button class="view-btn active" id="btn-view-galaxy" onclick="switchMainView('galaxy')">🪐 Galaxy Orbit</button>
+        <button class="view-btn" id="btn-view-doc" onclick="switchMainView('doc')">📄 Claude Summary View</button>
       </div>
     </div>
 
-    <!-- 1. GALAXY ORBIT VIEW (Clean Conducting AI Style) -->
+    <!-- CANVAS VIEW -->
     <div id="canvas-container">
       <canvas id="galaxy-canvas"></canvas>
 
       <div class="canvas-hud">
-        <button class="hud-btn" onclick="resetZoom()">🎯 Center</button>
-        <button class="hud-btn" onclick="toggleRotation()">🔄 <span id="rot-label">Pause</span></button>
+        <button class="hud-btn" onclick="resetZoom()">🎯 Center Galaxy</button>
+        <button class="hud-btn" onclick="toggleRotation()">🔄 <span id="rot-label">Pause Orbit</span></button>
       </div>
 
       <div id="tooltip"></div>
     </div>
 
-    <!-- 2. DOCUMENT / TABLE VIEW (Referenced from Screenshot 5) -->
+    <!-- CLAUDE DOCUMENT / EXECUTIVE REPORT VIEW (Exact match to Reference Image 5) -->
     <div id="doc-view">
       <div class="doc-container">
-        <h2 style="font-size: 20px; font-weight: 800; margin-bottom: 4px;">🏛️ DEV-HARNESS v2.0 Subsystems & Swarm Directory</h2>
-        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 24px;">Complete organizational breakdown of active agent swarms, toolchains, and verified state machines.</p>
+        <h2 style="font-size: 20px; font-weight: 800; color: var(--text-title); margin-bottom: 4px;">Conducting AI / DEV-HARNESS v2.0 Task Force</h2>
+        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 24px;">Executive roadmap, responsibility allocation, and verified deliverables.</p>
 
         <table class="doc-table">
           <thead>
             <tr>
-              <th>Entity / Agent</th>
-              <th>Architectural Role</th>
-              <th>Current Workstream & Security Scope</th>
-              <th>Status</th>
+              <th>Member / Agent</th>
+              <th>Role</th>
+              <th>Deliverables & Current Focus</th>
             </tr>
           </thead>
-          <tbody id="doc-table-body">
-            <!-- Dynamically populated -->
+          <tbody>
+            <tr>
+              <td><strong>Marcus Chen</strong> <span class="role-badge">Lead</span></td>
+              <td style="color: var(--text-muted);">Chief Strategy Officer</td>
+              <td><strong>Employee Onboarding Automation</strong> project — package it for board presentation to secure Phase 2 budget. Drive governance framework drafting.</td>
+            </tr>
+            <tr>
+              <td><strong>Andrew Kowalski</strong> <span class="role-badge">Lead</span></td>
+              <td style="color: var(--text-muted);">CTO</td>
+              <td>Ensure infra readiness for the two active projects and start scoping Phase 2 architecture. Resolve any technical blockers on the Customer Service and Sales Pipeline rollouts.</td>
+            </tr>
+            <tr>
+              <td><strong>Nina Petrov</strong></td>
+              <td style="color: var(--text-muted);">AI Engineer</td>
+              <td>Hands-on delivery across both active projects — focus on agent performance tuning, monitoring accuracy of Ticket Triage & Lead Scoring agents, and flagging issues early.</td>
+            </tr>
+            <tr>
+              <td><strong>Dr. Anika Gupta</strong></td>
+              <td style="color: var(--text-muted);">Head of Data & Analytics</td>
+              <td>Stand up usage/adoption dashboards to track the 80% WAU target per department. Define the data pipeline from Phase 1 copilots that feeds Phase 2 AI brains.</td>
+            </tr>
+            <tr>
+              <td><strong>Laura Bennett</strong></td>
+              <td style="color: var(--text-muted);">VP of People</td>
+              <td>Lead the AI education push — she needs a plan to get 100% of staff to "In Progress" by Q3 2026. Also own change management comms as copilots roll into new departments.</td>
+            </tr>
+            <tr>
+              <td><strong>Benjamin Fowler (you)</strong></td>
+              <td style="color: var(--text-muted);">Head of AI</td>
+              <td>Orchestrate across all workstreams — ensure the two active projects stay on track for Q3, support Marcus Chen on the governance framework, and start socialising the Phase 2 roadmap with Catherine Wells.</td>
+            </tr>
           </tbody>
         </table>
 
-        <div class="summary-box">
-          <h3 style="font-size: 15px; font-weight: 700; margin-bottom: 8px;">Executive Summary</h3>
-          <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6;">
-            The DEV-HARNESS execution environment is operating at <strong>100% verified test conformance (55/55 passed)</strong>. All AST code symbols, failure evidence memories, and sealed cross-agent handoffs are synchronized across the 12-state FSM Kernel.
+        <div class="summary-card">
+          <h3>Summary</h3>
+          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">
+            The task force is in solid shape: one project shipped, two running in parallel, and the Phase 1 deployment deadline (Q2 2026) is within reach. The critical path items right now are:
           </p>
+          <div class="summary-item"><strong>1. ROI case study</strong> — Marcus Chen needs to package Onboarding Automation results ASAP to unlock Phase 2 funding.</div>
+          <div class="summary-item"><strong>2. Adoption tracking</strong> — Dr. Anika Gupta needs dashboards live before the next department launches.</div>
+          <div class="summary-item"><strong>3. Governance framework</strong> — needs board sign-off before Phase 2; Marcus Chen and Andrew Kowalski should co-own this.</div>
+
+          <div class="prompt-footer">
+            Want me to dig deeper into either of the active projects, or draft any specific deliverables (e.g. the ROI case study outline, governance framework skeleton)?
+          </div>
         </div>
       </div>
     </div>
-
-    <!-- 3. SLIDE-OUT INSPECTOR -->
-    <aside id="inspector">
-      <div class="inspector-header">
-        <span class="type-pill" id="insp-type">ENTITY</span>
-        <button class="close-btn" onclick="closeInspector()">✕</button>
-      </div>
-
-      <h3 id="insp-name" style="font-size: 16px; font-weight: 800; margin-bottom: 6px;">Node Name</h3>
-      <p id="insp-desc" style="font-size: 12.5px; color: var(--text-muted); margin-bottom: 18px;">Description</p>
-
-      <div style="margin-bottom: 18px;">
-        <h4 style="font-size: 11px; font-weight: 700; color: var(--text-subtle); text-transform: uppercase; margin-bottom: 6px;">Metadata & Signature</h4>
-        <div class="code-snippet" id="insp-code">export const example = true;</div>
-      </div>
-    </aside>
   </main>
 
   <script>
@@ -544,14 +654,36 @@ export function getDashboardHtml(): string {
     const tooltip = document.getElementById('tooltip');
 
     let nodes = [];
-    let packages = [];
-    let camera = { x: 0, y: 0, zoom: 0.9 };
+    let camera = { x: 0, y: 0, zoom: 0.85 };
     let isDragging = false;
     let dragStart = { x: 0, y: 0 };
     let hoveredNode = null;
+    let selectedDepartment = null;
     let rotationAngle = 0;
     let isRotating = true;
-    let currentFilter = 'all';
+
+    // Concentric Ring Radii
+    const RINGS = [
+      { r: 0, color: '#eab308', count: 1, label: 'CORE' },
+      { r: 120, color: '#f59e0b', count: 10, label: 'DEPARTMENTS' },
+      { r: 240, color: '#8b5cf6', count: 120, label: 'SYSTEMS & AGENTS' },
+      { r: 360, color: '#3b82f6', count: 240, label: 'WORKFLOWS & SOPS' },
+      { r: 480, color: '#10b981', count: 180, label: 'PEOPLE & ENTITIES' },
+      { r: 600, color: '#ef4444', count: 80, label: 'GOVERNANCE & AUDIT' }
+    ];
+
+    const DEPARTMENTS = [
+      { name: 'Product Management', color: '#ea580c' },
+      { name: 'Marketing & Growth', color: '#dc2626' },
+      { name: 'Sales', color: '#16a34a' },
+      { name: 'Customer & Admin', color: '#0d9488' },
+      { name: 'Operations & Supply Chain', color: '#b45309' },
+      { name: 'Tech, AI & Automations', color: '#4f46e5' },
+      { name: 'Strategy & Leadership', color: '#2563eb' },
+      { name: 'Finance', color: '#ca8a04' },
+      { name: 'Data & Analytics', color: '#0284c7' },
+      { name: 'Legal, Risk & Compliance', color: '#9333ea' }
+    ];
 
     function resizeCanvas() {
       const container = document.getElementById('canvas-container');
@@ -559,175 +691,96 @@ export function getDashboardHtml(): string {
       canvas.height = container.clientHeight * window.devicePixelRatio;
       ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
     }
-
     window.addEventListener('resize', resizeCanvas);
 
-    async function loadData() {
-      try {
-        const [statusRes, graphRes, failuresRes, handoffsRes] = await Promise.all([
-          fetch('/api/status').then(r => r.json()),
-          fetch('/api/graph').then(r => r.json()),
-          fetch('/api/failures').then(r => r.json()),
-          fetch('/api/handoffs').then(r => r.json())
-        ]);
-
-        buildCleanGalaxy(statusRes, graphRes, failuresRes, handoffsRes);
-        buildDocView(statusRes, graphRes, failuresRes, handoffsRes);
-      } catch (err) {
-        console.error('Failed to load data:', err);
-      }
-    }
-
-    function buildCleanGalaxy(status, graph, failures, handoffs) {
+    function initGalaxyData() {
       nodes = [];
-      packages = [];
 
-      // 1. Center Sun Node
+      // 1. Center Root Node "D"
       nodes.push({
-        id: 'center-core',
-        name: 'DEV-HARNESS Kernel',
+        id: 'center-demo-company',
+        name: 'Demo Company',
         kind: 'core',
-        color: '#f59e0b',
-        radius: 24,
-        x: 0,
-        y: 0,
-        showLabel: true,
-        data: { description: 'Sole Commit Authority & Pure Domain State Machine' }
+        color: '#ca8a04',
+        radius: 28,
+        orbitR: 0,
+        angle: 0,
+        shape: 'avatar',
+        avatarText: 'D'
       });
 
-      // 2. Ring 1: 11 Core Monorepo Packages (Arranged symmetrically)
-      const pkgList = [
-        { name: 'spec', desc: 'Portable Types' },
-        { name: 'kernel', desc: '12-State FSM' },
-        { name: 'infrastructure', desc: 'RunStore & Swarm' },
-        { name: 'sandbox', desc: 'Docker & Local' },
-        { name: 'security', desc: 'SecretBroker' },
-        { name: 'verifier', desc: 'Harness-Executed' },
-        { name: 'adapters', desc: 'Claude/Cursor/Ollama' },
-        { name: 'graph', desc: 'Sub-AST & Vectors' },
-        { name: 'mcp-server', desc: '8 MCP Tools' },
-        { name: 'router', desc: 'Model Routing' },
-        { name: 'ui', desc: 'Conducting AI Brain' }
-      ];
-
-      const R_PACKAGES = 180;
-      pkgList.forEach((pkg, i) => {
-        const angle = (i / pkgList.length) * Math.PI * 2;
-        const node = {
-          id: 'pkg-' + pkg.name,
-          name: '@dev-harness/' + pkg.name,
-          kind: 'packages',
-          color: '#8b5cf6',
+      // 2. Ring 1: 10 Departments (Each with unique sector angle)
+      DEPARTMENTS.forEach((dep, i) => {
+        const angle = (i / DEPARTMENTS.length) * Math.PI * 2;
+        nodes.push({
+          id: 'dep-' + dep.name,
+          name: dep.name,
+          department: dep.name,
+          kind: 'department',
+          color: dep.color,
           radius: 12,
-          x: Math.cos(angle) * R_PACKAGES,
-          y: Math.sin(angle) * R_PACKAGES,
+          orbitR: 120,
           angle: angle,
-          orbitR: R_PACKAGES,
-          showLabel: true,
-          data: pkg
-        };
-        nodes.push(node);
-        packages.push(node);
-      });
-
-      // 3. Ring 2 & 3: AST Symbols clustered around their respective parent packages (NO OVERLAPPING TEXT!)
-      const symbols = graph.symbols || [];
-      symbols.forEach((sym, idx) => {
-        // Assign to parent package angle sector
-        const pkgIndex = idx % pkgList.length;
-        const baseAngle = (pkgIndex / pkgList.length) * Math.PI * 2;
-        const jitterAngle = baseAngle + ((idx % 7) - 3) * 0.08;
-        const distance = 300 + (Math.floor(idx / 11) % 5) * 45;
-
-        nodes.push({
-          id: 'sym-' + sym.name + '-' + idx,
-          name: sym.name,
-          kind: 'symbols',
-          color: sym.kind === 'function' ? '#3b82f6' : sym.kind === 'class' ? '#0ea5e9' : '#6366f1',
-          radius: 4, // Clean micro-beads
-          x: Math.cos(jitterAngle) * distance,
-          y: Math.sin(jitterAngle) * distance,
-          angle: jitterAngle,
-          orbitR: distance,
-          showLabel: false, // Only show label on hover to keep it elegant and readable!
-          data: sym
+          shape: 'circle'
         });
+
+        // Generate nested beads around this department's angular sector!
+        // Ring 2: Systems & Tools (Squares & Diamonds)
+        for (let j = 0; j < 12; j++) {
+          const jAngle = angle + (j - 6) * 0.04;
+          const dist = 240 + (j % 3) * 15;
+          nodes.push({
+            id: \`sys-\${i}-\${j}\`,
+            name: \`\${dep.name} System #\${j + 1}\`,
+            department: dep.name,
+            kind: 'system',
+            color: dep.color,
+            radius: 5,
+            orbitR: dist,
+            angle: jAngle,
+            shape: (j % 2 === 0) ? 'square' : 'circle'
+          });
+        }
+
+        // Ring 3: Workflows & SOPs (Fine beads)
+        for (let k = 0; k < 24; k++) {
+          const kAngle = angle + (k - 12) * 0.022;
+          const dist = 360 + (k % 4) * 12;
+          nodes.push({
+            id: \`wf-\${i}-\${k}\`,
+            name: \`\${dep.name} Workflow #\${k + 1}\`,
+            department: dep.name,
+            kind: 'workflow',
+            color: dep.color,
+            radius: 3.5,
+            orbitR: dist,
+            angle: kAngle,
+            shape: 'circle'
+          });
+        }
+
+        // Ring 4: People & Agents (Diamonds & Beads)
+        for (let p = 0; p < 18; p++) {
+          const pAngle = angle + (p - 9) * 0.028;
+          const dist = 480 + (p % 3) * 14;
+          nodes.push({
+            id: \`ppl-\${i}-\${p}\`,
+            name: \`\${dep.name} Specialist #\${p + 1}\`,
+            department: dep.name,
+            kind: 'people',
+            color: dep.color,
+            radius: 4,
+            orbitR: dist,
+            angle: pAngle,
+            shape: 'diamond'
+          });
+        }
       });
-
-      // 4. Outer Ring: Active Agents (Distinct Emerald Nodes)
-      const agents = [
-        { name: 'Claude Code Agent', role: 'Architect & Lead Coder' },
-        { name: 'Cursor / Aider', role: 'Refactoring & Test Fixer' },
-        { name: 'Ollama Local Qwen', role: '100% Offline Coder' },
-        { name: 'DeepSeek-R1', role: 'Deep Reasoning Verifier' }
-      ];
-      agents.forEach((ag, i) => {
-        const angle = (i / agents.length) * Math.PI * 2 + Math.PI / 4;
-        const distance = 560;
-        nodes.push({
-          id: 'agent-' + i,
-          name: ag.name,
-          kind: 'agents',
-          color: '#10b981',
-          radius: 14,
-          x: Math.cos(angle) * distance,
-          y: Math.sin(angle) * distance,
-          angle: angle,
-          orbitR: distance,
-          showLabel: true,
-          data: ag
-        });
-      });
-
-      // 5. Failure Memories (Red Nodes)
-      failures.forEach((f, i) => {
-        const angle = (i / Math.max(1, failures.length)) * Math.PI * 2;
-        const distance = 680;
-        nodes.push({
-          id: 'fail-' + f.id,
-          name: f.id,
-          kind: 'failures',
-          color: '#ef4444',
-          radius: 12,
-          x: Math.cos(angle) * distance,
-          y: Math.sin(angle) * distance,
-          angle: angle,
-          orbitR: distance,
-          showLabel: true,
-          data: f
-        });
-      });
-
-      // Update Sidebar Counters
-      document.getElementById('cnt-total').innerText = nodes.length;
-      document.getElementById('cnt-symbols').innerText = symbols.length;
-      document.getElementById('cnt-failures').innerText = failures.length;
-      document.getElementById('cnt-handoffs').innerText = handoffs.length;
-    }
-
-    function buildDocView(status, graph, failures, handoffs) {
-      const tbody = document.getElementById('doc-table-body');
-      const rows = [
-        { name: 'Marcus Chen', role: 'Chief Strategy Officer', task: 'Employee Onboarding Automation — package for board presentation', status: 'ACTIVE' },
-        { name: 'Andrew Kowalski', role: 'CTO', task: 'Ensure infra readiness for Phase 2 architecture and resolve blockers', status: 'LEAD' },
-        { name: 'Claude Code Agent', role: 'Autonomous Software Engineer', task: 'Execute RUN-001 with 100% test verification and sealed handoff', status: 'PASSED' },
-        { name: 'Cursor / Aider', role: 'Refactoring Specialist', task: 'Resume RUN-002 from validated HANDOFF-001 without drift', status: 'READY' },
-        { name: 'Ollama Local Adapter', role: 'Offline LLM Runner', task: 'Zero-cost offline inference execution on local GPU', status: 'STANDBY' }
-      ];
-
-      tbody.innerHTML = rows.map(r => \`
-        <tr>
-          <td><strong>\${r.name}</strong></td>
-          <td style="color: var(--text-muted);">\${r.role}</td>
-          <td>\${r.task}</td>
-          <td><span style="font-size: 11px; font-weight: 700; background: #ecfdf5; color: #059669; padding: 3px 8px; border-radius: 4px;">\${r.status}</span></td>
-        </tr>
-      \`).join('');
     }
 
     function animate() {
       if (isRotating) {
-        rotationAngle += 0.0008;
+        rotationAngle += 0.0006;
       }
       renderCanvas();
       requestAnimationFrame(animate);
@@ -747,67 +800,108 @@ export function getDashboardHtml(): string {
       ctx.translate(centerX, centerY);
       ctx.scale(camera.zoom, camera.zoom);
 
-      // 1. Draw Subtle Concentric Guide Rings
-      const guideRings = [180, 300, 390, 480, 560, 680];
-      guideRings.forEach(r => {
+      // 1. Draw Concentric Solar Rings
+      RINGS.forEach(ring => {
+        if (ring.r === 0) return;
         ctx.beginPath();
-        ctx.arc(0, 0, r, 0, Math.PI * 2);
-        ctx.strokeStyle = 'rgba(226, 232, 240, 0.8)';
+        ctx.arc(0, 0, ring.r, 0, Math.PI * 2);
+        ctx.strokeStyle = 'rgba(226, 232, 240, 0.7)';
         ctx.lineWidth = 1;
-        ctx.setLineDash([3, 5]);
+        ctx.setLineDash([3, 6]);
         ctx.stroke();
         ctx.setLineDash([]);
       });
 
-      // 2. Draw Spokes from Core to Packages
-      packages.forEach(pkg => {
-        const curAngle = pkg.angle + rotationAngle;
-        const px = Math.cos(curAngle) * pkg.orbitR;
-        const py = Math.sin(curAngle) * pkg.orbitR;
+      // 2. Draw Connection Lines when a department is selected
+      if (selectedDepartment) {
+        const depNode = nodes.find(n => n.kind === 'department' && n.department === selectedDepartment);
+        if (depNode) {
+          const curAngle = depNode.angle + rotationAngle;
+          const dx = Math.cos(curAngle) * depNode.orbitR;
+          const dy = Math.sin(curAngle) * depNode.orbitR;
 
-        ctx.beginPath();
-        ctx.moveTo(0, 0);
-        ctx.lineTo(px, py);
-        ctx.strokeStyle = 'rgba(139, 92, 246, 0.15)';
-        ctx.lineWidth = 1;
-        ctx.stroke();
-      });
+          // Line Center -> Department
+          ctx.beginPath();
+          ctx.moveTo(0, 0);
+          ctx.lineTo(dx, dy);
+          ctx.strokeStyle = depNode.color + '88';
+          ctx.lineWidth = 2;
+          ctx.stroke();
 
-      // 3. Render Nodes (Clean, non-cluttered beads)
-      nodes.forEach(node => {
-        if (currentFilter !== 'all' && node.kind !== currentFilter && node.kind !== 'core') {
-          return;
+          // Lines Department -> Sub-nodes
+          nodes.forEach(node => {
+            if (node.department === selectedDepartment && node.orbitR > 120) {
+              const nAngle = node.angle + rotationAngle;
+              const nx = Math.cos(nAngle) * node.orbitR;
+              const ny = Math.sin(nAngle) * node.orbitR;
+
+              ctx.beginPath();
+              ctx.moveTo(dx, dy);
+              ctx.lineTo(nx, ny);
+              ctx.strokeStyle = depNode.color + '22';
+              ctx.lineWidth = 1;
+              ctx.stroke();
+            }
+          });
         }
+      }
 
+      // 3. Render Nodes (Beads, Squares, Diamonds, Center Avatar)
+      nodes.forEach(node => {
         const curAngle = (node.orbitR === 0) ? 0 : (node.angle + rotationAngle);
         const nx = (node.orbitR === 0) ? 0 : (Math.cos(curAngle) * node.orbitR);
         const ny = (node.orbitR === 0) ? 0 : (Math.sin(curAngle) * node.orbitR);
         node.currentX = nx;
         node.currentY = ny;
 
-        const isHovered = (hoveredNode && hoveredNode.id === node.id);
+        const isHighlighted = !selectedDepartment || node.department === selectedDepartment || node.kind === 'core';
+        const alpha = isHighlighted ? 'ff' : '22';
 
-        // Outer halo
-        ctx.beginPath();
-        ctx.arc(nx, ny, node.radius + (isHovered ? 6 : 2), 0, Math.PI * 2);
-        ctx.fillStyle = node.color + (isHovered ? '44' : '18');
-        ctx.fill();
+        if (node.shape === 'avatar') {
+          // Center "D" avatar box
+          ctx.beginPath();
+          ctx.arc(0, 0, node.radius, 0, Math.PI * 2);
+          ctx.fillStyle = '#ca8a04';
+          ctx.fill();
+          ctx.strokeStyle = '#ffffff';
+          ctx.lineWidth = 3;
+          ctx.stroke();
 
-        // Node circle
-        ctx.beginPath();
-        ctx.arc(nx, ny, node.radius, 0, Math.PI * 2);
-        ctx.fillStyle = node.color;
-        ctx.fill();
-        ctx.strokeStyle = '#ffffff';
-        ctx.lineWidth = node.radius > 6 ? 2 : 1;
-        ctx.stroke();
-
-        // ONLY print label if showLabel is true OR if hovered! (Prevents text overlap clutter!)
-        if (node.showLabel || isHovered) {
-          ctx.fillStyle = isHovered ? '#0f172a' : '#475569';
-          ctx.font = (isHovered ? '700 12px' : '600 11px') + " 'Plus Jakarta Sans', sans-serif";
+          ctx.fillStyle = '#ffffff';
+          ctx.font = '800 16px "Plus Jakarta Sans", sans-serif';
           ctx.textAlign = 'center';
-          ctx.fillText(node.name, nx, ny + node.radius + 13);
+          ctx.textBaseline = 'middle';
+          ctx.fillText('D', 0, 0);
+          ctx.textBaseline = 'alphabetic';
+        } else if (node.shape === 'square') {
+          // Square Bead
+          ctx.fillStyle = node.color + alpha;
+          ctx.fillRect(nx - node.radius, ny - node.radius, node.radius * 2, node.radius * 2);
+        } else if (node.shape === 'diamond') {
+          // Diamond Bead
+          ctx.beginPath();
+          ctx.moveTo(nx, ny - node.radius);
+          ctx.lineTo(nx + node.radius, ny);
+          ctx.lineTo(nx, ny + node.radius);
+          ctx.lineTo(nx - node.radius, ny);
+          ctx.closePath();
+          ctx.fillStyle = node.color + alpha;
+          ctx.fill();
+        } else {
+          // Circle Bead
+          ctx.beginPath();
+          ctx.arc(nx, ny, node.radius, 0, Math.PI * 2);
+          ctx.fillStyle = node.color + alpha;
+          ctx.fill();
+        }
+
+        // Highlight hover
+        if (hoveredNode && hoveredNode.id === node.id) {
+          ctx.beginPath();
+          ctx.arc(nx, ny, node.radius + 5, 0, Math.PI * 2);
+          ctx.strokeStyle = '#0f172a';
+          ctx.lineWidth = 2;
+          ctx.stroke();
         }
       });
 
@@ -824,16 +918,15 @@ export function getDashboardHtml(): string {
 
       for (let i = nodes.length - 1; i >= 0; i--) {
         const node = nodes[i];
-        if (currentFilter !== 'all' && node.kind !== currentFilter && node.kind !== 'core') continue;
         const dist = Math.hypot(node.currentX - localX, node.currentY - localY);
-        if (dist <= Math.max(8, node.radius + 4)) {
+        if (dist <= Math.max(10, node.radius + 4)) {
           return node;
         }
       }
       return null;
     }
 
-    // Interactive Listeners
+    // Canvas Mouse Listeners
     const container = document.getElementById('canvas-container');
 
     container.addEventListener('mousedown', e => {
@@ -851,9 +944,9 @@ export function getDashboardHtml(): string {
         hoveredNode = hit;
         if (hit) {
           tooltip.style.opacity = '1';
-          tooltip.style.left = (e.clientX + 12) + 'px';
-          tooltip.style.top = (e.clientY + 12) + 'px';
-          tooltip.innerHTML = '<strong>' + hit.name + '</strong> <span style="opacity:0.7;">(' + hit.kind + ')</span>';
+          tooltip.style.left = (e.clientX + 14) + 'px';
+          tooltip.style.top = (e.clientY + 14) + 'px';
+          tooltip.innerHTML = '<strong>' + hit.name + '</strong><br><span style="font-size:10px;opacity:0.8;">' + (hit.department || hit.kind).toUpperCase() + '</span>';
         } else {
           tooltip.style.opacity = '0';
         }
@@ -871,62 +964,43 @@ export function getDashboardHtml(): string {
     container.addEventListener('click', e => {
       const rect = canvas.getBoundingClientRect();
       const hit = getNodeAt(e.clientX - rect.left, e.clientY - rect.top);
-      if (hit) {
-        openInspector(hit);
+      if (hit && hit.department) {
+        openDepartmentView(hit.department, hit.color);
       }
     });
 
-    function openInspector(node) {
-      const insp = document.getElementById('inspector');
-      insp.classList.add('open');
-
-      document.getElementById('insp-name').innerText = node.name;
-      document.getElementById('insp-type').innerText = node.kind.toUpperCase();
-      document.getElementById('insp-type').style.background = node.color + '20';
-      document.getElementById('insp-type').style.color = node.color;
-
-      document.getElementById('insp-desc').innerText = node.data.desc || node.data.lesson || node.data.role || node.data.description || 'Entity in DEV-HARNESS Galaxy Brain';
-      document.getElementById('insp-code').innerText = JSON.stringify(node.data, null, 2);
-    }
-
-    function closeInspector() {
-      document.getElementById('inspector').classList.remove('open');
-    }
-
     function resetZoom() {
-      camera = { x: 0, y: 0, zoom: 0.9 };
+      camera = { x: 0, y: 0, zoom: 0.85 };
     }
 
     function toggleRotation() {
       isRotating = !isRotating;
-      document.getElementById('rot-label').innerText = isRotating ? 'Pause' : 'Resume';
+      document.getElementById('rot-label').innerText = isRotating ? 'Pause Orbit' : 'Resume Orbit';
     }
 
-    function filterByKind(kind) {
-      currentFilter = kind;
-      document.querySelectorAll('.nav-row').forEach(row => {
-        row.classList.toggle('active', row.getAttribute('onclick').includes(kind));
-      });
+    function showAllEntities() {
+      selectedDepartment = null;
+      document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+      document.querySelector('.nav-item').classList.add('active');
     }
 
-    function filterByDomain(domain) {
-      currentFilter = 'all';
-      const match = packages.find(p => p.name.includes(domain));
-      if (match) {
-        openInspector(match);
-      }
+    function openDepartmentView(depName, color) {
+      selectedDepartment = depName;
+      document.getElementById('dep-sidebar-detail').style.display = 'flex';
+      document.getElementById('dep-detail-title').innerText = depName;
+      document.getElementById('dep-detail-dot').style.background = color;
+
+      document.getElementById('dep-sys-1').innerText = depName + ' AI Copilot';
+      document.getElementById('dep-sys-2').innerText = depName + ' AI Brain';
+      document.getElementById('dep-sys-3').innerText = depName + ' Autonomous Agent';
     }
 
-    function handleSearch() {
-      const q = document.getElementById('search-input').value.toLowerCase();
-      if (!q) return;
-      const match = nodes.find(n => n.name.toLowerCase().includes(q));
-      if (match) {
-        openInspector(match);
-      }
+    function closeDepartmentView() {
+      document.getElementById('dep-sidebar-detail').style.display = 'none';
+      selectedDepartment = null;
     }
 
-    function switchView(view) {
+    function switchMainView(view) {
       const isGalaxy = (view === 'galaxy');
       document.getElementById('canvas-container').style.display = isGalaxy ? 'block' : 'none';
       document.getElementById('doc-view').style.display = isGalaxy ? 'none' : 'block';
@@ -935,10 +1009,18 @@ export function getDashboardHtml(): string {
       document.getElementById('btn-view-doc').classList.toggle('active', !isGalaxy);
     }
 
+    function handleSidebarSearch() {
+      const q = document.getElementById('sidebar-search-box').value.toLowerCase();
+      if (!q) return;
+      const match = DEPARTMENTS.find(d => d.name.toLowerCase().includes(q));
+      if (match) {
+        openDepartmentView(match.name, match.color);
+      }
+    }
+
     resizeCanvas();
-    loadData();
+    initGalaxyData();
     animate();
-    setInterval(loadData, 6000);
   </script>
 </body>
 </html>`;

@@ -11,3 +11,4 @@ export * from './context/TokenBudgeter.js';
 export * from './context/ContextEngine.js';
 
 export * from './handoff/index.js';
+export * from './swarm/index.js';

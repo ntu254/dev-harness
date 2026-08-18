@@ -10,31 +10,33 @@ export function getDashboardHtml(): string {
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-base: #fbfcfd;
+      --bg-base: #fcfdfd;
       --bg-surface: #ffffff;
-      --border: #e9ecef;
-      --border-dark: #ced4da;
+      --bg-sidebar: #fafbfd;
+      --border-soft: #edf2f7;
+      --border-subtle: #e2e8f0;
       
       --text-main: #1e293b;
       --text-muted: #64748b;
       --text-faint: #94a3b8;
 
-      --c-sales: #16a34a;
-      --c-tech: #4f46e5;
-      --c-pm: #ea580c;
-      --c-mktg: #dc2626;
-      --c-cust: #0d9488;
-      --c-ops: #b45309;
-      --c-strat: #2563eb;
-      --c-fin: #ca8a04;
-      --c-data: #0284c7;
-      --c-legal: #9333ea;
+      /* Conducting AI Harmonic Pastel Palette */
+      --c-pm: #f97316;
+      --c-mktg: #ef4444;
+      --c-sales: #10b981;
+      --c-cust: #14b8a6;
+      --c-ops: #d97706;
+      --c-tech: #6366f1;
+      --c-strat: #3b82f6;
+      --c-fin: #eab308;
+      --c-data: #0ea5e9;
+      --c-legal: #a855f7;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
       background-color: var(--bg-base);
       color: var(--text-main);
       height: 100vh;
@@ -43,74 +45,74 @@ export function getDashboardHtml(): string {
       display: flex;
     }
 
-    /* 1. DUAL-COLUMN LEFT SIDEBAR (Exact match to screenshot) */
+    /* 1. DUAL-COLUMN LEFT SIDEBAR */
     #sidebar-wrapper {
       display: flex;
       height: 100vh;
-      border-right: 1px solid var(--border);
+      border-right: 1px solid var(--border-soft);
       background: #ffffff;
       z-index: 30;
+      box-shadow: 2px 0 12px rgba(0, 0, 0, 0.02);
     }
 
-    /* Column 1: Main Taxonomy */
-    .sidebar-col-primary {
-      width: 240px;
-      min-width: 240px;
-      border-right: 1px solid var(--border);
+    .sidebar-primary {
+      width: 230px;
+      min-width: 230px;
+      border-right: 1px solid var(--border-soft);
       display: flex;
       flex-direction: column;
       height: 100%;
-      background: #fbfcfd;
+      background: var(--bg-sidebar);
     }
 
-    /* Column 2: Department Inspector (Docked side-by-side) */
-    .sidebar-col-secondary {
-      width: 280px;
-      min-width: 280px;
+    .sidebar-secondary {
+      width: 270px;
+      min-width: 270px;
       display: flex;
       flex-direction: column;
       height: 100%;
       background: #ffffff;
-      border-right: 1px solid var(--border);
+      border-right: 1px solid var(--border-soft);
     }
 
     .org-header {
       padding: 14px 16px;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid var(--border-soft);
       display: flex;
       align-items: center;
       gap: 10px;
       background: #ffffff;
     }
 
-    .org-icon {
+    .org-avatar {
       width: 28px;
       height: 28px;
-      background: #0f172a;
-      border-radius: 6px;
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      border-radius: 7px;
       display: flex;
       align-items: center;
       justify-content: center;
       color: #ffffff;
       font-weight: 800;
       font-size: 13px;
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.15);
     }
 
-    .org-title h2 {
+    .org-meta h2 {
       font-size: 13px;
       font-weight: 700;
       color: var(--text-main);
       line-height: 1.2;
     }
 
-    .org-title p {
+    .org-meta p {
       font-size: 10.5px;
       color: var(--text-muted);
     }
 
-    .search-container {
+    .search-wrap {
       padding: 8px 12px;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid var(--border-soft);
       background: #ffffff;
     }
 
@@ -119,9 +121,9 @@ export function getDashboardHtml(): string {
       align-items: center;
       gap: 6px;
       background: #f1f5f9;
-      border: 1px solid var(--border);
+      border: 1px solid var(--border-soft);
       border-radius: 6px;
-      padding: 4px 8px;
+      padding: 5px 8px;
     }
 
     .search-box input {
@@ -137,7 +139,7 @@ export function getDashboardHtml(): string {
     .sidebar-scroll {
       flex: 1;
       overflow-y: auto;
-      padding: 10px 8px;
+      padding: 10px 6px;
     }
 
     .sec-label {
@@ -150,12 +152,12 @@ export function getDashboardHtml(): string {
       margin-top: 4px;
     }
 
-    .nav-link {
+    .nav-item {
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 5px 8px;
-      border-radius: 5px;
+      border-radius: 6px;
       font-size: 12px;
       font-weight: 600;
       color: var(--text-muted);
@@ -164,19 +166,19 @@ export function getDashboardHtml(): string {
       transition: all 0.12s;
     }
 
-    .nav-link:hover {
+    .nav-item:hover {
       background: #f1f5f9;
       color: var(--text-main);
     }
 
-    .nav-link.active {
+    .nav-item.active {
       background: #ffffff;
       color: var(--text-main);
-      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-      border: 1px solid var(--border);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+      border: 1px solid var(--border-soft);
     }
 
-    .nav-link-left {
+    .nav-left {
       display: flex;
       align-items: center;
       gap: 7px;
@@ -188,43 +190,43 @@ export function getDashboardHtml(): string {
       border-radius: 50%;
     }
 
-    .count-badge {
+    .count-pill {
       font-size: 10.5px;
       font-weight: 600;
       color: var(--text-faint);
     }
 
-    /* SECONDARY COLUMN - DEPARTMENT DETAILS (Image exact match) */
-    .dep-header-box {
+    /* SECONDARY COLUMN - DEPARTMENT DETAILS */
+    .dep-header {
       padding: 14px 16px;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid var(--border-soft);
       display: flex;
       align-items: center;
       gap: 10px;
     }
 
-    .dep-badge-icon {
+    .dep-badge {
       width: 28px;
       height: 28px;
       background: var(--c-sales);
       color: #ffffff;
-      border-radius: 6px;
+      border-radius: 7px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 14px;
-      font-weight: 800;
+      font-size: 13px;
+      box-shadow: 0 2px 6px rgba(16, 185, 129, 0.2);
     }
 
-    .dep-title-meta h3 {
-      font-size: 14px;
+    .dep-meta h3 {
+      font-size: 13.5px;
       font-weight: 800;
       color: var(--text-main);
       line-height: 1.2;
     }
 
-    .dep-title-meta p {
-      font-size: 10px;
+    .dep-meta p {
+      font-size: 9.5px;
       color: var(--text-faint);
       text-transform: uppercase;
       font-weight: 700;
@@ -247,12 +249,12 @@ export function getDashboardHtml(): string {
       color: var(--text-main);
     }
 
-    .avatar-circle {
-      width: 16px;
-      height: 16px;
+    .avatar-mini {
+      width: 17px;
+      height: 17px;
       border-radius: 50%;
-      background: #cbd5e1;
-      font-size: 9px;
+      background: #e2e8f0;
+      font-size: 8.5px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -260,7 +262,7 @@ export function getDashboardHtml(): string {
       color: #334155;
     }
 
-    /* 2. MAIN NETWORK GRAPH CANVAS */
+    /* 2. MAIN ORGANIC CANVAS */
     #main-content {
       flex: 1;
       display: flex;
@@ -273,7 +275,7 @@ export function getDashboardHtml(): string {
     .top-toolbar {
       height: 48px;
       background: #ffffff;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid var(--border-soft);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -300,7 +302,7 @@ export function getDashboardHtml(): string {
       color: var(--text-muted);
     }
 
-    /* CANVAS AREA */
+    /* FULL-SIZE CANVAS VIEWPORT */
     #canvas-container {
       flex: 1;
       width: 100%;
@@ -313,7 +315,7 @@ export function getDashboardHtml(): string {
 
     #canvas-container:active { cursor: grabbing; }
 
-    #network-canvas {
+    #galaxy-canvas {
       width: 100%;
       height: 100%;
       display: block;
@@ -331,32 +333,33 @@ export function getDashboardHtml(): string {
 
     .hud-btn {
       background: #ffffff;
-      border: 1px solid var(--border);
+      border: 1px solid var(--border-soft);
       border-radius: 6px;
-      padding: 5px 10px;
+      padding: 5px 11px;
       font-size: 11.5px;
       font-weight: 600;
       color: var(--text-main);
-      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
       cursor: pointer;
       display: flex;
       align-items: center;
       gap: 4px;
+      transition: all 0.15s;
     }
 
-    .hud-btn:hover { background: #f8fafc; }
+    .hud-btn:hover { background: #f8fafc; border-color: var(--border-subtle); }
 
     #tooltip {
       position: absolute;
       pointer-events: none;
       background: rgba(15, 23, 42, 0.95);
-      backdrop-filter: blur(6px);
+      backdrop-filter: blur(8px);
       color: #ffffff;
       padding: 6px 12px;
       border-radius: 6px;
       font-size: 11px;
       font-weight: 600;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.15);
       opacity: 0;
       transition: opacity 0.1s ease;
       z-index: 40;
@@ -365,62 +368,56 @@ export function getDashboardHtml(): string {
 </head>
 <body>
 
-  <!-- 1. DUAL-COLUMN LEFT SIDEBAR -->
+  <!-- DUAL SIDEBAR -->
   <div id="sidebar-wrapper">
-    <!-- Primary Taxonomy Column -->
-    <aside class="sidebar-col-primary">
+    <!-- Primary Taxonomy -->
+    <aside class="sidebar-primary">
       <div class="org-header">
-        <div class="org-icon">D</div>
-        <div class="org-title">
+        <div class="org-avatar">D</div>
+        <div class="org-meta">
           <h2>Demo Company</h2>
           <p>Organisation Brain</p>
         </div>
       </div>
 
-      <div class="search-container">
+      <div class="search-wrap">
         <div class="search-box">
           <span>🔍</span>
-          <input type="text" placeholder="Search entities...">
+          <input type="text" placeholder="Search entities..." id="search-input" oninput="handleSearch()">
         </div>
       </div>
 
       <div class="sidebar-scroll">
         <div class="sec-label">By Entity Type</div>
-        <div class="nav-link active" onclick="selectDepartment('Sales')"><div class="nav-link-left"><span>🏢</span><span>All</span></div><span class="count-badge">757</span></div>
-        <div class="nav-link"><div class="nav-link-left"><span>👥</span><span>People</span></div><span class="count-badge">75</span></div>
-        <div class="nav-link"><div class="nav-link-left"><span>🤖</span><span>Sub-Agents</span></div><span class="count-badge">34</span></div>
-        <div class="nav-link"><div class="nav-link-left"><span>🛠️</span><span>Tools</span></div><span class="count-badge">145</span></div>
-        <div class="nav-link"><div class="nav-link-left"><span>⚡</span><span>Workflows</span></div><span class="count-badge">198</span></div>
-        <div class="nav-link"><div class="nav-link-left"><span>📜</span><span>SOPs</span></div><span class="count-badge">224</span></div>
-        <div class="nav-link"><div class="nav-link-left"><span>📁</span><span>Projects</span></div><span class="count-badge">12</span></div>
-        <div class="nav-link"><div class="nav-link-left"><span>👥</span><span>Teams</span></div><span class="count-badge">9</span></div>
-        <div class="nav-link"><div class="nav-link-left"><span>🏢</span><span>Departments</span></div><span class="count-badge">11</span></div>
-
-        <div class="sec-label">By Business Function</div>
-        <div class="nav-link"><div class="nav-link-left"><span class="dot" style="background:#3b82f6;"></span><span>Core</span></div><span class="count-badge">451</span></div>
-        <div class="nav-link"><div class="nav-link-left"><span class="dot" style="background:#8b5cf6;"></span><span>Enabling</span></div><span class="count-badge">306</span></div>
+        <div class="nav-item active" onclick="selectDepartment(null)"><div class="nav-left"><span>🏢</span><span>All Entities</span></div><span class="count-pill">757</span></div>
+        <div class="nav-item"><div class="nav-left"><span>👥</span><span>People</span></div><span class="count-pill">75</span></div>
+        <div class="nav-item"><div class="nav-left"><span>🤖</span><span>Sub-Agents</span></div><span class="count-pill">34</span></div>
+        <div class="nav-item"><div class="nav-left"><span>🛠️</span><span>Tools</span></div><span class="count-pill">145</span></div>
+        <div class="nav-item"><div class="nav-left"><span>⚡</span><span>Workflows</span></div><span class="count-pill">198</span></div>
+        <div class="nav-item"><div class="nav-left"><span>📜</span><span>SOPs</span></div><span class="count-pill">224</span></div>
+        <div class="nav-item"><div class="nav-left"><span>📁</span><span>Projects</span></div><span class="count-pill">12</span></div>
 
         <div class="sec-label">Departments</div>
-        <div class="nav-link" onclick="selectDepartment('Product Management')"><div class="nav-link-left"><span class="dot" style="background:var(--c-pm);"></span><span>Product Management</span></div></div>
-        <div class="nav-link" onclick="selectDepartment('Marketing & Growth')"><div class="nav-link-left"><span class="dot" style="background:var(--c-mktg);"></span><span>Marketing & Growth</span></div></div>
-        <div class="nav-link active" onclick="selectDepartment('Sales')"><div class="nav-link-left"><span class="dot" style="background:var(--c-sales);"></span><span>Sales</span></div></div>
-        <div class="nav-link" onclick="selectDepartment('Customer & Admin')"><div class="nav-link-left"><span class="dot" style="background:var(--c-cust);"></span><span>Customer & Admin</span></div></div>
-        <div class="nav-link" onclick="selectDepartment('Operations & Supply Chain')"><div class="nav-link-left"><span class="dot" style="background:var(--c-ops);"></span><span>Operations & Supply Chain</span></div></div>
-        <div class="nav-link" onclick="selectDepartment('Tech, AI & Automations')"><div class="nav-link-left"><span class="dot" style="background:var(--c-tech);"></span><span>Tech, AI & Automations</span></div></div>
-        <div class="nav-link" onclick="selectDepartment('Strategy & Leadership')"><div class="nav-link-left"><span class="dot" style="background:var(--c-strat);"></span><span>Strategy & Leadership</span></div></div>
-        <div class="nav-link" onclick="selectDepartment('Finance')"><div class="nav-link-left"><span class="dot" style="background:var(--c-fin);"></span><span>Finance</span></div></div>
-        <div class="nav-link" onclick="selectDepartment('Data & Analytics')"><div class="nav-link-left"><span class="dot" style="background:var(--c-data);"></span><span>Data & Analytics</span></div></div>
-        <div class="nav-link" onclick="selectDepartment('Legal, Risk & Compliance')"><div class="nav-link-left"><span class="dot" style="background:var(--c-legal);"></span><span>Legal, Risk & Compliance</span></div></div>
+        <div class="nav-item" onclick="selectDepartment('Product Management')"><div class="nav-left"><span class="dot" style="background:var(--c-pm);"></span><span>Product Management</span></div></div>
+        <div class="nav-item" onclick="selectDepartment('Marketing & Growth')"><div class="nav-left"><span class="dot" style="background:var(--c-mktg);"></span><span>Marketing & Growth</span></div></div>
+        <div class="nav-item active" onclick="selectDepartment('Sales')"><div class="nav-left"><span class="dot" style="background:var(--c-sales);"></span><span>Sales</span></div></div>
+        <div class="nav-item" onclick="selectDepartment('Customer & Admin')"><div class="nav-left"><span class="dot" style="background:var(--c-cust);"></span><span>Customer & Admin</span></div></div>
+        <div class="nav-item" onclick="selectDepartment('Operations & Supply Chain')"><div class="nav-left"><span class="dot" style="background:var(--c-ops);"></span><span>Operations & Supply Chain</span></div></div>
+        <div class="nav-item" onclick="selectDepartment('Tech, AI & Automations')"><div class="nav-left"><span class="dot" style="background:var(--c-tech);"></span><span>Tech, AI & Automations</span></div></div>
+        <div class="nav-item" onclick="selectDepartment('Strategy & Leadership')"><div class="nav-left"><span class="dot" style="background:var(--c-strat);"></span><span>Strategy & Leadership</span></div></div>
+        <div class="nav-item" onclick="selectDepartment('Finance')"><div class="nav-left"><span class="dot" style="background:var(--c-fin);"></span><span>Finance</span></div></div>
+        <div class="nav-item" onclick="selectDepartment('Data & Analytics')"><div class="nav-left"><span class="dot" style="background:var(--c-data);"></span><span>Data & Analytics</span></div></div>
+        <div class="nav-item" onclick="selectDepartment('Legal, Risk & Compliance')"><div class="nav-left"><span class="dot" style="background:var(--c-legal);"></span><span>Legal, Risk & Compliance</span></div></div>
       </div>
     </aside>
 
-    <!-- Secondary Inspector Column (Exact match to Reference Screenshot 4) -->
-    <aside class="sidebar-col-secondary">
-      <div class="dep-header-box">
-        <div class="dep-badge-icon" id="dep-icon">🏢</div>
-        <div class="dep-title-meta">
+    <!-- Secondary Inspector (Exact match to Reference Screenshot) -->
+    <aside class="sidebar-secondary">
+      <div class="dep-header">
+        <div class="dep-badge" id="dep-icon">🏢</div>
+        <div class="dep-meta">
           <h3 id="dep-name">Sales</h3>
-          <p>DEPARTMENT • PART OF DEMO COMPANY</p>
+          <p>DEPARTMENT • DEMO COMPANY</p>
         </div>
       </div>
 
@@ -431,12 +428,12 @@ export function getDashboardHtml(): string {
         <div class="detail-item"><span>⚡</span><span id="dep-sys-3">Sales Autonomous Agent</span></div>
 
         <div class="sec-label">People & Leads</div>
-        <div class="detail-item"><span class="avatar-circle">MT</span><span>Michael Torres</span></div>
-        <div class="detail-item"><span class="avatar-circle">OH</span><span>Omar Hassan</span></div>
-        <div class="detail-item"><span class="avatar-circle">RG</span><span>Rachel Green</span></div>
-        <div class="detail-item"><span class="avatar-circle">SR</span><span>Samantha Reed</span></div>
-        <div class="detail-item"><span class="avatar-circle">LC</span><span>Lisa Chang</span></div>
-        <div class="detail-item"><span class="avatar-circle">DP</span><span>David Park</span></div>
+        <div class="detail-item"><span class="avatar-mini">MT</span><span>Michael Torres</span></div>
+        <div class="detail-item"><span class="avatar-mini">OH</span><span>Omar Hassan</span></div>
+        <div class="detail-item"><span class="avatar-mini">RG</span><span>Rachel Green</span></div>
+        <div class="detail-item"><span class="avatar-mini">SR</span><span>Samantha Reed</span></div>
+        <div class="detail-item"><span class="avatar-mini">LC</span><span>Lisa Chang</span></div>
+        <div class="detail-item"><span class="avatar-mini">DP</span><span>David Park</span></div>
 
         <div class="sec-label">Sub-Agents & Automations</div>
         <div class="detail-item"><span>⚙️</span><span>Account Risk and Expansion...</span></div>
@@ -448,7 +445,6 @@ export function getDashboardHtml(): string {
         <div class="detail-item"><span>⚙️</span><span>Proposal & Document Generator...</span></div>
         <div class="detail-item"><span>⚙️</span><span>Prospect Research & CRM Enrichment...</span></div>
         <div class="detail-item"><span>⚙️</span><span>Sales Pipeline Health Monitor...</span></div>
-        <div class="detail-item"><span>⚙️</span><span>Auto Email Labelling & Draft...</span></div>
 
         <div class="sec-label">Tools & Integrations</div>
         <div class="detail-item"><span>📁</span><span>Notion</span></div>
@@ -459,7 +455,7 @@ export function getDashboardHtml(): string {
     </aside>
   </div>
 
-  <!-- 2. MAIN NETWORK GRAPH CANVAS -->
+  <!-- MAIN CANVAS -->
   <main id="main-content">
     <div class="top-toolbar">
       <div class="breadcrumbs">
@@ -470,18 +466,18 @@ export function getDashboardHtml(): string {
       </div>
 
       <div style="font-size: 12px; font-weight: 600; color: var(--text-muted);">
-        Interactive Web Network Perspective
+        Organic Celestial Graph
       </div>
     </div>
 
-    <!-- CANVAS VIEW -->
     <div id="canvas-container">
-      <canvas id="network-canvas"></canvas>
+      <canvas id="galaxy-canvas"></canvas>
 
       <div class="hud-controls">
         <button class="hud-btn" onclick="zoomIn()">➕ Zoom In</button>
         <button class="hud-btn" onclick="zoomOut()">➖ Zoom Out</button>
-        <button class="hud-btn" onclick="resetFocus()">🎯 Reset Focus</button>
+        <button class="hud-btn" onclick="fitView()">🎯 Fit View</button>
+        <button class="hud-btn" onclick="toggleRotation()">🔄 <span id="rot-lbl">Pause</span></button>
       </div>
 
       <div id="tooltip"></div>
@@ -489,29 +485,31 @@ export function getDashboardHtml(): string {
   </main>
 
   <script>
-    const canvas = document.getElementById('network-canvas');
+    const canvas = document.getElementById('galaxy-canvas');
     const ctx = canvas.getContext('2d');
     const tooltip = document.getElementById('tooltip');
 
     let nodes = [];
-    let edges = [];
-    let camera = { x: -80, y: 40, zoom: 0.95 };
+    let camera = { x: 0, y: 0, zoom: 0.95 };
     let isDragging = false;
     let dragStart = { x: 0, y: 0 };
     let hoveredNode = null;
     let activeDepartment = 'Sales';
+    let rotationAngle = 0;
+    let isRotating = true;
+    let waveTime = 0;
 
     const DEPARTMENTS = [
-      { name: 'Sales', color: '#16a34a' },
-      { name: 'Tech, AI & Automations', color: '#4f46e5' },
-      { name: 'Product Management', color: '#ea580c' },
-      { name: 'Marketing & Growth', color: '#dc2626' },
-      { name: 'Customer & Admin', color: '#0d9488' },
-      { name: 'Operations & Supply Chain', color: '#b45309' },
-      { name: 'Strategy & Leadership', color: '#2563eb' },
-      { name: 'Finance', color: '#ca8a04' },
-      { name: 'Data & Analytics', color: '#0284c7' },
-      { name: 'Legal, Risk & Compliance', color: '#9333ea' }
+      { name: 'Product Management', color: '#f97316' },
+      { name: 'Marketing & Growth', color: '#ef4444' },
+      { name: 'Sales', color: '#10b981' },
+      { name: 'Customer & Admin', color: '#14b8a6' },
+      { name: 'Operations & Supply Chain', color: '#d97706' },
+      { name: 'Tech, AI & Automations', color: '#6366f1' },
+      { name: 'Strategy & Leadership', color: '#3b82f6' },
+      { name: 'Finance', color: '#eab308' },
+      { name: 'Data & Analytics', color: '#0ea5e9' },
+      { name: 'Legal, Risk & Compliance', color: '#a855f7' }
     ];
 
     function resizeCanvas() {
@@ -522,116 +520,96 @@ export function getDashboardHtml(): string {
     }
     window.addEventListener('resize', resizeCanvas);
 
-    function initNetworkGraph() {
+    function initOrganicGalaxy() {
       nodes = [];
-      edges = [];
 
-      // 1. Center Root Node "D" (Demo Company)
-      const root = {
+      // 1. Center Root Node "D"
+      nodes.push({
         id: 'node-root',
         name: 'Demo Company',
         kind: 'core',
         color: '#ca8a04',
         radius: 20,
-        x: 180,
-        y: 120,
+        orbitR: 0,
+        angle: 0,
         shape: 'avatar'
-      };
-      nodes.push(root);
+      });
 
-      // 2. Build Realistic Web-Link Network Structure matching the screenshot!
+      // 2. Generate Graceful Fluid Concentric Celestial Rings
       DEPARTMENTS.forEach((dep, dIdx) => {
-        // Base Department Hub Angle
-        const depAngle = (dIdx / DEPARTMENTS.length) * Math.PI * 1.8 - 0.4;
-        const depDist = 220;
-        const depX = root.x + Math.cos(depAngle) * depDist;
-        const depY = root.y + Math.sin(depAngle) * depDist;
+        const baseAngle = (dIdx / DEPARTMENTS.length) * Math.PI * 2;
 
-        const depNode = {
+        // Department Hub
+        nodes.push({
           id: 'dep-' + dep.name,
           name: dep.name,
           department: dep.name,
           kind: 'department',
           color: dep.color,
-          radius: (dep.name === activeDepartment) ? 14 : 9,
-          x: depX,
-          y: depY,
+          radius: 9.5,
+          orbitR: 0.17,
+          angle: baseAngle,
           shape: 'circle'
-        };
-        nodes.push(depNode);
-        edges.push({ from: root.id, to: depNode.id, color: dep.color });
-
-        // Branching People (Upper Arc with Avatars)
-        const peopleList = ['MT', 'OH', 'RG', 'SR', 'LC', 'DP'];
-        peopleList.forEach((p, pIdx) => {
-          const pAngle = depAngle - 0.25 + (pIdx / peopleList.length) * 0.5;
-          const pDist = depDist + 160 + (pIdx % 2) * 40;
-          const pX = root.x + Math.cos(pAngle) * pDist;
-          const pY = root.y + Math.sin(pAngle) * pDist;
-
-          const pNode = {
-            id: \`ppl-\${dep.name}-\${pIdx}\`,
-            name: \`Person \${p} (\${dep.name})\`,
-            department: dep.name,
-            kind: 'person',
-            color: '#64748b',
-            radius: 8,
-            x: pX,
-            y: pY,
-            shape: 'avatar-mini',
-            avatarText: p
-          };
-          nodes.push(pNode);
-          edges.push({ from: depNode.id, to: pNode.id, color: dep.color });
         });
 
-        // Branching Sub-Agents & Tools (Fan of Green/Colored Squares)
-        for (let a = 0; a < 8; a++) {
-          const aAngle = depAngle - 0.2 + (a / 8) * 0.4;
-          const aDist = depDist + 90 + (a % 3) * 25;
-          const aX = root.x + Math.cos(aAngle) * aDist;
-          const aY = root.y + Math.sin(aAngle) * aDist;
-
-          const aNode = {
-            id: \`agent-\${dep.name}-\${a}\`,
-            name: \`\${dep.name} Sub-Agent #\${a+1}\`,
+        // Systems (Soft square beads flowing in concentric arc)
+        for (let s = 0; s < 14; s++) {
+          const arcAngle = baseAngle + (s - 6.5) * 0.032;
+          nodes.push({
+            id: \`sys-\${dIdx}-\${s}\`,
+            name: \`\${dep.name} System #\${s+1}\`,
             department: dep.name,
-            kind: 'subagent',
+            kind: 'system',
             color: dep.color,
-            radius: 5,
-            x: aX,
-            y: aY,
-            shape: 'square'
-          };
-          nodes.push(aNode);
-          edges.push({ from: depNode.id, to: aNode.id, color: dep.color });
+            radius: 4,
+            orbitR: 0.33 + (s % 3) * 0.015,
+            angle: arcAngle,
+            shape: (s % 2 === 0) ? 'square' : 'circle',
+            jitterPhase: Math.random() * Math.PI * 2
+          });
         }
 
-        // Branching Workflow & SOP Beads (Yellow & Blue Beads Network)
-        for (let w = 0; w < 16; w++) {
-          const wAngle = depAngle - 0.3 + (w / 16) * 0.6;
-          const wDist = depDist + 240 + (w % 4) * 20;
-          const wX = root.x + Math.cos(wAngle) * wDist;
-          const wY = root.y + Math.sin(wAngle) * wDist;
-
-          const wNode = {
-            id: \`wf-\${dep.name}-\${w}\`,
+        // Workflows & SOPs (Fine rounded pearls)
+        for (let w = 0; w < 28; w++) {
+          const arcAngle = baseAngle + (w - 13.5) * 0.018;
+          nodes.push({
+            id: \`wf-\${dIdx}-\${w}\`,
             name: \`\${dep.name} Workflow #\${w+1}\`,
             department: dep.name,
             kind: 'workflow',
-            color: (w % 3 === 0) ? '#eab308' : '#3b82f6',
-            radius: 3.5,
-            x: wX,
-            y: wY,
-            shape: 'circle'
-          };
-          nodes.push(wNode);
-          edges.push({ from: depNode.id, to: wNode.id, color: dep.color });
+            color: dep.color,
+            radius: 3.2,
+            orbitR: 0.50 + (w % 4) * 0.016,
+            angle: arcAngle,
+            shape: 'circle',
+            jitterPhase: Math.random() * Math.PI * 2
+          });
+        }
+
+        // People & Agents (Outer wide celestial band with diamonds and avatars)
+        for (let p = 0; p < 22; p++) {
+          const arcAngle = baseAngle + (p - 10.5) * 0.022;
+          nodes.push({
+            id: \`ppl-\${dIdx}-\${p}\`,
+            name: \`\${dep.name} Specialist #\${p+1}\`,
+            department: dep.name,
+            kind: 'agent',
+            color: dep.color,
+            radius: 3.8,
+            orbitR: 0.69 + (p % 3) * 0.018,
+            angle: arcAngle,
+            shape: 'diamond',
+            jitterPhase: Math.random() * Math.PI * 2
+          });
         }
       });
     }
 
     function animate() {
+      if (isRotating) {
+        rotationAngle += 0.0006;
+      }
+      waveTime += 0.015;
       render();
       requestAnimationFrame(animate);
     }
@@ -640,6 +618,7 @@ export function getDashboardHtml(): string {
       const container = document.getElementById('canvas-container');
       const width = container.clientWidth;
       const height = container.clientHeight;
+      const baseDim = Math.min(width, height) / 2;
 
       ctx.clearRect(0, 0, width, height);
 
@@ -650,32 +629,97 @@ export function getDashboardHtml(): string {
       ctx.translate(centerX, centerY);
       ctx.scale(camera.zoom, camera.zoom);
 
-      // 1. Draw Visible Network Connecting Lines (Bezier & Straight Edges)
-      edges.forEach(edge => {
-        const fromNode = nodes.find(n => n.id === edge.from);
-        const toNode = nodes.find(n => n.id === edge.to);
-        if (!fromNode || !toNode) return;
+      // 1. Center Soft Warm Ambient Halo
+      const sunGlow = ctx.createRadialGradient(0, 0, 0, 0, 0, 90);
+      sunGlow.addColorStop(0, 'rgba(234, 179, 8, 0.12)');
+      sunGlow.addColorStop(0.5, 'rgba(234, 179, 8, 0.04)');
+      sunGlow.addColorStop(1, 'rgba(234, 179, 8, 0)');
+      ctx.fillStyle = sunGlow;
+      ctx.beginPath();
+      ctx.arc(0, 0, 90, 0, Math.PI * 2);
+      ctx.fill();
 
-        const isRelated = (!activeDepartment || fromNode.department === activeDepartment || toNode.department === activeDepartment || fromNode.kind === 'core');
-        const alpha = isRelated ? '55' : '0d';
-
+      // 2. Delicate Concentric Orbit Guide Arcs
+      const ringsNorm = [0.17, 0.34, 0.51, 0.70, 0.84];
+      ringsNorm.forEach(rn => {
+        const radius = baseDim * rn;
         ctx.beginPath();
-        ctx.moveTo(fromNode.x, fromNode.y);
-        ctx.lineTo(toNode.x, toNode.y);
-        ctx.strokeStyle = edge.color + alpha;
-        ctx.lineWidth = isRelated ? 1.5 : 0.6;
+        ctx.arc(0, 0, radius, 0, Math.PI * 2);
+        ctx.strokeStyle = 'rgba(226, 232, 240, 0.65)';
+        ctx.lineWidth = 1;
+        ctx.setLineDash([4, 8]);
         ctx.stroke();
+        ctx.setLineDash([]);
       });
 
-      // 2. Render Nodes (Avatars, Circles, Squares)
+      // 3. Smooth Curved Bezier Connections when department is selected (Mềm mại, cong tự nhiên!)
+      if (activeDepartment) {
+        const depNode = nodes.find(n => n.kind === 'department' && n.department === activeDepartment);
+        if (depNode) {
+          const curAngle = depNode.angle + rotationAngle;
+          const depR = baseDim * depNode.orbitR;
+          const dx = Math.cos(curAngle) * depR;
+          const dy = Math.sin(curAngle) * depR;
+
+          // Soft Glowing Halo around Active Department
+          const depGlow = ctx.createRadialGradient(dx, dy, 0, dx, dy, 70);
+          depGlow.addColorStop(0, depNode.color + '22');
+          depGlow.addColorStop(1, depNode.color + '00');
+          ctx.fillStyle = depGlow;
+          ctx.beginPath();
+          ctx.arc(dx, dy, 70, 0, Math.PI * 2);
+          ctx.fill();
+
+          // Smooth curved connection Center -> Active Department
+          ctx.beginPath();
+          ctx.moveTo(0, 0);
+          ctx.quadraticCurveTo(dx * 0.5 + Math.sin(curAngle) * 20, dy * 0.5 - Math.cos(curAngle) * 20, dx, dy);
+          ctx.strokeStyle = depNode.color + '99';
+          ctx.lineWidth = 2.5;
+          ctx.stroke();
+
+          // Delicate Bezier Splines from Department to Sub-nodes
+          nodes.forEach(node => {
+            if (node.department === activeDepartment && node.orbitR > 0.17) {
+              const nAngle = node.angle + rotationAngle;
+              const nR = baseDim * node.orbitR;
+              const nx = Math.cos(nAngle) * nR;
+              const ny = Math.sin(nAngle) * nR;
+
+              // Smooth curved bezier spline
+              const midX = (dx + nx) / 2 + Math.sin(nAngle) * 8;
+              const midY = (dy + ny) / 2 - Math.cos(nAngle) * 8;
+
+              ctx.beginPath();
+              ctx.moveTo(dx, dy);
+              ctx.quadraticCurveTo(midX, midY, nx, ny);
+              ctx.strokeStyle = depNode.color + '38';
+              ctx.lineWidth = 1.0;
+              ctx.stroke();
+            }
+          });
+        }
+      }
+
+      // 4. Render Nodes with Soft Anti-aliasing & Floating Harmonic Wave
       nodes.forEach(node => {
+        const curAngle = (node.orbitR === 0) ? 0 : (node.angle + rotationAngle);
+        // Subtle organic breathing float
+        const breath = (node.jitterPhase) ? Math.sin(waveTime + node.jitterPhase) * 1.5 : 0;
+        const curR = baseDim * node.orbitR + breath;
+        const nx = Math.cos(curAngle) * curR;
+        const ny = Math.sin(curAngle) * curR;
+        node.currentX = nx;
+        node.currentY = ny;
+
         const isRelated = (!activeDepartment || node.department === activeDepartment || node.kind === 'core');
-        const alpha = isRelated ? 'ff' : '22';
+        // Non-active nodes maintain 55% soft pastel visibility instead of turning ghostly/ugly!
+        const alpha = isRelated ? 'ff' : '66';
 
         if (node.shape === 'avatar') {
-          // Center "D" Root Node
+          // Center "D" Node
           ctx.beginPath();
-          ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+          ctx.arc(0, 0, node.radius, 0, Math.PI * 2);
           ctx.fillStyle = '#0f172a';
           ctx.fill();
           ctx.strokeStyle = '#ffffff';
@@ -686,54 +730,43 @@ export function getDashboardHtml(): string {
           ctx.font = '800 12px "Plus Jakarta Sans", sans-serif';
           ctx.textAlign = 'center';
           ctx.textBaseline = 'middle';
-          ctx.fillText('D', node.x, node.y);
+          ctx.fillText('D', 0, 0);
           ctx.textBaseline = 'alphabetic';
-        } else if (node.shape === 'avatar-mini') {
-          // People Small Round Avatar Circle with Initials
-          ctx.beginPath();
-          ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
-          ctx.fillStyle = isRelated ? '#e2e8f0' : '#f1f5f9';
-          ctx.fill();
-          ctx.strokeStyle = '#ffffff';
-          ctx.lineWidth = 1.5;
-          ctx.stroke();
-
-          if (isRelated) {
-            ctx.fillStyle = '#334155';
-            ctx.font = '700 8px "Plus Jakarta Sans", sans-serif';
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-            ctx.fillText(node.avatarText || 'U', node.x, node.y);
-            ctx.textBaseline = 'alphabetic';
-          }
         } else if (node.shape === 'square') {
-          // Sub-Agent Green / Colored Square
+          // Soft Rounded Square
           ctx.fillStyle = node.color + alpha;
-          ctx.fillRect(node.x - node.radius, node.y - node.radius, node.radius * 2, node.radius * 2);
-        } else {
-          // Circle Dot / Bead
+          ctx.fillRect(nx - node.radius, ny - node.radius, node.radius * 2, node.radius * 2);
+        } else if (node.shape === 'diamond') {
+          // Delicate Diamond
           ctx.beginPath();
-          ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+          ctx.moveTo(nx, ny - node.radius);
+          ctx.lineTo(nx + node.radius, ny);
+          ctx.lineTo(nx, ny + node.radius);
+          ctx.lineTo(nx - node.radius, ny);
+          ctx.closePath();
           ctx.fillStyle = node.color + alpha;
           ctx.fill();
-          ctx.strokeStyle = '#ffffff';
-          ctx.lineWidth = 1;
-          ctx.stroke();
+        } else {
+          // Soft Circular Pearl
+          ctx.beginPath();
+          ctx.arc(nx, ny, node.radius, 0, Math.PI * 2);
+          ctx.fillStyle = node.color + alpha;
+          ctx.fill();
         }
 
-        // Selected Department Green Halo Box (Exact match to Sales node in screenshot)
+        // Active Department Green Ring Halo
         if (node.department === activeDepartment && node.kind === 'department') {
           ctx.beginPath();
-          ctx.arc(node.x, node.y, node.radius + 6, 0, Math.PI * 2);
+          ctx.arc(nx, ny, node.radius + 5, 0, Math.PI * 2);
           ctx.strokeStyle = node.color;
-          ctx.lineWidth = 2;
+          ctx.lineWidth = 2.2;
           ctx.stroke();
         }
 
         // Hover Effect
         if (hoveredNode && hoveredNode.id === node.id) {
           ctx.beginPath();
-          ctx.arc(node.x, node.y, node.radius + 5, 0, Math.PI * 2);
+          ctx.arc(nx, ny, node.radius + 4, 0, Math.PI * 2);
           ctx.strokeStyle = '#0f172a';
           ctx.lineWidth = 2;
           ctx.stroke();
@@ -753,8 +786,8 @@ export function getDashboardHtml(): string {
 
       for (let i = nodes.length - 1; i >= 0; i--) {
         const node = nodes[i];
-        const dist = Math.hypot(node.x - localX, node.y - localY);
-        if (dist <= Math.max(10, node.radius + 4)) {
+        const dist = Math.hypot(node.currentX - localX, node.currentY - localY);
+        if (dist <= Math.max(9, node.radius + 3)) {
           return node;
         }
       }
@@ -805,26 +838,43 @@ export function getDashboardHtml(): string {
 
     function selectDepartment(depName) {
       activeDepartment = depName;
-      document.getElementById('dep-name').innerText = depName;
-      const depObj = DEPARTMENTS.find(d => d.name === depName) || { color: '#16a34a' };
-      document.getElementById('dep-icon').style.background = depObj.color;
+      if (depName) {
+        document.getElementById('dep-name').innerText = depName;
+        const depObj = DEPARTMENTS.find(d => d.name === depName) || { color: '#10b981' };
+        document.getElementById('dep-icon').style.background = depObj.color;
 
-      document.getElementById('dep-sys-1').innerText = depName + ' AI Copilot';
-      document.getElementById('dep-sys-2').innerText = depName + ' AI Brain';
-      document.getElementById('dep-sys-3').innerText = depName + ' Autonomous Agent';
+        document.getElementById('dep-sys-1').innerText = depName + ' AI Copilot';
+        document.getElementById('dep-sys-2').innerText = depName + ' AI Brain';
+        document.getElementById('dep-sys-3').innerText = depName + ' Autonomous Agent';
+      }
 
-      document.querySelectorAll('.nav-link').forEach(link => {
-        link.classList.toggle('active', link.innerText.includes(depName));
+      document.querySelectorAll('.nav-item').forEach(link => {
+        link.classList.toggle('active', depName ? link.innerText.includes(depName) : link.innerText.includes('All Entities'));
       });
     }
 
     function zoomIn() { camera.zoom = Math.min(3.0, camera.zoom * 1.2); }
     function zoomOut() { camera.zoom = Math.max(0.4, camera.zoom / 1.2); }
-    function resetFocus() { camera = { x: -80, y: 40, zoom: 0.95 }; }
+    function fitView() { camera = { x: 0, y: 0, zoom: 0.95 }; }
+
+    function toggleRotation() {
+      isRotating = !isRotating;
+      document.getElementById('rot-lbl').innerText = isRotating ? 'Pause' : 'Resume';
+    }
+
+    function handleSearch() {
+      const q = document.getElementById('search-input').value.toLowerCase();
+      if (!q) { selectDepartment(null); return; }
+      const match = DEPARTMENTS.find(d => d.name.toLowerCase().includes(q));
+      if (match) {
+        selectDepartment(match.name);
+      }
+    }
 
     resizeCanvas();
-    initNetworkGraph();
+    initOrganicGalaxy();
     animate();
+    fitView();
   </script>
 </body>
 </html>`;

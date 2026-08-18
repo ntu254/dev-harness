@@ -1,6 +1,6 @@
 export function getDashboardHtml(): string {
   return `<!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,94 +10,84 @@ export function getDashboardHtml(): string {
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-base: #f8fafc;
+      --bg-base: #fbfcfd;
       --bg-surface: #ffffff;
-      --bg-sidebar: #fbfcfd;
-      --border-subtle: #e2e8f0;
-      --border-light: #f1f5f9;
-      --text-main: #0f172a;
+      --border: #e9ecef;
+      --border-dark: #ced4da;
+      
+      --text-main: #1e293b;
       --text-muted: #64748b;
       --text-faint: #94a3b8;
-      --ring-guide: rgba(226, 232, 240, 0.85);
 
-      --dep-pm: #ea580c;
-      --dep-mktg: #dc2626;
-      --dep-sales: #16a34a;
-      --dep-cust: #0d9488;
-      --dep-ops: #b45309;
-      --dep-tech: #4f46e5;
-      --dep-strat: #2563eb;
-      --dep-fin: #ca8a04;
-      --dep-data: #0284c7;
-      --dep-legal: #9333ea;
-    }
-
-    [data-theme="dark"] {
-      --bg-base: #090d16;
-      --bg-surface: #111827;
-      --bg-sidebar: #0b1120;
-      --border-subtle: #1e293b;
-      --border-light: #172033;
-      --text-main: #f8fafc;
-      --text-muted: #94a3b8;
-      --text-faint: #64748b;
-      --ring-guide: rgba(30, 41, 59, 0.8);
+      --c-sales: #16a34a;
+      --c-tech: #4f46e5;
+      --c-pm: #ea580c;
+      --c-mktg: #dc2626;
+      --c-cust: #0d9488;
+      --c-ops: #b45309;
+      --c-strat: #2563eb;
+      --c-fin: #ca8a04;
+      --c-data: #0284c7;
+      --c-legal: #9333ea;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
       background-color: var(--bg-base);
       color: var(--text-main);
       height: 100vh;
       width: 100vw;
       overflow: hidden;
       display: flex;
-      transition: background-color 0.2s ease, color 0.2s ease;
     }
 
-    /* 1. SIDEBAR (Collapsible for maximum real estate!) */
-    #sidebar {
-      width: 280px;
-      min-width: 280px;
-      background: var(--bg-sidebar);
-      border-right: 1px solid var(--border-subtle);
+    /* 1. DUAL-COLUMN LEFT SIDEBAR (Exact match to screenshot) */
+    #sidebar-wrapper {
+      display: flex;
+      height: 100vh;
+      border-right: 1px solid var(--border);
+      background: #ffffff;
+      z-index: 30;
+    }
+
+    /* Column 1: Main Taxonomy */
+    .sidebar-col-primary {
+      width: 240px;
+      min-width: 240px;
+      border-right: 1px solid var(--border);
       display: flex;
       flex-direction: column;
-      height: 100vh;
-      z-index: 20;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-      position: relative;
+      height: 100%;
+      background: #fbfcfd;
     }
 
-    #sidebar.collapsed {
-      width: 0;
-      min-width: 0;
-      overflow: hidden;
-      border-right: none;
+    /* Column 2: Department Inspector (Docked side-by-side) */
+    .sidebar-col-secondary {
+      width: 280px;
+      min-width: 280px;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      background: #ffffff;
+      border-right: 1px solid var(--border);
     }
 
     .org-header {
       padding: 14px 16px;
-      border-bottom: 1px solid var(--border-subtle);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: var(--bg-surface);
-    }
-
-    .org-meta {
+      border-bottom: 1px solid var(--border);
       display: flex;
       align-items: center;
       gap: 10px;
+      background: #ffffff;
     }
 
-    .org-avatar {
-      width: 30px;
-      height: 30px;
+    .org-icon {
+      width: 28px;
+      height: 28px;
       background: #0f172a;
-      border-radius: 7px;
+      border-radius: 6px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -118,28 +108,28 @@ export function getDashboardHtml(): string {
       color: var(--text-muted);
     }
 
-    .sidebar-search {
-      padding: 10px 12px;
-      border-bottom: 1px solid var(--border-subtle);
-      background: var(--bg-surface);
+    .search-container {
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--border);
+      background: #ffffff;
     }
 
-    .search-wrap {
+    .search-box {
       display: flex;
       align-items: center;
       gap: 6px;
-      background: var(--bg-base);
-      border: 1px solid var(--border-subtle);
+      background: #f1f5f9;
+      border: 1px solid var(--border);
       border-radius: 6px;
-      padding: 5px 8px;
+      padding: 4px 8px;
     }
 
-    .search-wrap input {
+    .search-box input {
       border: none;
       background: transparent;
       outline: none;
       font-family: inherit;
-      font-size: 12px;
+      font-size: 11.5px;
       width: 100%;
       color: var(--text-main);
     }
@@ -147,99 +137,148 @@ export function getDashboardHtml(): string {
     .sidebar-scroll {
       flex: 1;
       overflow-y: auto;
-      padding: 10px 6px;
+      padding: 10px 8px;
     }
 
-    .sidebar-sec-title {
+    .sec-label {
       font-size: 9.5px;
       font-weight: 700;
       color: var(--text-faint);
       text-transform: uppercase;
-      letter-spacing: 0.7px;
-      padding: 6px 10px 3px;
+      letter-spacing: 0.6px;
+      padding: 6px 8px 2px;
       margin-top: 4px;
     }
 
-    .nav-item {
+    .nav-link {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 5px 10px;
-      border-radius: 6px;
+      padding: 5px 8px;
+      border-radius: 5px;
       font-size: 12px;
       font-weight: 600;
       color: var(--text-muted);
       cursor: pointer;
-      transition: all 0.12s ease;
       margin-bottom: 1px;
+      transition: all 0.12s;
     }
 
-    .nav-item:hover {
-      background: var(--border-light);
+    .nav-link:hover {
+      background: #f1f5f9;
       color: var(--text-main);
     }
 
-    .nav-item.active {
-      background: var(--bg-surface);
+    .nav-link.active {
+      background: #ffffff;
       color: var(--text-main);
-      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-      border: 1px solid var(--border-subtle);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+      border: 1px solid var(--border);
     }
 
-    .nav-left {
+    .nav-link-left {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 7px;
     }
 
     .dot {
-      width: 7px;
-      height: 7px;
+      width: 6px;
+      height: 6px;
       border-radius: 50%;
     }
 
-    .count-pill {
+    .count-badge {
       font-size: 10.5px;
       font-weight: 600;
       color: var(--text-faint);
     }
 
-    /* 2. MAIN FULL-BLEED CANVAS */
+    /* SECONDARY COLUMN - DEPARTMENT DETAILS (Image exact match) */
+    .dep-header-box {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .dep-badge-icon {
+      width: 28px;
+      height: 28px;
+      background: var(--c-sales);
+      color: #ffffff;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .dep-title-meta h3 {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text-main);
+      line-height: 1.2;
+    }
+
+    .dep-title-meta p {
+      font-size: 10px;
+      color: var(--text-faint);
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .detail-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 8px;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--text-muted);
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .detail-item:hover {
+      background: #f8fafc;
+      color: var(--text-main);
+    }
+
+    .avatar-circle {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #cbd5e1;
+      font-size: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: #334155;
+    }
+
+    /* 2. MAIN NETWORK GRAPH CANVAS */
     #main-content {
       flex: 1;
       display: flex;
       flex-direction: column;
       height: 100vh;
       position: relative;
-      background: var(--bg-surface);
+      background: #ffffff;
     }
 
-    /* TOP SLIM FLOATING BAR */
     .top-toolbar {
       height: 48px;
-      background: var(--bg-surface);
-      border-bottom: 1px solid var(--border-subtle);
+      background: #ffffff;
+      border-bottom: 1px solid var(--border);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 18px;
+      padding: 0 20px;
       z-index: 10;
-    }
-
-    .toolbar-left {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .toggle-sidebar-btn {
-      background: var(--bg-base);
-      border: 1px solid var(--border-subtle);
-      border-radius: 6px;
-      padding: 4px 8px;
-      font-size: 12px;
-      cursor: pointer;
-      color: var(--text-muted);
     }
 
     .breadcrumbs {
@@ -255,148 +294,69 @@ export function getDashboardHtml(): string {
 
     .tag-badge {
       font-size: 11px;
-      background: var(--bg-base);
-      border: 1px solid var(--border-subtle);
-      padding: 2px 7px;
+      background: #f1f5f9;
+      padding: 2px 8px;
       border-radius: 9999px;
       color: var(--text-muted);
     }
 
-    .view-toggles {
-      display: flex;
-      gap: 4px;
-      background: var(--bg-base);
-      padding: 2px;
-      border-radius: 6px;
-      border: 1px solid var(--border-subtle);
-    }
-
-    .view-btn {
-      font-size: 11.5px;
-      font-weight: 600;
-      padding: 4px 10px;
-      border-radius: 4px;
-      border: none;
-      background: transparent;
-      color: var(--text-muted);
-      cursor: pointer;
-      transition: all 0.15s;
-    }
-
-    .view-btn.active {
-      background: var(--bg-surface);
-      color: var(--text-main);
-      box-shadow: 0 1px 2px rgba(0,0,0,0.06);
-    }
-
-    /* FULL-SIZE CANVAS VIEWPORT */
+    /* CANVAS AREA */
     #canvas-container {
       flex: 1;
       width: 100%;
       height: calc(100vh - 48px);
       position: relative;
       overflow: hidden;
-      background: radial-gradient(circle at center, var(--bg-surface) 0%, var(--bg-base) 100%);
+      background: radial-gradient(circle at center, #ffffff 0%, #f8fafc 100%);
       cursor: grab;
     }
 
     #canvas-container:active { cursor: grabbing; }
 
-    #galaxy-canvas {
+    #network-canvas {
       width: 100%;
       height: 100%;
       display: block;
     }
 
-    /* FLOATING BOTTOM CONTROLS (HUD) */
-    .canvas-hud {
+    /* FLOATING CONTROLS */
+    .hud-controls {
       position: absolute;
-      bottom: 18px;
-      left: 18px;
+      bottom: 20px;
+      left: 20px;
       display: flex;
       gap: 6px;
       z-index: 15;
     }
 
     .hud-btn {
-      background: var(--bg-surface);
-      border: 1px solid var(--border-subtle);
+      background: #ffffff;
+      border: 1px solid var(--border);
       border-radius: 6px;
       padding: 5px 10px;
       font-size: 11.5px;
       font-weight: 600;
       color: var(--text-main);
-      box-shadow: 0 2px 5px rgba(0,0,0,0.04);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
       cursor: pointer;
       display: flex;
       align-items: center;
       gap: 4px;
     }
 
-    .hud-btn:hover { background: var(--bg-base); }
+    .hud-btn:hover { background: #f8fafc; }
 
-    /* CLAUDE SUMMARY DOCUMENT VIEW */
-    #doc-view {
-      position: absolute;
-      top: 48px;
-      left: 0;
-      width: 100%;
-      height: calc(100vh - 48px);
-      background: var(--bg-surface);
-      overflow-y: auto;
-      padding: 32px 40px;
-      display: none;
-      z-index: 25;
-    }
-
-    .doc-container {
-      max-width: 960px;
-      margin: 0 auto;
-    }
-
-    .doc-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-      font-size: 12.5px;
-    }
-
-    .doc-table th {
-      text-align: left;
-      padding: 8px 12px;
-      border-bottom: 2px solid var(--border-subtle);
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--text-faint);
-      text-transform: uppercase;
-    }
-
-    .doc-table td {
-      padding: 12px;
-      border-bottom: 1px solid var(--border-light);
-      vertical-align: top;
-      line-height: 1.5;
-    }
-
-    .summary-card {
-      margin-top: 28px;
-      background: var(--bg-base);
-      border: 1px solid var(--border-subtle);
-      border-radius: 8px;
-      padding: 20px;
-    }
-
-    /* TOOLTIP */
     #tooltip {
       position: absolute;
       pointer-events: none;
-      background: #0f172a;
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(6px);
       color: #ffffff;
       padding: 6px 12px;
       border-radius: 6px;
-      font-size: 11.5px;
+      font-size: 11px;
       font-weight: 600;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
       opacity: 0;
       transition: opacity 0.1s ease;
       z-index: 40;
@@ -405,139 +365,149 @@ export function getDashboardHtml(): string {
 </head>
 <body>
 
-  <!-- 1. COLLAPSIBLE CONDUCTING AI SIDEBAR -->
-  <aside id="sidebar">
-    <div class="org-header">
-      <div class="org-meta">
-        <div class="org-avatar">D</div>
+  <!-- 1. DUAL-COLUMN LEFT SIDEBAR -->
+  <div id="sidebar-wrapper">
+    <!-- Primary Taxonomy Column -->
+    <aside class="sidebar-col-primary">
+      <div class="org-header">
+        <div class="org-icon">D</div>
         <div class="org-title">
           <h2>Demo Company</h2>
           <p>Organisation Brain</p>
         </div>
       </div>
-    </div>
 
-    <div class="sidebar-search">
-      <div class="search-wrap">
-        <span>🔍</span>
-        <input type="text" placeholder="Search entities..." id="sidebar-search" oninput="handleSearch()">
-      </div>
-    </div>
-
-    <div class="sidebar-scroll">
-      <div class="sidebar-sec-title">Overview</div>
-      <div class="nav-item active" onclick="filterDepartment(null)">
-        <div class="nav-left"><span>🪐</span><span>All Entities Brain</span></div>
-        <span class="count-pill">757</span>
+      <div class="search-container">
+        <div class="search-box">
+          <span>🔍</span>
+          <input type="text" placeholder="Search entities...">
+        </div>
       </div>
 
-      <div class="sidebar-sec-title">By Entity Type</div>
-      <div class="nav-item"><div class="nav-left"><span>👥</span><span>People</span></div><span class="count-pill">75</span></div>
-      <div class="nav-item"><div class="nav-left"><span>🤖</span><span>Sub-Agents</span></div><span class="count-pill">34</span></div>
-      <div class="nav-item"><div class="nav-left"><span>🛠️</span><span>Tools</span></div><span class="count-pill">145</span></div>
-      <div class="nav-item"><div class="nav-left"><span>⚡</span><span>Workflows</span></div><span class="count-pill">198</span></div>
-      <div class="nav-item"><div class="nav-left"><span>📜</span><span>SOPs</span></div><span class="count-pill">224</span></div>
-      <div class="nav-item"><div class="nav-left"><span>📁</span><span>Projects</span></div><span class="count-pill">12</span></div>
+      <div class="sidebar-scroll">
+        <div class="sec-label">By Entity Type</div>
+        <div class="nav-link active" onclick="selectDepartment('Sales')"><div class="nav-link-left"><span>🏢</span><span>All</span></div><span class="count-badge">757</span></div>
+        <div class="nav-link"><div class="nav-link-left"><span>👥</span><span>People</span></div><span class="count-badge">75</span></div>
+        <div class="nav-link"><div class="nav-link-left"><span>🤖</span><span>Sub-Agents</span></div><span class="count-badge">34</span></div>
+        <div class="nav-link"><div class="nav-link-left"><span>🛠️</span><span>Tools</span></div><span class="count-badge">145</span></div>
+        <div class="nav-link"><div class="nav-link-left"><span>⚡</span><span>Workflows</span></div><span class="count-badge">198</span></div>
+        <div class="nav-link"><div class="nav-link-left"><span>📜</span><span>SOPs</span></div><span class="count-badge">224</span></div>
+        <div class="nav-link"><div class="nav-link-left"><span>📁</span><span>Projects</span></div><span class="count-badge">12</span></div>
+        <div class="nav-link"><div class="nav-link-left"><span>👥</span><span>Teams</span></div><span class="count-badge">9</span></div>
+        <div class="nav-link"><div class="nav-link-left"><span>🏢</span><span>Departments</span></div><span class="count-badge">11</span></div>
 
-      <div class="sidebar-sec-title">Core Departments</div>
-      <div class="nav-item" onclick="filterDepartment('Product Management')"><div class="nav-left"><span class="dot" style="background: var(--dep-pm);"></span><span>Product Management</span></div></div>
-      <div class="nav-item" onclick="filterDepartment('Marketing & Growth')"><div class="nav-left"><span class="dot" style="background: var(--dep-mktg);"></span><span>Marketing & Growth</span></div></div>
-      <div class="nav-item" onclick="filterDepartment('Sales')"><div class="nav-left"><span class="dot" style="background: var(--dep-sales);"></span><span>Sales</span></div></div>
-      <div class="nav-item" onclick="filterDepartment('Customer & Admin')"><div class="nav-left"><span class="dot" style="background: var(--dep-cust);"></span><span>Customer & Admin</span></div></div>
-      <div class="nav-item" onclick="filterDepartment('Operations & Supply Chain')"><div class="nav-left"><span class="dot" style="background: var(--dep-ops);"></span><span>Operations & Supply Chain</span></div></div>
-      <div class="nav-item" onclick="filterDepartment('Tech, AI & Automations')"><div class="nav-left"><span class="dot" style="background: var(--dep-tech);"></span><span>Tech, AI & Automations</span></div></div>
-      <div class="nav-item" onclick="filterDepartment('Strategy & Leadership')"><div class="nav-left"><span class="dot" style="background: var(--dep-strat);"></span><span>Strategy & Leadership</span></div></div>
-      <div class="nav-item" onclick="filterDepartment('Finance')"><div class="nav-left"><span class="dot" style="background: var(--dep-fin);"></span><span>Finance</span></div></div>
-      <div class="nav-item" onclick="filterDepartment('Data & Analytics')"><div class="nav-left"><span class="dot" style="background: var(--dep-data);"></span><span>Data & Analytics</span></div></div>
-      <div class="nav-item" onclick="filterDepartment('Legal, Risk & Compliance')"><div class="nav-left"><span class="dot" style="background: var(--dep-legal);"></span><span>Legal, Risk & Compliance</span></div></div>
-    </div>
-  </aside>
+        <div class="sec-label">By Business Function</div>
+        <div class="nav-link"><div class="nav-link-left"><span class="dot" style="background:#3b82f6;"></span><span>Core</span></div><span class="count-badge">451</span></div>
+        <div class="nav-link"><div class="nav-link-left"><span class="dot" style="background:#8b5cf6;"></span><span>Enabling</span></div><span class="count-badge">306</span></div>
 
-  <!-- 2. MAIN FULL-BLEED AREA -->
+        <div class="sec-label">Departments</div>
+        <div class="nav-link" onclick="selectDepartment('Product Management')"><div class="nav-link-left"><span class="dot" style="background:var(--c-pm);"></span><span>Product Management</span></div></div>
+        <div class="nav-link" onclick="selectDepartment('Marketing & Growth')"><div class="nav-link-left"><span class="dot" style="background:var(--c-mktg);"></span><span>Marketing & Growth</span></div></div>
+        <div class="nav-link active" onclick="selectDepartment('Sales')"><div class="nav-link-left"><span class="dot" style="background:var(--c-sales);"></span><span>Sales</span></div></div>
+        <div class="nav-link" onclick="selectDepartment('Customer & Admin')"><div class="nav-link-left"><span class="dot" style="background:var(--c-cust);"></span><span>Customer & Admin</span></div></div>
+        <div class="nav-link" onclick="selectDepartment('Operations & Supply Chain')"><div class="nav-link-left"><span class="dot" style="background:var(--c-ops);"></span><span>Operations & Supply Chain</span></div></div>
+        <div class="nav-link" onclick="selectDepartment('Tech, AI & Automations')"><div class="nav-link-left"><span class="dot" style="background:var(--c-tech);"></span><span>Tech, AI & Automations</span></div></div>
+        <div class="nav-link" onclick="selectDepartment('Strategy & Leadership')"><div class="nav-link-left"><span class="dot" style="background:var(--c-strat);"></span><span>Strategy & Leadership</span></div></div>
+        <div class="nav-link" onclick="selectDepartment('Finance')"><div class="nav-link-left"><span class="dot" style="background:var(--c-fin);"></span><span>Finance</span></div></div>
+        <div class="nav-link" onclick="selectDepartment('Data & Analytics')"><div class="nav-link-left"><span class="dot" style="background:var(--c-data);"></span><span>Data & Analytics</span></div></div>
+        <div class="nav-link" onclick="selectDepartment('Legal, Risk & Compliance')"><div class="nav-link-left"><span class="dot" style="background:var(--c-legal);"></span><span>Legal, Risk & Compliance</span></div></div>
+      </div>
+    </aside>
+
+    <!-- Secondary Inspector Column (Exact match to Reference Screenshot 4) -->
+    <aside class="sidebar-col-secondary">
+      <div class="dep-header-box">
+        <div class="dep-badge-icon" id="dep-icon">🏢</div>
+        <div class="dep-title-meta">
+          <h3 id="dep-name">Sales</h3>
+          <p>DEPARTMENT • PART OF DEMO COMPANY</p>
+        </div>
+      </div>
+
+      <div class="sidebar-scroll">
+        <div class="sec-label">AI Systems</div>
+        <div class="detail-item"><span>🤖</span><span id="dep-sys-1">Sales AI Copilot</span></div>
+        <div class="detail-item"><span>🧠</span><span id="dep-sys-2">Sales AI Brain</span></div>
+        <div class="detail-item"><span>⚡</span><span id="dep-sys-3">Sales Autonomous Agent</span></div>
+
+        <div class="sec-label">People & Leads</div>
+        <div class="detail-item"><span class="avatar-circle">MT</span><span>Michael Torres</span></div>
+        <div class="detail-item"><span class="avatar-circle">OH</span><span>Omar Hassan</span></div>
+        <div class="detail-item"><span class="avatar-circle">RG</span><span>Rachel Green</span></div>
+        <div class="detail-item"><span class="avatar-circle">SR</span><span>Samantha Reed</span></div>
+        <div class="detail-item"><span class="avatar-circle">LC</span><span>Lisa Chang</span></div>
+        <div class="detail-item"><span class="avatar-circle">DP</span><span>David Park</span></div>
+
+        <div class="sec-label">Sub-Agents & Automations</div>
+        <div class="detail-item"><span>⚙️</span><span>Account Risk and Expansion...</span></div>
+        <div class="detail-item"><span>⚙️</span><span>Automated Follow Up Sequence...</span></div>
+        <div class="detail-item"><span>⚙️</span><span>Competitor Intelligence Gatherer...</span></div>
+        <div class="detail-item"><span>⚙️</span><span>Next-Best Action Recommender...</span></div>
+        <div class="detail-item"><span>⚙️</span><span>Meeting Transcription & Auto...</span></div>
+        <div class="detail-item"><span>⚙️</span><span>Intelligent Lead Scoring & Routing...</span></div>
+        <div class="detail-item"><span>⚙️</span><span>Proposal & Document Generator...</span></div>
+        <div class="detail-item"><span>⚙️</span><span>Prospect Research & CRM Enrichment...</span></div>
+        <div class="detail-item"><span>⚙️</span><span>Sales Pipeline Health Monitor...</span></div>
+        <div class="detail-item"><span>⚙️</span><span>Auto Email Labelling & Draft...</span></div>
+
+        <div class="sec-label">Tools & Integrations</div>
+        <div class="detail-item"><span>📁</span><span>Notion</span></div>
+        <div class="detail-item"><span>📋</span><span>Asana</span></div>
+        <div class="detail-item"><span>✨</span><span>Claude / Anthropic</span></div>
+        <div class="detail-item"><span>🎯</span><span>Apollo.io</span></div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- 2. MAIN NETWORK GRAPH CANVAS -->
   <main id="main-content">
     <div class="top-toolbar">
-      <div class="toolbar-left">
-        <button class="toggle-sidebar-btn" onclick="toggleSidebar()">☰</button>
-        <div class="breadcrumbs">
-          <span>Demo Company</span>
-          <span>/</span>
-          <strong>Organisation Brain</strong>
-          <span class="tag-badge">757 Entities • 1,847 Links</span>
-        </div>
+      <div class="breadcrumbs">
+        <span>Demo Company</span>
+        <span>/</span>
+        <strong>Organisation Brain</strong>
+        <span class="tag-badge">Entities: <strong>757</strong> • Connections: <strong>1,847</strong></span>
       </div>
 
-      <div style="display: flex; align-items: center; gap: 8px;">
-        <button class="hud-btn" onclick="toggleTheme()">🌓 <span id="theme-label">Dark</span></button>
-        <div class="view-toggles">
-          <button class="view-btn active" id="btn-v-galaxy" onclick="switchView('galaxy')">🪐 Galaxy Orbit</button>
-          <button class="view-btn" id="btn-v-doc" onclick="switchView('doc')">📄 Claude View</button>
-        </div>
+      <div style="font-size: 12px; font-weight: 600; color: var(--text-muted);">
+        Interactive Web Network Perspective
       </div>
     </div>
 
     <!-- CANVAS VIEW -->
     <div id="canvas-container">
-      <canvas id="galaxy-canvas"></canvas>
+      <canvas id="network-canvas"></canvas>
 
-      <div class="canvas-hud">
+      <div class="hud-controls">
         <button class="hud-btn" onclick="zoomIn()">➕ Zoom In</button>
         <button class="hud-btn" onclick="zoomOut()">➖ Zoom Out</button>
-        <button class="hud-btn" onclick="fitView()">🎯 Fit View</button>
-        <button class="hud-btn" onclick="toggleRotation()">🔄 <span id="rot-lbl">Pause</span></button>
+        <button class="hud-btn" onclick="resetFocus()">🎯 Reset Focus</button>
       </div>
 
       <div id="tooltip"></div>
     </div>
-
-    <!-- CLAUDE DOCUMENT VIEW -->
-    <div id="doc-view">
-      <div class="doc-container">
-        <h2 style="font-size: 18px; font-weight: 800; margin-bottom: 4px;">Conducting AI / DEV-HARNESS v2.0 Task Force</h2>
-        <p style="font-size: 12.5px; color: var(--text-muted); margin-bottom: 20px;">Executive roadmap, responsibility allocation, and verified deliverables.</p>
-
-        <table class="doc-table">
-          <thead>
-            <tr><th>Member / Agent</th><th>Role</th><th>Current Focus & Deliverables</th></tr>
-          </thead>
-          <tbody>
-            <tr><td><strong>Marcus Chen</strong> [Lead]</td><td style="color:var(--text-muted);">Chief Strategy Officer</td><td>Employee Onboarding Automation — package for board presentation to secure Phase 2 budget.</td></tr>
-            <tr><td><strong>Andrew Kowalski</strong> [Lead]</td><td style="color:var(--text-muted);">CTO</td><td>Ensure infra readiness for the two active projects and start scoping Phase 2 architecture.</td></tr>
-            <tr><td><strong>Nina Petrov</strong></td><td style="color:var(--text-muted);">AI Engineer</td><td>Hands-on delivery across both active projects — focus on agent performance tuning.</td></tr>
-            <tr><td><strong>Dr. Anika Gupta</strong></td><td style="color:var(--text-muted);">Head of Data & Analytics</td><td>Stand up usage/adoption dashboards to track 80% WAU target per department.</td></tr>
-          </tbody>
-        </table>
-
-        <div class="summary-card">
-          <h3 style="font-size: 14px; font-weight: 700; margin-bottom: 6px;">Executive Summary</h3>
-          <p style="font-size: 12.5px; color: var(--text-muted); line-height: 1.5;">
-            The task force is in solid shape: one project shipped, two running in parallel, and Phase 1 deployment deadline is within reach.
-          </p>
-        </div>
-      </div>
-    </div>
   </main>
 
   <script>
-    const canvas = document.getElementById('galaxy-canvas');
+    const canvas = document.getElementById('network-canvas');
     const ctx = canvas.getContext('2d');
     const tooltip = document.getElementById('tooltip');
 
     let nodes = [];
-    let camera = { x: 0, y: 0, zoom: 1.0 };
+    let edges = [];
+    let camera = { x: -80, y: 40, zoom: 0.95 };
     let isDragging = false;
     let dragStart = { x: 0, y: 0 };
     let hoveredNode = null;
-    let selectedDepartment = null;
-    let rotationAngle = 0;
-    let isRotating = true;
+    let activeDepartment = 'Sales';
 
     const DEPARTMENTS = [
+      { name: 'Sales', color: '#16a34a' },
+      { name: 'Tech, AI & Automations', color: '#4f46e5' },
       { name: 'Product Management', color: '#ea580c' },
       { name: 'Marketing & Growth', color: '#dc2626' },
-      { name: 'Sales', color: '#16a34a' },
       { name: 'Customer & Admin', color: '#0d9488' },
       { name: 'Operations & Supply Chain', color: '#b45309' },
-      { name: 'Tech, AI & Automations', color: '#4f46e5' },
       { name: 'Strategy & Leadership', color: '#2563eb' },
       { name: 'Finance', color: '#ca8a04' },
       { name: 'Data & Analytics', color: '#0284c7' },
@@ -550,99 +520,118 @@ export function getDashboardHtml(): string {
       canvas.height = container.clientHeight * window.devicePixelRatio;
       ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
     }
-    window.addEventListener('resize', () => { resizeCanvas(); fitView(); });
+    window.addEventListener('resize', resizeCanvas);
 
-    function initData() {
+    function initNetworkGraph() {
       nodes = [];
+      edges = [];
 
-      // 1. Center Avatar "D"
-      nodes.push({
-        id: 'root-d',
+      // 1. Center Root Node "D" (Demo Company)
+      const root = {
+        id: 'node-root',
         name: 'Demo Company',
         kind: 'core',
         color: '#ca8a04',
-        radius: 22,
-        ringIdx: 0,
-        orbitR: 0,
-        angle: 0,
+        radius: 20,
+        x: 180,
+        y: 120,
         shape: 'avatar'
-      });
+      };
+      nodes.push(root);
 
-      // 2. Build Multi-Tier High-Density Orbital Sectors that elegantly fill the entire viewport!
+      // 2. Build Realistic Web-Link Network Structure matching the screenshot!
       DEPARTMENTS.forEach((dep, dIdx) => {
-        const baseAngle = (dIdx / DEPARTMENTS.length) * Math.PI * 2;
+        // Base Department Hub Angle
+        const depAngle = (dIdx / DEPARTMENTS.length) * Math.PI * 1.8 - 0.4;
+        const depDist = 220;
+        const depX = root.x + Math.cos(depAngle) * depDist;
+        const depY = root.y + Math.sin(depAngle) * depDist;
 
-        // Tier 1: Department Hub
-        nodes.push({
-          id: 'dep-' + dIdx,
+        const depNode = {
+          id: 'dep-' + dep.name,
           name: dep.name,
           department: dep.name,
           kind: 'department',
           color: dep.color,
-          radius: 9,
-          ringIdx: 1,
-          orbitR: 0.18, // Normalized multiplier of viewport min-dimension
-          angle: baseAngle,
+          radius: (dep.name === activeDepartment) ? 14 : 9,
+          x: depX,
+          y: depY,
           shape: 'circle'
+        };
+        nodes.push(depNode);
+        edges.push({ from: root.id, to: depNode.id, color: dep.color });
+
+        // Branching People (Upper Arc with Avatars)
+        const peopleList = ['MT', 'OH', 'RG', 'SR', 'LC', 'DP'];
+        peopleList.forEach((p, pIdx) => {
+          const pAngle = depAngle - 0.25 + (pIdx / peopleList.length) * 0.5;
+          const pDist = depDist + 160 + (pIdx % 2) * 40;
+          const pX = root.x + Math.cos(pAngle) * pDist;
+          const pY = root.y + Math.sin(pAngle) * pDist;
+
+          const pNode = {
+            id: \`ppl-\${dep.name}-\${pIdx}\`,
+            name: \`Person \${p} (\${dep.name})\`,
+            department: dep.name,
+            kind: 'person',
+            color: '#64748b',
+            radius: 8,
+            x: pX,
+            y: pY,
+            shape: 'avatar-mini',
+            avatarText: p
+          };
+          nodes.push(pNode);
+          edges.push({ from: depNode.id, to: pNode.id, color: dep.color });
         });
 
-        // Tier 2: Systems (Dense curved arc of squares)
-        for (let s = 0; s < 14; s++) {
-          const arcAngle = baseAngle + (s - 6.5) * 0.038;
-          nodes.push({
-            id: \`sys-\${dIdx}-\${s}\`,
-            name: \`\${dep.name} System #\${s+1}\`,
+        // Branching Sub-Agents & Tools (Fan of Green/Colored Squares)
+        for (let a = 0; a < 8; a++) {
+          const aAngle = depAngle - 0.2 + (a / 8) * 0.4;
+          const aDist = depDist + 90 + (a % 3) * 25;
+          const aX = root.x + Math.cos(aAngle) * aDist;
+          const aY = root.y + Math.sin(aAngle) * aDist;
+
+          const aNode = {
+            id: \`agent-\${dep.name}-\${a}\`,
+            name: \`\${dep.name} Sub-Agent #\${a+1}\`,
             department: dep.name,
-            kind: 'system',
+            kind: 'subagent',
             color: dep.color,
-            radius: 4,
-            ringIdx: 2,
-            orbitR: 0.34 + (s % 3) * 0.015,
-            angle: arcAngle,
-            shape: (s % 2 === 0) ? 'square' : 'circle'
-          });
+            radius: 5,
+            x: aX,
+            y: aY,
+            shape: 'square'
+          };
+          nodes.push(aNode);
+          edges.push({ from: depNode.id, to: aNode.id, color: dep.color });
         }
 
-        // Tier 3: Workflows (Dense sweeping arc of beads)
-        for (let w = 0; w < 28; w++) {
-          const arcAngle = baseAngle + (w - 13.5) * 0.021;
-          nodes.push({
-            id: \`wf-\${dIdx}-\${w}\`,
+        // Branching Workflow & SOP Beads (Yellow & Blue Beads Network)
+        for (let w = 0; w < 16; w++) {
+          const wAngle = depAngle - 0.3 + (w / 16) * 0.6;
+          const wDist = depDist + 240 + (w % 4) * 20;
+          const wX = root.x + Math.cos(wAngle) * wDist;
+          const wY = root.y + Math.sin(wAngle) * wDist;
+
+          const wNode = {
+            id: \`wf-\${dep.name}-\${w}\`,
             name: \`\${dep.name} Workflow #\${w+1}\`,
             department: dep.name,
             kind: 'workflow',
-            color: dep.color,
-            radius: 3,
-            ringIdx: 3,
-            orbitR: 0.52 + (w % 4) * 0.018,
-            angle: arcAngle,
-            shape: 'circle'
-          });
-        }
-
-        // Tier 4: People & Agents (Outer wide celestial band)
-        for (let p = 0; p < 22; p++) {
-          const arcAngle = baseAngle + (p - 10.5) * 0.026;
-          nodes.push({
-            id: \`ppl-\${dIdx}-\${p}\`,
-            name: \`\${dep.name} Agent #\${p+1}\`,
-            department: dep.name,
-            kind: 'agent',
-            color: dep.color,
+            color: (w % 3 === 0) ? '#eab308' : '#3b82f6',
             radius: 3.5,
-            ringIdx: 4,
-            orbitR: 0.72 + (p % 3) * 0.02,
-            angle: arcAngle,
-            shape: 'diamond'
-          });
+            x: wX,
+            y: wY,
+            shape: 'circle'
+          };
+          nodes.push(wNode);
+          edges.push({ from: depNode.id, to: wNode.id, color: dep.color });
         }
       });
     }
 
     function animate() {
-      if (isRotating) {
-        rotationAngle += 0.0007;
-      }
       render();
       requestAnimationFrame(animate);
     }
@@ -651,7 +640,6 @@ export function getDashboardHtml(): string {
       const container = document.getElementById('canvas-container');
       const width = container.clientWidth;
       const height = container.clientHeight;
-      const baseDim = Math.min(width, height) / 2; // Dynamic viewport sizing
 
       ctx.clearRect(0, 0, width, height);
 
@@ -662,103 +650,90 @@ export function getDashboardHtml(): string {
       ctx.translate(centerX, centerY);
       ctx.scale(camera.zoom, camera.zoom);
 
-      // 1. Concentric Radial Orbit Guide Lines
-      const ringsNorm = [0.18, 0.35, 0.53, 0.73, 0.88];
-      ringsNorm.forEach(rn => {
-        const radius = baseDim * rn;
+      // 1. Draw Visible Network Connecting Lines (Bezier & Straight Edges)
+      edges.forEach(edge => {
+        const fromNode = nodes.find(n => n.id === edge.from);
+        const toNode = nodes.find(n => n.id === edge.to);
+        if (!fromNode || !toNode) return;
+
+        const isRelated = (!activeDepartment || fromNode.department === activeDepartment || toNode.department === activeDepartment || fromNode.kind === 'core');
+        const alpha = isRelated ? '55' : '0d';
+
         ctx.beginPath();
-        ctx.arc(0, 0, radius, 0, Math.PI * 2);
-        ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--ring-guide');
-        ctx.lineWidth = 1;
-        ctx.setLineDash([3, 6]);
+        ctx.moveTo(fromNode.x, fromNode.y);
+        ctx.lineTo(toNode.x, toNode.y);
+        ctx.strokeStyle = edge.color + alpha;
+        ctx.lineWidth = isRelated ? 1.5 : 0.6;
         ctx.stroke();
-        ctx.setLineDash([]);
       });
 
-      // 2. Focused Connection Lines
-      if (selectedDepartment) {
-        const depNode = nodes.find(n => n.kind === 'department' && n.department === selectedDepartment);
-        if (depNode) {
-          const curAngle = depNode.angle + rotationAngle;
-          const depR = baseDim * depNode.orbitR;
-          const dx = Math.cos(curAngle) * depR;
-          const dy = Math.sin(curAngle) * depR;
-
-          ctx.beginPath();
-          ctx.moveTo(0, 0);
-          ctx.lineTo(dx, dy);
-          ctx.strokeStyle = depNode.color + 'aa';
-          ctx.lineWidth = 2;
-          ctx.stroke();
-
-          nodes.forEach(node => {
-            if (node.department === selectedDepartment && node.orbitR > 0.18) {
-              const nAngle = node.angle + rotationAngle;
-              const nR = baseDim * node.orbitR;
-              const nx = Math.cos(nAngle) * nR;
-              const ny = Math.sin(nAngle) * nR;
-
-              ctx.beginPath();
-              ctx.moveTo(dx, dy);
-              ctx.lineTo(nx, ny);
-              ctx.strokeStyle = depNode.color + '33';
-              ctx.lineWidth = 1;
-              ctx.stroke();
-            }
-          });
-        }
-      }
-
-      // 3. Render Nodes
+      // 2. Render Nodes (Avatars, Circles, Squares)
       nodes.forEach(node => {
-        const curAngle = (node.orbitR === 0) ? 0 : (node.angle + rotationAngle);
-        const curR = baseDim * node.orbitR;
-        const nx = Math.cos(curAngle) * curR;
-        const ny = Math.sin(curAngle) * curR;
-        node.currentX = nx;
-        node.currentY = ny;
-
-        const isHighlighted = !selectedDepartment || node.department === selectedDepartment || node.kind === 'core';
-        const alpha = isHighlighted ? 'ff' : '22';
+        const isRelated = (!activeDepartment || node.department === activeDepartment || node.kind === 'core');
+        const alpha = isRelated ? 'ff' : '22';
 
         if (node.shape === 'avatar') {
-          // Center "D" Avatar
+          // Center "D" Root Node
           ctx.beginPath();
-          ctx.arc(0, 0, node.radius, 0, Math.PI * 2);
-          ctx.fillStyle = '#ca8a04';
+          ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+          ctx.fillStyle = '#0f172a';
           ctx.fill();
           ctx.strokeStyle = '#ffffff';
           ctx.lineWidth = 3;
           ctx.stroke();
 
           ctx.fillStyle = '#ffffff';
-          ctx.font = '800 13px "Plus Jakarta Sans", sans-serif';
+          ctx.font = '800 12px "Plus Jakarta Sans", sans-serif';
           ctx.textAlign = 'center';
           ctx.textBaseline = 'middle';
-          ctx.fillText('D', 0, 0);
+          ctx.fillText('D', node.x, node.y);
           ctx.textBaseline = 'alphabetic';
+        } else if (node.shape === 'avatar-mini') {
+          // People Small Round Avatar Circle with Initials
+          ctx.beginPath();
+          ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+          ctx.fillStyle = isRelated ? '#e2e8f0' : '#f1f5f9';
+          ctx.fill();
+          ctx.strokeStyle = '#ffffff';
+          ctx.lineWidth = 1.5;
+          ctx.stroke();
+
+          if (isRelated) {
+            ctx.fillStyle = '#334155';
+            ctx.font = '700 8px "Plus Jakarta Sans", sans-serif';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(node.avatarText || 'U', node.x, node.y);
+            ctx.textBaseline = 'alphabetic';
+          }
         } else if (node.shape === 'square') {
+          // Sub-Agent Green / Colored Square
           ctx.fillStyle = node.color + alpha;
-          ctx.fillRect(nx - node.radius, ny - node.radius, node.radius * 2, node.radius * 2);
-        } else if (node.shape === 'diamond') {
-          ctx.beginPath();
-          ctx.moveTo(nx, ny - node.radius);
-          ctx.lineTo(nx + node.radius, ny);
-          ctx.lineTo(nx, ny + node.radius);
-          ctx.lineTo(nx - node.radius, ny);
-          ctx.closePath();
-          ctx.fillStyle = node.color + alpha;
-          ctx.fill();
+          ctx.fillRect(node.x - node.radius, node.y - node.radius, node.radius * 2, node.radius * 2);
         } else {
+          // Circle Dot / Bead
           ctx.beginPath();
-          ctx.arc(nx, ny, node.radius, 0, Math.PI * 2);
+          ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
           ctx.fillStyle = node.color + alpha;
           ctx.fill();
+          ctx.strokeStyle = '#ffffff';
+          ctx.lineWidth = 1;
+          ctx.stroke();
         }
 
+        // Selected Department Green Halo Box (Exact match to Sales node in screenshot)
+        if (node.department === activeDepartment && node.kind === 'department') {
+          ctx.beginPath();
+          ctx.arc(node.x, node.y, node.radius + 6, 0, Math.PI * 2);
+          ctx.strokeStyle = node.color;
+          ctx.lineWidth = 2;
+          ctx.stroke();
+        }
+
+        // Hover Effect
         if (hoveredNode && hoveredNode.id === node.id) {
           ctx.beginPath();
-          ctx.arc(nx, ny, node.radius + 4, 0, Math.PI * 2);
+          ctx.arc(node.x, node.y, node.radius + 5, 0, Math.PI * 2);
           ctx.strokeStyle = '#0f172a';
           ctx.lineWidth = 2;
           ctx.stroke();
@@ -778,8 +753,8 @@ export function getDashboardHtml(): string {
 
       for (let i = nodes.length - 1; i >= 0; i--) {
         const node = nodes[i];
-        const dist = Math.hypot(node.currentX - localX, node.currentY - localY);
-        if (dist <= Math.max(9, node.radius + 3)) {
+        const dist = Math.hypot(node.x - localX, node.y - localY);
+        if (dist <= Math.max(10, node.radius + 4)) {
           return node;
         }
       }
@@ -805,7 +780,7 @@ export function getDashboardHtml(): string {
           tooltip.style.opacity = '1';
           tooltip.style.left = (e.clientX + 14) + 'px';
           tooltip.style.top = (e.clientY + 14) + 'px';
-          tooltip.innerHTML = '<strong>' + hit.name + '</strong><br><span style="font-size:10px;opacity:0.7;">' + (hit.department || hit.kind).toUpperCase() + '</span>';
+          tooltip.innerHTML = '<strong>' + hit.name + '</strong><br><span style="font-size:10px;opacity:0.8;">' + (hit.department || hit.kind).toUpperCase() + '</span>';
         } else {
           tooltip.style.opacity = '0';
         }
@@ -824,60 +799,32 @@ export function getDashboardHtml(): string {
       const rect = canvas.getBoundingClientRect();
       const hit = getNodeAt(e.clientX - rect.left, e.clientY - rect.top);
       if (hit && hit.department) {
-        filterDepartment(hit.department);
+        selectDepartment(hit.department);
       }
     });
 
-    function toggleSidebar() {
-      document.getElementById('sidebar').classList.toggle('collapsed');
-      setTimeout(resizeCanvas, 300);
-    }
+    function selectDepartment(depName) {
+      activeDepartment = depName;
+      document.getElementById('dep-name').innerText = depName;
+      const depObj = DEPARTMENTS.find(d => d.name === depName) || { color: '#16a34a' };
+      document.getElementById('dep-icon').style.background = depObj.color;
 
-    function toggleTheme() {
-      const current = document.documentElement.getAttribute('data-theme');
-      const next = current === 'dark' ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', next);
-      document.getElementById('theme-label').innerText = next === 'dark' ? 'Light' : 'Dark';
+      document.getElementById('dep-sys-1').innerText = depName + ' AI Copilot';
+      document.getElementById('dep-sys-2').innerText = depName + ' AI Brain';
+      document.getElementById('dep-sys-3').innerText = depName + ' Autonomous Agent';
+
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.toggle('active', link.innerText.includes(depName));
+      });
     }
 
     function zoomIn() { camera.zoom = Math.min(3.0, camera.zoom * 1.2); }
     function zoomOut() { camera.zoom = Math.max(0.4, camera.zoom / 1.2); }
-    function fitView() { camera = { x: 0, y: 0, zoom: 1.0 }; }
-
-    function toggleRotation() {
-      isRotating = !isRotating;
-      document.getElementById('rot-lbl').innerText = isRotating ? 'Pause' : 'Resume';
-    }
-
-    function filterDepartment(depName) {
-      selectedDepartment = depName;
-      document.querySelectorAll('.nav-item').forEach(el => {
-        el.classList.toggle('active', depName ? el.innerText.includes(depName) : el.innerText.includes('All Entities'));
-      });
-    }
-
-    function switchView(view) {
-      const isGalaxy = (view === 'galaxy');
-      document.getElementById('canvas-container').style.display = isGalaxy ? 'block' : 'none';
-      document.getElementById('doc-view').style.display = isGalaxy ? 'none' : 'block';
-
-      document.getElementById('btn-v-galaxy').classList.toggle('active', isGalaxy);
-      document.getElementById('btn-v-doc').classList.toggle('active', !isGalaxy);
-    }
-
-    function handleSearch() {
-      const q = document.getElementById('sidebar-search').value.toLowerCase();
-      if (!q) { filterDepartment(null); return; }
-      const match = DEPARTMENTS.find(d => d.name.toLowerCase().includes(q));
-      if (match) {
-        filterDepartment(match.name);
-      }
-    }
+    function resetFocus() { camera = { x: -80, y: 40, zoom: 0.95 }; }
 
     resizeCanvas();
-    initData();
+    initNetworkGraph();
     animate();
-    fitView();
   </script>
 </body>
 </html>`;

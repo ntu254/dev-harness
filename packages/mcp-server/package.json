@@ -1,16 +1,20 @@
 {
-  "name": "dev-harness",
+  "name": "@dev-harness/mcp-server",
   "version": "2.0.0-spec",
-  "description": "CLI tool for DEV-HARNESS",
+  "description": "Official Model Context Protocol (MCP) Server for DEV-HARNESS",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "bin": {
-    "dev-harness": "./bin/dev-harness.js"
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
   },
   "type": "module",
   "scripts": {
     "build": "tsc",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
   },
   "dependencies": {
     "@dev-harness/spec": "*",
@@ -19,8 +23,6 @@
     "@dev-harness/sandbox": "*",
     "@dev-harness/security": "*",
     "@dev-harness/verifier": "*",
-    "@dev-harness/adapters": "*",
-    "@dev-harness/graph": "*",
-    "@dev-harness/mcp-server": "*"
+    "@dev-harness/graph": "*"
   }
 }

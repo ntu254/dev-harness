@@ -15,6 +15,7 @@ export default defineConfig({
       '@dev-harness/verifier': path.resolve(__dirname, './packages/verifier/src/index.ts'),
       '@dev-harness/adapters': path.resolve(__dirname, './packages/adapters/src/index.ts'),
       '@dev-harness/graph': path.resolve(__dirname, './packages/graph/src/index.ts'),
+      '@dev-harness/mcp-server': path.resolve(__dirname, './packages/mcp-server/src/index.ts'),
     },
     coverage: {
       provider: 'v8',

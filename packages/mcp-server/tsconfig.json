@@ -13,9 +13,7 @@
       "@dev-harness/sandbox": ["../sandbox/dist/index.d.ts"],
       "@dev-harness/security": ["../security/dist/index.d.ts"],
       "@dev-harness/verifier": ["../verifier/dist/index.d.ts"],
-      "@dev-harness/adapters": ["../adapters/dist/index.d.ts"],
-      "@dev-harness/graph": ["../graph/dist/index.d.ts"],
-      "@dev-harness/mcp-server": ["../mcp-server/dist/index.d.ts"]
+      "@dev-harness/graph": ["../graph/dist/index.d.ts"]
     }
   },
   "references": [
@@ -25,9 +23,7 @@
     { "path": "../sandbox" },
     { "path": "../security" },
     { "path": "../verifier" },
-    { "path": "../adapters" },
-    { "path": "../graph" },
-    { "path": "../mcp-server" }
+    { "path": "../graph" }
   ],
   "include": ["src/**/*"]
 }

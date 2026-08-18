@@ -1,6 +1,7 @@
 import { runInit } from './commands/init.js';
 import { runStatus } from './commands/status.js';
 import { runTask } from './commands/run.js';
+import { McpServer } from '@dev-harness/mcp-server';
 
 export async function main(argv: string[] = process.argv.slice(2)): Promise<void> {
   const command = argv[0];
@@ -13,6 +14,12 @@ export async function main(argv: string[] = process.argv.slice(2)): Promise<void
     case 'status':
       runStatus();
       break;
+
+    case 'mcp': {
+      const server = new McpServer(process.cwd());
+      server.startStdio();
+      break;
+    }
 
     case 'run': {
       const intent = argv[1];
@@ -35,12 +42,13 @@ export async function main(argv: string[] = process.argv.slice(2)): Promise<void
     case '-h':
     default:
       console.log(`
-🏛️  DEV-HARNESS CLI v1.0.0-spec
+🏛️  DEV-HARNESS CLI v2.0.0-spec
 Portable Runtime & Workspace Specification for AI Software Agents
 
 CÁC LỆNH SỬ DỤNG:
   dev-harness init                     Khởi tạo cấu trúc .harness/ trong repository hiện tại
   dev-harness status                   Kiểm tra lịch sử runs, checkpoints và tính hợp lệ của handoffs
+  dev-harness mcp                      Khởi động Model Context Protocol (MCP) Server qua stdio
   dev-harness run "<mục tiêu>"         Thực thi tác vụ có kiểm chứng qua Harness Kernel
       [--agent claude-code|cursor]     Chỉ định AI Agent Adapter
   dev-harness help                     Hiển thị trợ giúp này

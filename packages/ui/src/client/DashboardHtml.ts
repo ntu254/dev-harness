@@ -4,57 +4,57 @@ export function getDashboardHtml(): string {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DEV-HARNESS v2.0 - Obsidian-Style Knowledge Graph & Agent Swarm</title>
+  <title>DEV-HARNESS v2.0 - High-Contrast Obsidian Knowledge Graph</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-base: #0d1117;
-      --bg-surface: #161b22;
-      --bg-sidebar: #0e131b;
-      --border-soft: #21262d;
-      --border-subtle: #30363d;
+      --bg-base: #090d16;
+      --bg-surface: #111827;
+      --bg-sidebar: #0c121e;
+      --border-soft: #1e293b;
+      --border-subtle: #334155;
       
-      --text-main: #f0f6fc;
-      --text-muted: #8b949e;
-      --text-faint: #484f58;
+      /* High-contrast crisp white typography for Dark mode */
+      --text-main: #ffffff;
+      --text-muted: #cbd5e1;
+      --text-faint: #94a3b8;
 
-      /* Obsidian-style vibrant palette */
-      --c-kernel: #f1e05a;
-      --c-infra: #a371f7;
-      --c-sandbox: #3fb950;
-      --c-security: #2ea043;
-      --c-verifier: #f85149;
-      --c-adapters: #ff7b72;
-      --c-graph: #58a6ff;
+      --c-kernel: #facc15;
+      --c-infra: #c084fc;
+      --c-sandbox: #4ade80;
+      --c-security: #2dd4bf;
+      --c-verifier: #f87171;
+      --c-adapters: #fb923c;
+      --c-graph: #60a5fa;
       --c-mcp: #38bdf8;
-      --c-router: #f43f5e;
-      --c-ui: #79c0ff;
-      --c-spec: #8b949e;
+      --c-router: #fb7185;
+      --c-ui: #818cf8;
+      --c-spec: #94a3b8;
     }
 
     [data-theme="light"] {
-      --bg-base: #f6f8fa;
+      --bg-base: #f8fafc;
       --bg-surface: #ffffff;
-      --bg-sidebar: #f6f8fa;
-      --border-soft: #d0d7de;
-      --border-subtle: #afb8c1;
-      --text-main: #1f2328;
-      --text-muted: #656d76;
-      --text-faint: #8c959f;
+      --bg-sidebar: #f1f5f9;
+      --border-soft: #e2e8f0;
+      --border-subtle: #cbd5e1;
+      --text-main: #0f172a;
+      --text-muted: #334155;
+      --text-faint: #64748b;
 
-      --c-kernel: #b08800;
-      --c-infra: #8250df;
-      --c-sandbox: #1a7f37;
-      --c-security: #116329;
-      --c-verifier: #cf222e;
-      --c-adapters: #bc4c00;
-      --c-graph: #0969da;
-      --c-mcp: #059669;
-      --c-router: #d12453;
-      --c-ui: #0550ae;
-      --c-spec: #57606a;
+      --c-kernel: #ca8a04;
+      --c-infra: #7c3aed;
+      --c-sandbox: #16a34a;
+      --c-security: #0d9488;
+      --c-verifier: #dc2626;
+      --c-adapters: #ea580c;
+      --c-graph: #0284c7;
+      --c-mcp: #0891b2;
+      --c-router: #e11d48;
+      --c-ui: #4f46e5;
+      --c-spec: #475569;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -108,20 +108,20 @@ export function getDashboardHtml(): string {
     }
 
     .org-avatar {
-      width: 26px;
-      height: 26px;
-      background: linear-gradient(135deg, #238636 0%, #196c2e 100%);
+      width: 28px;
+      height: 28px;
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
       border-radius: 6px;
       display: flex;
       align-items: center;
       justify-content: center;
       color: #ffffff;
       font-weight: 800;
-      font-size: 12px;
+      font-size: 13px;
     }
 
     .org-meta h2 {
-      font-size: 12.5px;
+      font-size: 13px;
       font-weight: 800;
       color: var(--text-main);
       line-height: 1.2;
@@ -130,6 +130,7 @@ export function getDashboardHtml(): string {
     .org-meta p {
       font-size: 10px;
       color: var(--text-muted);
+      font-weight: 600;
     }
 
     .search-wrap {
@@ -145,7 +146,7 @@ export function getDashboardHtml(): string {
       background: var(--bg-base);
       border: 1px solid var(--border-soft);
       border-radius: 6px;
-      padding: 4px 8px;
+      padding: 5px 8px;
     }
 
     .search-box input {
@@ -153,10 +154,12 @@ export function getDashboardHtml(): string {
       background: transparent;
       outline: none;
       font-family: inherit;
-      font-size: 11px;
+      font-size: 11.5px;
       width: 100%;
       color: var(--text-main);
     }
+
+    .search-box input::placeholder { color: var(--text-faint); }
 
     .sidebar-scroll {
       flex: 1;
@@ -165,22 +168,22 @@ export function getDashboardHtml(): string {
     }
 
     .sec-label {
-      font-size: 9px;
-      font-weight: 700;
+      font-size: 9.5px;
+      font-weight: 800;
       color: var(--text-faint);
       text-transform: uppercase;
       letter-spacing: 0.6px;
-      padding: 6px 8px 2px;
-      margin-top: 2px;
+      padding: 6px 8px 3px;
+      margin-top: 4px;
     }
 
     .nav-item {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 4px 8px;
+      padding: 5px 8px;
       border-radius: 5px;
-      font-size: 11.5px;
+      font-size: 12px;
       font-weight: 600;
       color: var(--text-muted);
       cursor: pointer;
@@ -194,28 +197,28 @@ export function getDashboardHtml(): string {
     }
 
     .nav-item.active {
-      background: var(--bg-surface);
-      color: var(--text-main);
-      border: 1px solid var(--border-soft);
+      background: var(--border-soft);
+      color: #ffffff;
+      border: 1px solid var(--border-subtle);
       font-weight: 700;
     }
 
     .nav-left {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 7px;
     }
 
     .dot {
-      width: 6px;
-      height: 6px;
+      width: 7px;
+      height: 7px;
       border-radius: 50%;
     }
 
     .count-pill {
-      font-size: 10px;
-      font-weight: 600;
-      color: var(--text-faint);
+      font-size: 10.5px;
+      font-weight: 700;
+      color: var(--text-muted);
     }
 
     /* SECONDARY COLUMN */
@@ -228,27 +231,27 @@ export function getDashboardHtml(): string {
     }
 
     .dep-badge {
-      width: 26px;
-      height: 26px;
+      width: 28px;
+      height: 28px;
       background: var(--c-kernel);
       color: #ffffff;
       border-radius: 6px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 12px;
+      font-size: 13px;
     }
 
     .dep-meta h3 {
-      font-size: 12.5px;
+      font-size: 13px;
       font-weight: 800;
       color: var(--text-main);
       line-height: 1.2;
     }
 
     .dep-meta p {
-      font-size: 9px;
-      color: var(--text-faint);
+      font-size: 9.5px;
+      color: var(--text-muted);
       text-transform: uppercase;
       font-weight: 700;
     }
@@ -257,8 +260,8 @@ export function getDashboardHtml(): string {
       display: flex;
       align-items: center;
       gap: 7px;
-      padding: 4px 8px;
-      font-size: 11px;
+      padding: 5px 8px;
+      font-size: 11.5px;
       font-weight: 600;
       color: var(--text-muted);
       border-radius: 5px;
@@ -267,13 +270,14 @@ export function getDashboardHtml(): string {
 
     .detail-item:hover {
       background: var(--bg-base);
-      color: var(--text-main);
+      color: #ffffff;
     }
 
     .code-tag {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 10px;
-      color: #58a6ff;
+      font-size: 10.5px;
+      color: #60a5fa;
+      font-weight: 700;
     }
 
     /* 2. MAIN OBSIDIAN GRAPH CANVAS */
@@ -298,23 +302,24 @@ export function getDashboardHtml(): string {
     }
 
     .breadcrumbs {
-      font-size: 12px;
-      font-weight: 600;
+      font-size: 12.5px;
+      font-weight: 700;
       color: var(--text-muted);
       display: flex;
       align-items: center;
       gap: 6px;
     }
 
-    .breadcrumbs strong { color: var(--text-main); }
+    .breadcrumbs strong { color: var(--text-main); font-weight: 800; }
 
     .tag-badge {
-      font-size: 10.5px;
+      font-size: 11px;
       background: var(--bg-base);
       border: 1px solid var(--border-soft);
-      padding: 2px 6px;
+      padding: 2px 7px;
       border-radius: 9999px;
-      color: var(--text-muted);
+      color: var(--text-main);
+      font-weight: 700;
     }
 
     /* OBSIDIAN GRAPH CONTROLS PILL */
@@ -322,29 +327,30 @@ export function getDashboardHtml(): string {
       position: absolute;
       top: 56px;
       left: 16px;
-      background: rgba(22, 27, 34, 0.85);
+      background: rgba(17, 24, 39, 0.9);
       backdrop-filter: blur(12px);
-      border: 1px solid var(--border-soft);
+      border: 1px solid var(--border-subtle);
       border-radius: 8px;
-      padding: 6px 12px;
+      padding: 6px 14px;
       display: flex;
       align-items: center;
-      gap: 12px;
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--text-muted);
+      gap: 14px;
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #f1f5f9;
       z-index: 20;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
     }
 
     .obsidian-toggle {
       display: flex;
       align-items: center;
-      gap: 4px;
+      gap: 5px;
       cursor: pointer;
+      color: #ffffff;
     }
 
-    .obsidian-toggle input { cursor: pointer; }
+    .obsidian-toggle input { cursor: pointer; accent-color: #3b82f6; }
 
     /* CANVAS AREA */
     #canvas-container {
@@ -394,19 +400,19 @@ export function getDashboardHtml(): string {
     }
 
     .insp-badge {
-      font-size: 10px;
-      font-weight: 700;
+      font-size: 10.5px;
+      font-weight: 800;
       text-transform: uppercase;
-      padding: 2px 7px;
+      padding: 3px 8px;
       border-radius: 4px;
     }
 
     .close-btn {
       background: transparent;
       border: none;
-      font-size: 15px;
+      font-size: 16px;
       cursor: pointer;
-      color: var(--text-muted);
+      color: var(--text-main);
     }
 
     .action-row {
@@ -417,12 +423,12 @@ export function getDashboardHtml(): string {
 
     .action-btn {
       flex: 1;
-      background: #238636;
+      background: #2563eb;
       color: #ffffff;
       border: none;
       border-radius: 6px;
-      padding: 7px 10px;
-      font-size: 11px;
+      padding: 8px 10px;
+      font-size: 11.5px;
       font-weight: 700;
       cursor: pointer;
       display: flex;
@@ -441,8 +447,8 @@ export function getDashboardHtml(): string {
     .action-btn:hover { opacity: 0.9; }
 
     .code-box {
-      background: #0d1117;
-      color: #e6edf3;
+      background: #090d16;
+      color: #f8fafc;
       padding: 10px;
       border-radius: 6px;
       border: 1px solid var(--border-soft);
@@ -464,13 +470,13 @@ export function getDashboardHtml(): string {
 
     .hud-btn {
       background: var(--bg-surface);
-      border: 1px solid var(--border-soft);
+      border: 1px solid var(--border-subtle);
       border-radius: 6px;
-      padding: 4px 10px;
-      font-size: 11px;
-      font-weight: 600;
+      padding: 5px 11px;
+      font-size: 11.5px;
+      font-weight: 700;
       color: var(--text-main);
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.25);
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -479,24 +485,23 @@ export function getDashboardHtml(): string {
 
     .hud-btn:hover { background: var(--border-soft); }
 
-    /* 🎯 SNUG OBSIDIAN HOVER TOOLTIP */
+    /* 🎯 HIGH-CONTRAST HOVER TOOLTIP */
     #tooltip {
       position: absolute;
       pointer-events: none;
-      background: rgba(13, 17, 23, 0.95);
-      backdrop-filter: blur(10px);
-      color: #f0f6fc;
-      padding: 4px 8px;
-      border-radius: 5px;
-      font-size: 10.5px;
-      font-weight: 600;
-      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.4);
+      background: #0f172a;
+      color: #ffffff;
+      padding: 5px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
       opacity: 0;
       transform: translate(6px, -20px);
       transition: opacity 0.08s ease;
       z-index: 40;
       white-space: nowrap;
-      border: 1px solid var(--border-subtle);
+      border: 1px solid #334155;
     }
   </style>
 </head>
@@ -577,7 +582,7 @@ export function getDashboardHtml(): string {
       <div class="breadcrumbs">
         <span>DEV-HARNESS</span>
         <span>/</span>
-        <strong>Obsidian-Style Force Graph</strong>
+        <strong>High-Contrast Obsidian Graph</strong>
         <span class="tag-badge">55 Tests Passed</span>
       </div>
 
@@ -586,13 +591,13 @@ export function getDashboardHtml(): string {
       </div>
     </div>
 
-    <!-- OBSIDIAN GRAPH CONTROLS PILL -->
+    <!-- OBSIDIAN CONTROLS -->
     <div class="obsidian-controls">
       <label class="obsidian-toggle"><input type="checkbox" id="chk-labels" checked onchange="toggleLabels()"> Text Labels</label>
       <label class="obsidian-toggle"><input type="checkbox" id="chk-forces" checked onchange="toggleForces()"> Physics Jiggle</label>
       <span style="opacity: 0.5;">|</span>
-      <span>Nodes: <strong id="lbl-nodes">215</strong></span>
-      <span>Edges: <strong id="lbl-edges">284</strong></span>
+      <span>Nodes: <strong id="lbl-nodes" style="color:#ffffff;">215</strong></span>
+      <span>Edges: <strong id="lbl-edges" style="color:#ffffff;">284</strong></span>
     </div>
 
     <div id="canvas-container">
@@ -601,7 +606,7 @@ export function getDashboardHtml(): string {
       <div class="hud-controls">
         <button class="hud-btn" onclick="zoomIn()">➕ Zoom In</button>
         <button class="hud-btn" onclick="zoomOut()">➖ Zoom Out</button>
-        <button class="hud-btn" onclick="resetPhysics()">🎯 Recenter Graph</button>
+        <button class="hud-btn" onclick="resetPhysics()">🎯 Recenter</button>
       </div>
 
       <div id="tooltip"></div>
@@ -610,11 +615,11 @@ export function getDashboardHtml(): string {
     <!-- CODE INSPECTOR DRAWER -->
     <aside id="inspector-drawer">
       <div class="insp-head">
-        <span class="insp-badge" id="insp-badge" style="background:#eab30822; color:#eab308;">CLASS</span>
+        <span class="insp-badge" id="insp-badge" style="background:#facc1522; color:#facc15;">CLASS</span>
         <button class="close-btn" onclick="closeInspector()">✕</button>
       </div>
 
-      <h3 id="insp-title" style="font-size: 15px; font-weight: 800; margin-bottom: 4px;">StateMachine</h3>
+      <h3 id="insp-title" style="font-size: 15px; font-weight: 800; margin-bottom: 4px; color:#ffffff;">StateMachine</h3>
       <p id="insp-file" style="font-family:'JetBrains Mono',monospace; font-size: 11px; color:var(--text-muted); margin-bottom: 12px;">packages/kernel/src/StateMachine.ts</p>
 
       <div class="action-row">
@@ -623,7 +628,7 @@ export function getDashboardHtml(): string {
       </div>
 
       <div style="margin-bottom: 16px;">
-        <h4 style="font-size: 10.5px; font-weight: 700; color: var(--text-faint); text-transform: uppercase; margin-bottom: 6px;">TypeScript Signature</h4>
+        <h4 style="font-size: 10.5px; font-weight: 800; color: var(--text-faint); text-transform: uppercase; margin-bottom: 6px;">TypeScript Signature</h4>
         <div class="code-box" id="insp-signature">export class StateMachine {
   public transition(event: DomainEvent): StateMachineResult
 }</div>
@@ -648,17 +653,17 @@ export function getDashboardHtml(): string {
     let enableForces = true;
 
     const SUBSYSTEMS = [
-      { name: 'kernel', color: '#f1e05a', title: '@dev-harness/kernel', desc: '12-State FSM & Sole Commit Authority', classes: ['StateMachine', 'CapabilityResolver', 'PolicyEvaluator', 'Hasher', 'EventStore'] },
-      { name: 'infrastructure', color: '#a371f7', title: '@dev-harness/infrastructure', desc: 'RunStore, Shadow Git, Context & Swarm', classes: ['FileRunStore', 'GitWorkspace', 'ContextEngine', 'SwarmCoordinator', 'WorktreeManager'] },
-      { name: 'sandbox', color: '#3fb950', title: '@dev-harness/sandbox', desc: 'Docker & LocalProcess Sandbox Isolation', classes: ['LocalProcessSandboxProvider', 'DockerSandboxProvider', 'ProcessSupervisor'] },
-      { name: 'security', color: '#2ea043', title: '@dev-harness/security', desc: 'SecretBroker & Scoped Token Redaction', classes: ['SecretBroker', 'NetworkPolicyEvaluator', 'TokenRedactor'] },
-      { name: 'verifier', color: '#f85149', title: '@dev-harness/verifier', desc: 'Sandboxed Test Runner & Gate Evaluator', classes: ['VerifierRunner', 'GateEvaluator', 'TddCycleValidator'] },
-      { name: 'adapters', color: '#ff7b72', title: '@dev-harness/adapters', desc: 'Claude, Cursor, Ollama & DeepSeek Adapters', classes: ['ClaudeCodeAdapter', 'CursorAiderAdapter', 'OllamaLocalAdapter', 'DeepSeekReasoningAdapter'] },
-      { name: 'graph', color: '#58a6ff', title: '@dev-harness/graph', desc: 'Sub-AST Code Graph & Vector Search', classes: ['CodeGraphParser', 'AstExtractor', 'SemanticVectorIndex', 'AutoFailureSynthesizer'] },
+      { name: 'kernel', color: '#facc15', title: '@dev-harness/kernel', desc: '12-State FSM & Sole Commit Authority', classes: ['StateMachine', 'CapabilityResolver', 'PolicyEvaluator', 'Hasher', 'EventStore'] },
+      { name: 'infrastructure', color: '#c084fc', title: '@dev-harness/infrastructure', desc: 'RunStore, Shadow Git, Context & Swarm', classes: ['FileRunStore', 'GitWorkspace', 'ContextEngine', 'SwarmCoordinator', 'WorktreeManager'] },
+      { name: 'sandbox', color: '#4ade80', title: '@dev-harness/sandbox', desc: 'Docker & LocalProcess Sandbox Isolation', classes: ['LocalProcessSandboxProvider', 'DockerSandboxProvider', 'ProcessSupervisor'] },
+      { name: 'security', color: '#2dd4bf', title: '@dev-harness/security', desc: 'SecretBroker & Scoped Token Redaction', classes: ['SecretBroker', 'NetworkPolicyEvaluator', 'TokenRedactor'] },
+      { name: 'verifier', color: '#f87171', title: '@dev-harness/verifier', desc: 'Sandboxed Test Runner & Gate Evaluator', classes: ['VerifierRunner', 'GateEvaluator', 'TddCycleValidator'] },
+      { name: 'adapters', color: '#fb923c', title: '@dev-harness/adapters', desc: 'Claude, Cursor, Ollama & DeepSeek Adapters', classes: ['ClaudeCodeAdapter', 'CursorAiderAdapter', 'OllamaLocalAdapter', 'DeepSeekReasoningAdapter'] },
+      { name: 'graph', color: '#60a5fa', title: '@dev-harness/graph', desc: 'Sub-AST Code Graph & Vector Search', classes: ['CodeGraphParser', 'AstExtractor', 'SemanticVectorIndex', 'AutoFailureSynthesizer'] },
       { name: 'mcp-server', color: '#38bdf8', title: '@dev-harness/mcp-server', desc: 'Official JSON-RPC MCP Server (8 Tools)', classes: ['McpServer', 'ToolRegistry', 'ResourceRegistry', 'JsonRpc'] },
-      { name: 'router', color: '#f43f5e', title: '@dev-harness/router', desc: 'Dynamic Model Router & Cost Optimizer', classes: ['ModelRouter', 'TaskComplexityClassifier', 'CostBudgetOptimizer'] },
-      { name: 'ui', color: '#79c0ff', title: '@dev-harness/ui', desc: 'Real-Time Web Observer Dashboard', classes: ['HttpServer', 'ApiRouter', 'DashboardHtml'] },
-      { name: 'spec', color: '#8b949e', title: '@dev-harness/spec', desc: 'Portable TypeScript Contracts & Types', classes: ['AgentAdapter', 'RunRecord', 'ContextBundle', 'HandoffPackage'] }
+      { name: 'router', color: '#fb7185', title: '@dev-harness/router', desc: 'Dynamic Model Router & Cost Optimizer', classes: ['ModelRouter', 'TaskComplexityClassifier', 'CostBudgetOptimizer'] },
+      { name: 'ui', color: '#818cf8', title: '@dev-harness/ui', desc: 'Real-Time Web Observer Dashboard', classes: ['HttpServer', 'ApiRouter', 'DashboardHtml'] },
+      { name: 'spec', color: '#94a3b8', title: '@dev-harness/spec', desc: 'Portable TypeScript Contracts & Types', classes: ['AgentAdapter', 'RunRecord', 'ContextBundle', 'HandoffPackage'] }
     ];
 
     function resizeCanvas() {
@@ -684,18 +689,16 @@ export function getDashboardHtml(): string {
       }
     }
 
-    // 🌟 BUILD OBSIDIAN-STYLE FORCE-DIRECTED GRAPH NETWORK
     function buildObsidianForceGraph(status, graph, failures, handoffs) {
       nodes = [];
       links = [];
 
-      // 1. Root Kernel Node
       const rootNode = {
         id: 'node-root-kernel',
         name: 'DEV-HARNESS Kernel',
         kind: 'core',
-        color: '#f1e05a',
-        radius: 12,
+        color: '#facc15',
+        radius: 13,
         x: 0,
         y: 0,
         vx: 0,
@@ -704,7 +707,6 @@ export function getDashboardHtml(): string {
       };
       nodes.push(rootNode);
 
-      // 2. Package Hub Nodes (11 Packages clustered around center)
       SUBSYSTEMS.forEach((sub, sIdx) => {
         const angle = (sIdx / SUBSYSTEMS.length) * Math.PI * 2;
         const dist = 140;
@@ -714,7 +716,7 @@ export function getDashboardHtml(): string {
           subsystem: sub.name,
           kind: 'subsystem',
           color: sub.color,
-          radius: 8,
+          radius: 9,
           x: Math.cos(angle) * dist,
           y: Math.sin(angle) * dist,
           vx: (Math.random() - 0.5) * 2,
@@ -724,17 +726,16 @@ export function getDashboardHtml(): string {
         nodes.push(subNode);
         links.push({ source: rootNode.id, target: subNode.id, length: 140, strength: 0.8 });
 
-        // Add 8-12 child symbols orbiting each package hub
         sub.classes.forEach((clsName, cIdx) => {
           const cAngle = angle + (cIdx - 2) * 0.3;
-          const cDist = dist + 60 + Math.random() * 30;
+          const cDist = dist + 65 + Math.random() * 30;
           const clsNode = {
             id: \`cls-\${sub.name}-\${cIdx}\`,
             name: clsName,
             subsystem: sub.name,
             kind: 'class',
             color: sub.color,
-            radius: 4.5,
+            radius: 5,
             x: Math.cos(cAngle) * cDist,
             y: Math.sin(cAngle) * cDist,
             vx: (Math.random() - 0.5) * 2,
@@ -745,7 +746,6 @@ export function getDashboardHtml(): string {
         });
       });
 
-      // 3. Parsed AST Symbols from actual files (connected organically)
       const allSymbols = graph.symbols || [];
       allSymbols.slice(0, 100).forEach((sym, sIdx) => {
         const subIdx = sIdx % SUBSYSTEMS.length;
@@ -760,7 +760,7 @@ export function getDashboardHtml(): string {
           subsystem: SUBSYSTEMS[subIdx].name,
           kind: 'symbol',
           color: SUBSYSTEMS[subIdx].color,
-          radius: 3,
+          radius: 3.5,
           x: parentHub.x + Math.cos(symAngle) * symDist,
           y: parentHub.y + Math.sin(symAngle) * symDist,
           vx: (Math.random() - 0.5) * 1.5,
@@ -771,7 +771,6 @@ export function getDashboardHtml(): string {
         links.push({ source: parentHub.id, target: symNode.id, length: 65, strength: 0.4 });
       });
 
-      // 4. Cross-Package Dependency Links (Obsidian Web interconnectivity!)
       links.push({ source: 'sub-infrastructure', target: 'sub-kernel', length: 110, strength: 0.5 });
       links.push({ source: 'sub-router', target: 'sub-adapters', length: 100, strength: 0.5 });
       links.push({ source: 'sub-verifier', target: 'sub-sandbox', length: 100, strength: 0.5 });
@@ -784,14 +783,12 @@ export function getDashboardHtml(): string {
       document.getElementById('cnt-symbols').innerText = allSymbols.length;
     }
 
-    // ⚡ OBSIDIAN FORCE PHYSICS SIMULATION
     function updatePhysics() {
       if (!enableForces) return;
 
       const nodeMap = new Map();
       nodes.forEach(n => nodeMap.set(n.id, n));
 
-      // 1. Repulsion between all nodes (Coulomb electrostatic force)
       for (let i = 0; i < nodes.length; i++) {
         for (let j = i + 1; j < nodes.length; j++) {
           const n1 = nodes[i];
@@ -811,7 +808,6 @@ export function getDashboardHtml(): string {
         }
       }
 
-      // 2. Spring attraction along links (Hooke's law)
       links.forEach(link => {
         const n1 = nodeMap.get(link.source);
         const n2 = nodeMap.get(link.target);
@@ -827,18 +823,15 @@ export function getDashboardHtml(): string {
         const fy = (dy / dist) * force;
 
         if (n1 !== draggedNode) { n1.vx += fx; n1.vy += fy; }
-        if (n2 !== draggedNode) { n2.vx -= fx; n2.vy -= fy; }
+        if (n2 !== draggedNode) { n2.vx += fx; n2.vy += fy; }
       });
 
-      // 3. Center Gravity (Pull toward center 0,0)
       nodes.forEach(node => {
         if (node === draggedNode) return;
-        const distToCenter = Math.hypot(node.x, node.y);
         const grav = 0.015;
         node.vx -= node.x * grav * 0.1;
         node.vy -= node.y * grav * 0.1;
 
-        // Velocity damping (Friction)
         node.vx *= 0.88;
         node.vy *= 0.88;
 
@@ -853,7 +846,7 @@ export function getDashboardHtml(): string {
       requestAnimationFrame(animate);
     }
 
-    // 🎨 RENDER OBSIDIAN GRAPH VIEW (Easy on the eyes, organic & luminous)
+    // 🎨 HIGH-CONTRAST RENDERER
     function render() {
       const container = document.getElementById('canvas-container');
       const width = container.clientWidth;
@@ -871,7 +864,7 @@ export function getDashboardHtml(): string {
       const nodeMap = new Map();
       nodes.forEach(n => nodeMap.set(n.id, n));
 
-      // 1. Draw Obsidian Delicate Link Lines
+      // 1. Draw Links
       links.forEach(link => {
         const from = nodeMap.get(link.source);
         const to = nodeMap.get(link.target);
@@ -885,36 +878,34 @@ export function getDashboardHtml(): string {
         ctx.lineTo(to.x, to.y);
 
         if (isHovered) {
-          ctx.strokeStyle = '#58a6ff';
-          ctx.lineWidth = 1.8;
+          ctx.strokeStyle = '#60a5fa';
+          ctx.lineWidth = 2.0;
         } else if (isSubSelected) {
-          ctx.strokeStyle = from.color + '66';
-          ctx.lineWidth = 1.2;
+          ctx.strokeStyle = from.color + '88';
+          ctx.lineWidth = 1.4;
         } else {
-          ctx.strokeStyle = 'rgba(139, 148, 158, 0.15)';
-          ctx.lineWidth = 0.6;
+          ctx.strokeStyle = 'rgba(148, 163, 184, 0.22)';
+          ctx.lineWidth = 0.7;
         }
         ctx.stroke();
       });
 
-      // 2. Draw Obsidian Glowing Nodes & Labels
+      // 2. Draw Nodes & High-Contrast Labels
       nodes.forEach(node => {
         const isHovered = hoveredNode && hoveredNode.id === node.id;
         const isSubSelected = !activeSubsystem || node.subsystem === activeSubsystem || node.kind === 'core';
-        const alpha = isSubSelected ? 'ff' : '44';
+        const alpha = isSubSelected ? 'ff' : '66';
 
-        // Soft Radial Glow on Hub Nodes
         if (node.isHub) {
-          const glow = ctx.createRadialGradient(node.x, node.y, 0, node.x, node.y, node.radius * 3);
-          glow.addColorStop(0, node.color + (isHovered ? '66' : '22'));
+          const glow = ctx.createRadialGradient(node.x, node.y, 0, node.x, node.y, node.radius * 3.5);
+          glow.addColorStop(0, node.color + (isHovered ? '88' : '33'));
           glow.addColorStop(1, node.color + '00');
           ctx.fillStyle = glow;
           ctx.beginPath();
-          ctx.arc(node.x, node.y, node.radius * 3, 0, Math.PI * 2);
+          ctx.arc(node.x, node.y, node.radius * 3.5, 0, Math.PI * 2);
           ctx.fill();
         }
 
-        // Main Node Circle
         ctx.beginPath();
         ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
         ctx.fillStyle = node.color + alpha;
@@ -922,26 +913,38 @@ export function getDashboardHtml(): string {
 
         if (node.isHub) {
           ctx.strokeStyle = '#ffffff';
-          ctx.lineWidth = 1.5;
-          ctx.stroke();
-        }
-
-        // Hover Ring
-        if (isHovered) {
-          ctx.beginPath();
-          ctx.arc(node.x, node.y, node.radius + 4, 0, Math.PI * 2);
-          ctx.strokeStyle = '#ffffff';
           ctx.lineWidth = 2;
           ctx.stroke();
         }
 
-        // 3. Obsidian Text Labels (Floating cleanly next to hub nodes)
+        if (isHovered) {
+          ctx.beginPath();
+          ctx.arc(node.x, node.y, node.radius + 5, 0, Math.PI * 2);
+          ctx.strokeStyle = '#ffffff';
+          ctx.lineWidth = 2.5;
+          ctx.stroke();
+        }
+
+        // 🌟 3. HIGH-CONTRAST LABELS WITH TRANSLUCENT BACKDROP PILL
         if (showLabels && (node.isHub || isHovered)) {
-          ctx.font = node.isHub ? '700 10.5px "Plus Jakarta Sans", sans-serif' : '600 9.5px "Plus Jakarta Sans", sans-serif';
-          ctx.fillStyle = isHovered ? '#ffffff' : (isSubSelected ? 'var(--text-main)' : 'var(--text-faint)');
+          const labelText = node.name;
+          ctx.font = node.isHub ? '800 11px "Plus Jakarta Sans", sans-serif' : '700 10px "Plus Jakarta Sans", sans-serif';
+          
+          const textMetrics = ctx.measureText(labelText);
+          const padX = 5;
+          const padY = 3;
+          const labelX = node.x + node.radius + 6;
+          const labelY = node.y;
+
+          // Draw dark pill background behind text for 100% readability
+          ctx.fillStyle = 'rgba(15, 23, 42, 0.85)';
+          ctx.fillRect(labelX - padX, labelY - 8 - padY, textMetrics.width + padX * 2, 16 + padY);
+
+          // Draw crisp white bold text
+          ctx.fillStyle = '#ffffff';
           ctx.textAlign = 'left';
           ctx.textBaseline = 'middle';
-          ctx.fillText(node.name, node.x + node.radius + 6, node.y);
+          ctx.fillText(labelText, labelX, labelY);
         }
       });
 
@@ -998,7 +1001,7 @@ export function getDashboardHtml(): string {
           tooltip.style.opacity = '1';
           tooltip.style.left = (e.clientX + 6) + 'px';
           tooltip.style.top = (e.clientY - 20) + 'px';
-          tooltip.innerHTML = '<strong>' + hit.name + '</strong> • <span style="font-size:9.5px;opacity:0.85;">' + (hit.subsystem || hit.kind).toUpperCase() + '</span>';
+          tooltip.innerHTML = '<strong>' + hit.name + '</strong> • <span style="font-size:9.5px;opacity:0.9;">' + (hit.subsystem || hit.kind).toUpperCase() + '</span>';
         } else {
           tooltip.style.opacity = '0';
         }

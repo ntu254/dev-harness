@@ -158,6 +158,8 @@ export function getDashboardHtml(): string {
       color: var(--text-main);
     }
 
+    .search-box input::placeholder { color: var(--text-faint); }
+
     .sidebar-scroll {
       flex: 1;
       overflow-y: auto;
@@ -665,9 +667,11 @@ export function getDashboardHtml(): string {
 
     function resizeCanvas() {
       const container = document.getElementById('canvas-container');
-      canvas.width = container.clientWidth * window.devicePixelRatio;
-      canvas.height = container.clientHeight * window.devicePixelRatio;
-      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = container.clientWidth * dpr;
+      canvas.height = container.clientHeight * dpr;
+      canvas.style.width = container.clientWidth + 'px';
+      canvas.style.height = container.clientHeight + 'px';
     }
     window.addEventListener('resize', resizeCanvas);
 
@@ -819,7 +823,7 @@ export function getDashboardHtml(): string {
         const fx = (dx / dist) * force;
         const fy = (dy / dist) * force;
 
-        if (n1 !== draggedNode) { n1.vx += fx; n1.vy += fy; }
+        if (n1 !== draggedNode) { n1.vx -= fx; n1.vy -= fy; }
         if (n2 !== draggedNode) { n2.vx += fx; n2.vy += fy; }
       });
 
@@ -843,17 +847,20 @@ export function getDashboardHtml(): string {
       requestAnimationFrame(animate);
     }
 
+    // 🎨 HIGH-CONTRAST HIGH-DPI RENDERER
     function render() {
       const container = document.getElementById('canvas-container');
       const width = container.clientWidth;
       const height = container.clientHeight;
+      const dpr = window.devicePixelRatio || 1;
 
-      ctx.clearRect(0, 0, width, height);
+      ctx.save();
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.scale(dpr, dpr);
 
       const centerX = width / 2 + camera.x;
       const centerY = height / 2 + camera.y;
 
-      ctx.save();
       ctx.translate(centerX, centerY);
       ctx.scale(camera.zoom, camera.zoom);
 

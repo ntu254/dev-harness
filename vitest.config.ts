@@ -14,6 +14,7 @@ export default defineConfig({
       '@dev-harness/security': path.resolve(__dirname, './packages/security/src/index.ts'),
       '@dev-harness/verifier': path.resolve(__dirname, './packages/verifier/src/index.ts'),
       '@dev-harness/adapters': path.resolve(__dirname, './packages/adapters/src/index.ts'),
+      '@dev-harness/graph': path.resolve(__dirname, './packages/graph/src/index.ts'),
     },
     coverage: {
       provider: 'v8',

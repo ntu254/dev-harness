@@ -1,0 +1,23 @@
+{
+  "name": "@dev-harness/graph",
+  "version": "2.0.0-spec",
+  "description": "Code Graph, Semantic Indexing, and Auto-Failure Synthesizer for DEV-HARNESS v2.0",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@dev-harness/spec": "*",
+    "@dev-harness/kernel": "*"
+  }
+}

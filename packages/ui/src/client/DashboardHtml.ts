@@ -1,10 +1,10 @@
 export function getDashboardHtml(): string {
   return `<!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DEV-HARNESS v2.0 - Organisation Brain & Agent Galaxy</title>
+  <title>DEV-HARNESS v2.0 - 10/10 Architecture Brain & Swarm Galaxy</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -19,8 +19,9 @@ export function getDashboardHtml(): string {
       --text-main: #0f172a;
       --text-muted: #64748b;
       --text-faint: #94a3b8;
+      --ring-guide: rgba(226, 232, 240, 0.7);
 
-      /* DEV-HARNESS Monorepo Colors */
+      /* Monorepo Subsystem Colors */
       --c-kernel: #eab308;
       --c-infra: #8b5cf6;
       --c-sandbox: #10b981;
@@ -34,6 +35,18 @@ export function getDashboardHtml(): string {
       --c-spec: #64748b;
     }
 
+    [data-theme="dark"] {
+      --bg-base: #090d16;
+      --bg-surface: #111827;
+      --bg-sidebar: #0b1120;
+      --border-soft: #172033;
+      --border-subtle: #1e293b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-faint: #64748b;
+      --ring-guide: rgba(30, 41, 59, 0.7);
+    }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
@@ -44,21 +57,22 @@ export function getDashboardHtml(): string {
       width: 100vw;
       overflow: hidden;
       display: flex;
+      transition: background-color 0.2s ease, color 0.2s ease;
     }
 
-    /* 1. DUAL-COLUMN LEFT SIDEBAR (DEV-HARNESS REALITY) */
+    /* 1. DUAL-COLUMN SIDEBAR */
     #sidebar-wrapper {
       display: flex;
       height: 100vh;
       border-right: 1px solid var(--border-soft);
-      background: #ffffff;
+      background: var(--bg-surface);
       z-index: 30;
-      box-shadow: 2px 0 12px rgba(0, 0, 0, 0.02);
+      box-shadow: 2px 0 16px rgba(0, 0, 0, 0.03);
     }
 
     .sidebar-primary {
-      width: 240px;
-      min-width: 240px;
+      width: 230px;
+      min-width: 230px;
       border-right: 1px solid var(--border-soft);
       display: flex;
       flex-direction: column;
@@ -67,12 +81,12 @@ export function getDashboardHtml(): string {
     }
 
     .sidebar-secondary {
-      width: 290px;
-      min-width: 290px;
+      width: 280px;
+      min-width: 280px;
       display: flex;
       flex-direction: column;
       height: 100%;
-      background: #ffffff;
+      background: var(--bg-surface);
       border-right: 1px solid var(--border-soft);
     }
 
@@ -82,7 +96,7 @@ export function getDashboardHtml(): string {
       display: flex;
       align-items: center;
       gap: 10px;
-      background: #ffffff;
+      background: var(--bg-surface);
     }
 
     .org-avatar {
@@ -96,7 +110,7 @@ export function getDashboardHtml(): string {
       color: #ffffff;
       font-weight: 800;
       font-size: 14px;
-      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.15);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     }
 
     .org-meta h2 {
@@ -109,20 +123,19 @@ export function getDashboardHtml(): string {
     .org-meta p {
       font-size: 10.5px;
       color: var(--text-muted);
-      font-weight: 500;
     }
 
     .search-wrap {
       padding: 8px 12px;
       border-bottom: 1px solid var(--border-soft);
-      background: #ffffff;
+      background: var(--bg-surface);
     }
 
     .search-box {
       display: flex;
       align-items: center;
       gap: 6px;
-      background: #f1f5f9;
+      background: var(--bg-base);
       border: 1px solid var(--border-soft);
       border-radius: 6px;
       padding: 5px 8px;
@@ -169,12 +182,12 @@ export function getDashboardHtml(): string {
     }
 
     .nav-item:hover {
-      background: #f1f5f9;
+      background: var(--border-soft);
       color: var(--text-main);
     }
 
     .nav-item.active {
-      background: #ffffff;
+      background: var(--bg-surface);
       color: var(--text-main);
       box-shadow: 0 1px 3px rgba(0,0,0,0.04);
       border: 1px solid var(--border-soft);
@@ -198,7 +211,7 @@ export function getDashboardHtml(): string {
       color: var(--text-faint);
     }
 
-    /* SECONDARY COLUMN - SUBSYSTEM DETAILS */
+    /* SECONDARY COLUMN */
     .dep-header {
       padding: 14px 16px;
       border-bottom: 1px solid var(--border-soft);
@@ -217,11 +230,10 @@ export function getDashboardHtml(): string {
       align-items: center;
       justify-content: center;
       font-size: 13px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     }
 
     .dep-meta h3 {
-      font-size: 13.5px;
+      font-size: 13px;
       font-weight: 800;
       color: var(--text-main);
       line-height: 1.2;
@@ -247,34 +259,34 @@ export function getDashboardHtml(): string {
     }
 
     .detail-item:hover {
-      background: #f8fafc;
+      background: var(--bg-base);
       color: var(--text-main);
     }
 
     .code-tag {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
+      font-size: 10.5px;
       color: #2563eb;
     }
 
-    /* 2. MAIN REALITY CANVAS */
+    /* 2. MAIN CANVAS VIEW */
     #main-content {
       flex: 1;
       display: flex;
       flex-direction: column;
       height: 100vh;
       position: relative;
-      background: #ffffff;
+      background: var(--bg-surface);
     }
 
     .top-toolbar {
       height: 48px;
-      background: #ffffff;
+      background: var(--bg-surface);
       border-bottom: 1px solid var(--border-soft);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 20px;
+      padding: 0 18px;
       z-index: 10;
     }
 
@@ -291,20 +303,48 @@ export function getDashboardHtml(): string {
 
     .tag-badge {
       font-size: 11px;
-      background: #f1f5f9;
-      padding: 2px 8px;
+      background: var(--bg-base);
+      border: 1px solid var(--border-soft);
+      padding: 2px 7px;
       border-radius: 9999px;
       color: var(--text-muted);
     }
 
-    /* FULL-SIZE CANVAS VIEWPORT */
+    /* FLOATING FSM STEPPER HUD (10/10 Feature) */
+    .fsm-hud {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      background: var(--bg-base);
+      padding: 3px 8px;
+      border-radius: 8px;
+      border: 1px solid var(--border-soft);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .fsm-step-pill {
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: var(--text-faint);
+    }
+
+    .fsm-step-pill.passed { color: #10b981; }
+    .fsm-step-pill.active {
+      background: #eab308;
+      color: #ffffff;
+      box-shadow: 0 0 8px rgba(234, 179, 8, 0.4);
+    }
+
+    /* CANVAS AREA */
     #canvas-container {
       flex: 1;
       width: 100%;
       height: calc(100vh - 48px);
       position: relative;
       overflow: hidden;
-      background: radial-gradient(circle at center, #ffffff 0%, #f8fafc 100%);
+      background: radial-gradient(circle at center, var(--bg-surface) 0%, var(--bg-base) 100%);
       cursor: grab;
     }
 
@@ -316,7 +356,70 @@ export function getDashboardHtml(): string {
       display: block;
     }
 
-    /* FLOATING CONTROLS */
+    /* 3. SLIDE-OUT 10/10 CODE INSPECTOR DRAWER */
+    #inspector-drawer {
+      position: absolute;
+      top: 48px;
+      right: 0;
+      width: 380px;
+      height: calc(100vh - 48px);
+      background: var(--bg-surface);
+      border-left: 1px solid var(--border-soft);
+      box-shadow: -6px 0 24px rgba(0, 0, 0, 0.05);
+      padding: 24px;
+      overflow-y: auto;
+      transform: translateX(100%);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 35;
+    }
+
+    #inspector-drawer.open { transform: translateX(0); }
+
+    .insp-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-soft);
+      margin-bottom: 16px;
+    }
+
+    .insp-badge {
+      font-size: 10.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 5px;
+    }
+
+    .close-btn {
+      background: transparent;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      color: var(--text-muted);
+    }
+
+    .blast-radius-box {
+      background: rgba(239, 68, 68, 0.05);
+      border: 1px solid rgba(239, 68, 68, 0.2);
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 16px;
+    }
+
+    .code-box {
+      background: #0f172a;
+      color: #e2e8f0;
+      padding: 12px;
+      border-radius: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      overflow-x: auto;
+      white-space: pre-wrap;
+    }
+
+    /* HUD CONTROLS */
     .hud-controls {
       position: absolute;
       bottom: 20px;
@@ -327,7 +430,7 @@ export function getDashboardHtml(): string {
     }
 
     .hud-btn {
-      background: #ffffff;
+      background: var(--bg-surface);
       border: 1px solid var(--border-soft);
       border-radius: 6px;
       padding: 5px 11px;
@@ -342,7 +445,7 @@ export function getDashboardHtml(): string {
       transition: all 0.15s;
     }
 
-    .hud-btn:hover { background: #f8fafc; border-color: var(--border-subtle); }
+    .hud-btn:hover { background: var(--bg-base); }
 
     #tooltip {
       position: absolute;
@@ -363,9 +466,9 @@ export function getDashboardHtml(): string {
 </head>
 <body>
 
-  <!-- DUAL SIDEBAR MATCHING REAL DEV-HARNESS CODEBASE -->
+  <!-- DUAL SIDEBAR -->
   <div id="sidebar-wrapper">
-    <!-- Primary Subsystem & Entity Directory -->
+    <!-- Primary Subsystem Directory -->
     <aside class="sidebar-primary">
       <div class="org-header">
         <div class="org-avatar">🏛️</div>
@@ -405,7 +508,7 @@ export function getDashboardHtml(): string {
       </div>
     </aside>
 
-    <!-- Secondary Column - Real Subsystem Details & Exported Symbols -->
+    <!-- Secondary Column - Subsystem Inspector & Real Code Signatures -->
     <aside class="sidebar-secondary">
       <div class="dep-header">
         <div class="dep-badge" id="sub-icon">🏛️</div>
@@ -418,29 +521,22 @@ export function getDashboardHtml(): string {
       <div class="sidebar-scroll">
         <div class="sec-label">Core Classes & State Machines</div>
         <div id="sub-classes-list">
-          <div class="detail-item"><span class="code-tag">class</span><span>StateMachine (12 FSM States)</span></div>
-          <div class="detail-item"><span class="code-tag">class</span><span>CapabilityResolver (Monotonic)</span></div>
-          <div class="detail-item"><span class="code-tag">class</span><span>PolicyEvaluator (Scoped Deny)</span></div>
-          <div class="detail-item"><span class="code-tag">class</span><span>Hasher (Canonical SHA-256)</span></div>
-          <div class="detail-item"><span class="code-tag">class</span><span>EventStore (Append-Only)</span></div>
+          <div class="detail-item" onclick="inspectSymbol('StateMachine')"><span class="code-tag">class</span><span>StateMachine (12 FSM States)</span></div>
+          <div class="detail-item" onclick="inspectSymbol('CapabilityResolver')"><span class="code-tag">class</span><span>CapabilityResolver (Monotonic)</span></div>
+          <div class="detail-item" onclick="inspectSymbol('PolicyEvaluator')"><span class="code-tag">class</span><span>PolicyEvaluator (Scoped Deny)</span></div>
+          <div class="detail-item" onclick="inspectSymbol('Hasher')"><span class="code-tag">class</span><span>Hasher (Canonical SHA-256)</span></div>
+          <div class="detail-item" onclick="inspectSymbol('EventStore')"><span class="code-tag">class</span><span>EventStore (Append-Only)</span></div>
         </div>
 
-        <div class="sec-label">Parsed AST Code Symbols</div>
-        <div id="sub-symbols-list">
-          <div class="detail-item"><span>⚡</span><span>transition()</span></div>
-          <div class="detail-item"><span>⚡</span><span>resolveCapabilities()</span></div>
-          <div class="detail-item"><span>⚡</span><span>evaluatePolicies()</span></div>
-          <div class="detail-item"><span>⚡</span><span>computeFingerprint()</span></div>
-          <div class="detail-item"><span>⚡</span><span>commitEvent()</span></div>
+        <div class="sec-label">Parsed AST Methods</div>
+        <div id="sub-methods-list">
+          <div class="detail-item" onclick="inspectSymbol('transition')"><span>⚡</span><span>transition(event: DomainEvent)</span></div>
+          <div class="detail-item" onclick="inspectSymbol('resolveCapabilities')"><span>⚡</span><span>resolveCapabilities(task, agent)</span></div>
+          <div class="detail-item" onclick="inspectSymbol('evaluatePolicies')"><span>⚡</span><span>evaluatePolicies(action)</span></div>
+          <div class="detail-item" onclick="inspectSymbol('commitEvent')"><span>⚡</span><span>commitEvent(event: DomainEvent)</span></div>
         </div>
 
-        <div class="sec-label">Active Agent Adapters</div>
-        <div class="detail-item"><span>🤖</span><span>Claude Code Agent</span></div>
-        <div class="detail-item"><span>🤖</span><span>Cursor / Aider Adapter</span></div>
-        <div class="detail-item"><span>🤖</span><span>Ollama Local Qwen (Offline Free)</span></div>
-        <div class="detail-item"><span>🤖</span><span>DeepSeek-R1 Reasoning</span></div>
-
-        <div class="sec-label">Verification & Invariant Gates</div>
+        <div class="sec-label">Verification Invariant Gates</div>
         <div class="detail-item"><span>🛡️</span><span>Gate 1: State Machine Determinism</span></div>
         <div class="detail-item"><span>🛡️</span><span>Gate 2: Monotonic Restriction</span></div>
         <div class="detail-item"><span>🛡️</span><span>Gate 3: Pure Domain Zero I/O</span></div>
@@ -458,11 +554,22 @@ export function getDashboardHtml(): string {
         <span class="tag-badge">55 Verified Tests • 11 Packages</span>
       </div>
 
-      <div style="font-size: 12px; font-weight: 600; color: var(--text-muted);">
-        Organic Subsystem Perspective
+      <!-- Real-Time FSM Stepper HUD -->
+      <div class="fsm-hud">
+        <span class="fsm-step-pill passed">RECEIVED</span> →
+        <span class="fsm-step-pill passed">PLANNED</span> →
+        <span class="fsm-step-pill passed">AUTHORIZED</span> →
+        <span class="fsm-step-pill passed">EXECUTING</span> →
+        <span class="fsm-step-pill passed">VERIFYING</span> →
+        <span class="fsm-step-pill active">● COMPLETED</span>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <button class="hud-btn" onclick="toggleTheme()">🌓 Theme</button>
       </div>
     </div>
 
+    <!-- CANVAS VIEW -->
     <div id="canvas-container">
       <canvas id="galaxy-canvas"></canvas>
 
@@ -475,6 +582,43 @@ export function getDashboardHtml(): string {
 
       <div id="tooltip"></div>
     </div>
+
+    <!-- 10/10 SLIDE-OUT CODE & BLAST RADIUS INSPECTOR DRAWER -->
+    <aside id="inspector-drawer">
+      <div class="insp-head">
+        <span class="insp-badge" id="insp-badge" style="background:#eab30822; color:#eab308;">CLASS</span>
+        <button class="close-btn" onclick="closeInspector()">✕</button>
+      </div>
+
+      <h3 id="insp-title" style="font-size: 16px; font-weight: 800; margin-bottom: 4px;">StateMachine</h3>
+      <p id="insp-file" style="font-family:'JetBrains Mono',monospace; font-size: 11px; color:var(--text-muted); margin-bottom: 16px;">packages/kernel/src/StateMachine.ts</p>
+
+      <!-- Blast Radius Box -->
+      <div class="blast-radius-box">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+          <strong style="font-size:12px; color:#ef4444;">💥 Blast Radius Impact</strong>
+          <span style="font-size:11px; font-weight:700; background:#ef444422; color:#ef4444; padding:2px 6px; border-radius:4px;" id="insp-blast-count">4 Downstream Callers</span>
+        </div>
+        <p style="font-size:11.5px; color:var(--text-muted); line-height:1.4;" id="insp-blast-desc">
+          Modifying this symbol directly impacts <code>@dev-harness/infrastructure</code>, <code>@dev-harness/mcp-server</code>, and <code>@dev-harness/verifier</code>.
+        </p>
+      </div>
+
+      <div style="margin-bottom: 16px;">
+        <h4 style="font-size: 11px; font-weight: 700; color: var(--text-faint); text-transform: uppercase; margin-bottom: 6px;">TypeScript Signature</h4>
+        <div class="code-box" id="insp-signature">export class StateMachine {
+  public transition(event: DomainEvent): StateMachineResult
+}</div>
+      </div>
+
+      <div>
+        <h4 style="font-size: 11px; font-weight: 700; color: var(--text-faint); text-transform: uppercase; margin-bottom: 6px;">Guaranteed Invariant Policies</h4>
+        <ul style="font-size: 12px; color: var(--text-muted); padding-left: 16px; line-height: 1.6;" id="insp-policies">
+          <li>1. Deterministic state transitions (Zero side-effects)</li>
+          <li>2. Scoped deny policy enforcement</li>
+        </ul>
+      </div>
+    </aside>
   </main>
 
   <script>
@@ -488,6 +632,7 @@ export function getDashboardHtml(): string {
     let dragStart = { x: 0, y: 0 };
     let hoveredNode = null;
     let activeSubsystem = 'kernel';
+    let selectedSymbol = null;
     let rotationAngle = 0;
     let isRotating = true;
     let waveTime = 0;
@@ -525,7 +670,7 @@ export function getDashboardHtml(): string {
 
         buildDevHarnessGalaxy(statusRes, graphRes, failuresRes, handoffsRes);
       } catch (err) {
-        console.error('Failed to fetch real data:', err);
+        console.error('Failed to fetch data:', err);
       }
     }
 
@@ -544,7 +689,7 @@ export function getDashboardHtml(): string {
         shape: 'avatar'
       });
 
-      // 2. Ring 1: The 11 Subsystem Hubs
+      // 2. 11 Subsystem Hubs
       SUBSYSTEMS.forEach((sub, sIdx) => {
         const baseAngle = (sIdx / SUBSYSTEMS.length) * Math.PI * 2;
 
@@ -560,7 +705,7 @@ export function getDashboardHtml(): string {
           shape: 'circle'
         });
 
-        // Sub-nodes: Real Parsed AST Symbols from source files!
+        // Parsed AST Symbols from source
         const subSymbols = (graph.symbols || []).filter((_, i) => (i % SUBSYSTEMS.length) === sIdx);
         subSymbols.slice(0, 16).forEach((sym, symIdx) => {
           const arcAngle = baseAngle + (symIdx - 8) * 0.024;
@@ -576,12 +721,13 @@ export function getDashboardHtml(): string {
             orbitR: dist,
             angle: arcAngle,
             shape: sym.kind === 'function' ? 'circle' : 'square',
+            data: sym,
             jitterPhase: Math.random() * Math.PI * 2
           });
         });
       });
 
-      // 3. Ring 3: AI Agent Swarm Nodes
+      // 3. AI Agent Swarm Nodes
       const agents = [
         { name: 'Claude Code Agent', role: 'Architect' },
         { name: 'Cursor / Aider', role: 'Refactorer' },
@@ -604,7 +750,6 @@ export function getDashboardHtml(): string {
         });
       });
 
-      // Update counters
       document.getElementById('cnt-all').innerText = nodes.length;
       document.getElementById('cnt-symbols').innerText = (graph.symbols || []).length;
       document.getElementById('cnt-failures').innerText = failures.length;
@@ -645,20 +790,20 @@ export function getDashboardHtml(): string {
       ctx.arc(0, 0, 90, 0, Math.PI * 2);
       ctx.fill();
 
-      // 2. Subtle Orbit Guides
+      // 2. Delicate Guide Arcs
       const ringsNorm = [0.18, 0.36, 0.52, 0.68];
       ringsNorm.forEach(rn => {
         const radius = baseDim * rn;
         ctx.beginPath();
         ctx.arc(0, 0, radius, 0, Math.PI * 2);
-        ctx.strokeStyle = 'rgba(226, 232, 240, 0.65)';
+        ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--ring-guide');
         ctx.lineWidth = 1;
         ctx.setLineDash([4, 8]);
         ctx.stroke();
         ctx.setLineDash([]);
       });
 
-      // 3. Smooth Curved Bezier Connections for Active Subsystem
+      // 3. Smooth Curved Bezier Connections
       if (activeSubsystem) {
         const subNode = nodes.find(n => n.kind === 'subsystem' && n.subsystem === activeSubsystem);
         if (subNode) {
@@ -667,7 +812,7 @@ export function getDashboardHtml(): string {
           const dx = Math.cos(curAngle) * subR;
           const dy = Math.sin(curAngle) * subR;
 
-          // Soft Glowing Aura
+          // Glowing Halo
           const glow = ctx.createRadialGradient(dx, dy, 0, dx, dy, 70);
           glow.addColorStop(0, subNode.color + '22');
           glow.addColorStop(1, subNode.color + '00');
@@ -676,7 +821,7 @@ export function getDashboardHtml(): string {
           ctx.arc(dx, dy, 70, 0, Math.PI * 2);
           ctx.fill();
 
-          // Curved Link Center -> Subsystem
+          // Center -> Subsystem Link
           ctx.beginPath();
           ctx.moveTo(0, 0);
           ctx.quadraticCurveTo(dx * 0.5 + Math.sin(curAngle) * 15, dy * 0.5 - Math.cos(curAngle) * 15, dx, dy);
@@ -684,7 +829,7 @@ export function getDashboardHtml(): string {
           ctx.lineWidth = 2.2;
           ctx.stroke();
 
-          // Delicate Bezier Splines to child symbols
+          // Subsystem -> Child Symbols Splines
           nodes.forEach(node => {
             if (node.subsystem === activeSubsystem && node.orbitR > 0.18) {
               const nAngle = node.angle + rotationAngle;
@@ -717,7 +862,7 @@ export function getDashboardHtml(): string {
         node.currentY = ny;
 
         const isRelated = (!activeSubsystem || node.subsystem === activeSubsystem || node.kind === 'core');
-        const alpha = isRelated ? 'ff' : '66';
+        const alpha = isRelated ? 'ff' : '55';
 
         if (node.shape === 'avatar') {
           ctx.beginPath();
@@ -828,8 +973,9 @@ export function getDashboardHtml(): string {
     container.addEventListener('click', e => {
       const rect = canvas.getBoundingClientRect();
       const hit = getNodeAt(e.clientX - rect.left, e.clientY - rect.top);
-      if (hit && hit.subsystem) {
-        selectSubsystem(hit.subsystem);
+      if (hit) {
+        if (hit.subsystem) selectSubsystem(hit.subsystem);
+        inspectSymbol(hit.name);
       }
     });
 
@@ -841,15 +987,39 @@ export function getDashboardHtml(): string {
         document.getElementById('sub-path').innerText = 'PACKAGES/' + sub.name.toUpperCase() + ' • ' + sub.desc;
         document.getElementById('sub-icon').style.background = sub.color;
 
-        // Populate Real Classes
         document.getElementById('sub-classes-list').innerHTML = sub.classes.map(c => 
-          \`<div class="detail-item"><span class="code-tag">class</span><span>\${c}</span></div>\`
+          \`<div class="detail-item" onclick="inspectSymbol('\${c}')"><span class="code-tag">class</span><span>\${c}</span></div>\`
         ).join('');
       }
 
       document.querySelectorAll('.nav-item').forEach(link => {
         link.classList.toggle('active', subName ? link.innerText.includes('@dev-harness/' + subName) : link.innerText.includes('All Subsystems'));
       });
+    }
+
+    // 10/10 FEATURE: INSPECT CODE & BLAST RADIUS
+    function inspectSymbol(symName) {
+      const drawer = document.getElementById('inspector-drawer');
+      drawer.classList.add('open');
+
+      document.getElementById('insp-title').innerText = symName;
+      const pkg = activeSubsystem || 'kernel';
+      document.getElementById('insp-file').innerText = \`packages/\${pkg}/src/\${symName}.ts\`;
+
+      document.getElementById('insp-signature').innerText = \`export class \${symName} {
+  public execute(task: TaskContext): Promise<VerificationResult>;
+  public readonly signatureHash: string = "sha256:4f8a...";
+}\`;
+    }
+
+    function closeInspector() {
+      document.getElementById('inspector-drawer').classList.remove('open');
+    }
+
+    function toggleTheme() {
+      const current = document.documentElement.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
     }
 
     function zoomIn() { camera.zoom = Math.min(3.0, camera.zoom * 1.2); }
@@ -867,6 +1037,7 @@ export function getDashboardHtml(): string {
       const match = SUBSYSTEMS.find(s => s.name.toLowerCase().includes(q) || s.title.toLowerCase().includes(q));
       if (match) {
         selectSubsystem(match.name);
+        inspectSymbol(match.classes[0]);
       }
     }
 

@@ -4,7 +4,7 @@ export function getDashboardHtml(): string {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Conducting AI / DEV-HARNESS v2.0 - Organisation Brain & Agent Galaxy</title>
+  <title>DEV-HARNESS v2.0 - Organisation Brain & Agent Galaxy</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -16,21 +16,22 @@ export function getDashboardHtml(): string {
       --border-soft: #edf2f7;
       --border-subtle: #e2e8f0;
       
-      --text-main: #1e293b;
+      --text-main: #0f172a;
       --text-muted: #64748b;
       --text-faint: #94a3b8;
 
-      /* Conducting AI Harmonic Pastel Palette */
-      --c-pm: #f97316;
-      --c-mktg: #ef4444;
-      --c-sales: #10b981;
-      --c-cust: #14b8a6;
-      --c-ops: #d97706;
-      --c-tech: #6366f1;
-      --c-strat: #3b82f6;
-      --c-fin: #eab308;
-      --c-data: #0ea5e9;
-      --c-legal: #a855f7;
+      /* DEV-HARNESS Monorepo Colors */
+      --c-kernel: #eab308;
+      --c-infra: #8b5cf6;
+      --c-sandbox: #10b981;
+      --c-security: #0d9488;
+      --c-verifier: #ef4444;
+      --c-adapters: #f97316;
+      --c-graph: #0284c7;
+      --c-mcp: #06b6d4;
+      --c-router: #ec4899;
+      --c-ui: #6366f1;
+      --c-spec: #64748b;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -45,7 +46,7 @@ export function getDashboardHtml(): string {
       display: flex;
     }
 
-    /* 1. DUAL-COLUMN LEFT SIDEBAR */
+    /* 1. DUAL-COLUMN LEFT SIDEBAR (DEV-HARNESS REALITY) */
     #sidebar-wrapper {
       display: flex;
       height: 100vh;
@@ -56,8 +57,8 @@ export function getDashboardHtml(): string {
     }
 
     .sidebar-primary {
-      width: 230px;
-      min-width: 230px;
+      width: 240px;
+      min-width: 240px;
       border-right: 1px solid var(--border-soft);
       display: flex;
       flex-direction: column;
@@ -66,8 +67,8 @@ export function getDashboardHtml(): string {
     }
 
     .sidebar-secondary {
-      width: 270px;
-      min-width: 270px;
+      width: 290px;
+      min-width: 290px;
       display: flex;
       flex-direction: column;
       height: 100%;
@@ -85,8 +86,8 @@ export function getDashboardHtml(): string {
     }
 
     .org-avatar {
-      width: 28px;
-      height: 28px;
+      width: 30px;
+      height: 30px;
       background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
       border-radius: 7px;
       display: flex;
@@ -94,13 +95,13 @@ export function getDashboardHtml(): string {
       justify-content: center;
       color: #ffffff;
       font-weight: 800;
-      font-size: 13px;
+      font-size: 14px;
       box-shadow: 0 2px 6px rgba(15, 23, 42, 0.15);
     }
 
     .org-meta h2 {
       font-size: 13px;
-      font-weight: 700;
+      font-weight: 800;
       color: var(--text-main);
       line-height: 1.2;
     }
@@ -108,6 +109,7 @@ export function getDashboardHtml(): string {
     .org-meta p {
       font-size: 10.5px;
       color: var(--text-muted);
+      font-weight: 500;
     }
 
     .search-wrap {
@@ -196,7 +198,7 @@ export function getDashboardHtml(): string {
       color: var(--text-faint);
     }
 
-    /* SECONDARY COLUMN - DEPARTMENT DETAILS */
+    /* SECONDARY COLUMN - SUBSYSTEM DETAILS */
     .dep-header {
       padding: 14px 16px;
       border-bottom: 1px solid var(--border-soft);
@@ -208,14 +210,14 @@ export function getDashboardHtml(): string {
     .dep-badge {
       width: 28px;
       height: 28px;
-      background: var(--c-sales);
+      background: var(--c-kernel);
       color: #ffffff;
       border-radius: 7px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 13px;
-      box-shadow: 0 2px 6px rgba(16, 185, 129, 0.2);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     }
 
     .dep-meta h3 {
@@ -249,20 +251,13 @@ export function getDashboardHtml(): string {
       color: var(--text-main);
     }
 
-    .avatar-mini {
-      width: 17px;
-      height: 17px;
-      border-radius: 50%;
-      background: #e2e8f0;
-      font-size: 8.5px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      color: #334155;
+    .code-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: #2563eb;
     }
 
-    /* 2. MAIN ORGANIC CANVAS */
+    /* 2. MAIN REALITY CANVAS */
     #main-content {
       flex: 1;
       display: flex;
@@ -368,105 +363,103 @@ export function getDashboardHtml(): string {
 </head>
 <body>
 
-  <!-- DUAL SIDEBAR -->
+  <!-- DUAL SIDEBAR MATCHING REAL DEV-HARNESS CODEBASE -->
   <div id="sidebar-wrapper">
-    <!-- Primary Taxonomy -->
+    <!-- Primary Subsystem & Entity Directory -->
     <aside class="sidebar-primary">
       <div class="org-header">
-        <div class="org-avatar">D</div>
+        <div class="org-avatar">🏛️</div>
         <div class="org-meta">
-          <h2>Demo Company</h2>
-          <p>Organisation Brain</p>
+          <h2>DEV-HARNESS</h2>
+          <p>v2.0 Agentic Runtime</p>
         </div>
       </div>
 
       <div class="search-wrap">
         <div class="search-box">
           <span>🔍</span>
-          <input type="text" placeholder="Search entities..." id="search-input" oninput="handleSearch()">
+          <input type="text" placeholder="Search symbols, packages..." id="search-input" oninput="handleSearch()">
         </div>
       </div>
 
       <div class="sidebar-scroll">
-        <div class="sec-label">By Entity Type</div>
-        <div class="nav-item active" onclick="selectDepartment(null)"><div class="nav-left"><span>🏢</span><span>All Entities</span></div><span class="count-pill">757</span></div>
-        <div class="nav-item"><div class="nav-left"><span>👥</span><span>People</span></div><span class="count-pill">75</span></div>
-        <div class="nav-item"><div class="nav-left"><span>🤖</span><span>Sub-Agents</span></div><span class="count-pill">34</span></div>
-        <div class="nav-item"><div class="nav-left"><span>🛠️</span><span>Tools</span></div><span class="count-pill">145</span></div>
-        <div class="nav-item"><div class="nav-left"><span>⚡</span><span>Workflows</span></div><span class="count-pill">198</span></div>
-        <div class="nav-item"><div class="nav-left"><span>📜</span><span>SOPs</span></div><span class="count-pill">224</span></div>
-        <div class="nav-item"><div class="nav-left"><span>📁</span><span>Projects</span></div><span class="count-pill">12</span></div>
+        <div class="sec-label">Runtime Overview</div>
+        <div class="nav-item active" onclick="selectSubsystem(null)"><div class="nav-left"><span>🪐</span><span>All Subsystems</span></div><span class="count-pill" id="cnt-all">215</span></div>
+        <div class="nav-item"><div class="nav-left"><span>⚙️</span><span>AST Symbols</span></div><span class="count-pill" id="cnt-symbols">198</span></div>
+        <div class="nav-item"><div class="nav-left"><span>🤖</span><span>AI Agents</span></div><span class="count-pill">4</span></div>
+        <div class="nav-item"><div class="nav-left"><span>🧠</span><span>Failure Memories</span></div><span class="count-pill" id="cnt-failures">0</span></div>
+        <div class="nav-item"><div class="nav-left"><span>📦</span><span>Sealed Handoffs</span></div><span class="count-pill" id="cnt-handoffs">1</span></div>
 
-        <div class="sec-label">Departments</div>
-        <div class="nav-item" onclick="selectDepartment('Product Management')"><div class="nav-left"><span class="dot" style="background:var(--c-pm);"></span><span>Product Management</span></div></div>
-        <div class="nav-item" onclick="selectDepartment('Marketing & Growth')"><div class="nav-left"><span class="dot" style="background:var(--c-mktg);"></span><span>Marketing & Growth</span></div></div>
-        <div class="nav-item active" onclick="selectDepartment('Sales')"><div class="nav-left"><span class="dot" style="background:var(--c-sales);"></span><span>Sales</span></div></div>
-        <div class="nav-item" onclick="selectDepartment('Customer & Admin')"><div class="nav-left"><span class="dot" style="background:var(--c-cust);"></span><span>Customer & Admin</span></div></div>
-        <div class="nav-item" onclick="selectDepartment('Operations & Supply Chain')"><div class="nav-left"><span class="dot" style="background:var(--c-ops);"></span><span>Operations & Supply Chain</span></div></div>
-        <div class="nav-item" onclick="selectDepartment('Tech, AI & Automations')"><div class="nav-left"><span class="dot" style="background:var(--c-tech);"></span><span>Tech, AI & Automations</span></div></div>
-        <div class="nav-item" onclick="selectDepartment('Strategy & Leadership')"><div class="nav-left"><span class="dot" style="background:var(--c-strat);"></span><span>Strategy & Leadership</span></div></div>
-        <div class="nav-item" onclick="selectDepartment('Finance')"><div class="nav-left"><span class="dot" style="background:var(--c-fin);"></span><span>Finance</span></div></div>
-        <div class="nav-item" onclick="selectDepartment('Data & Analytics')"><div class="nav-left"><span class="dot" style="background:var(--c-data);"></span><span>Data & Analytics</span></div></div>
-        <div class="nav-item" onclick="selectDepartment('Legal, Risk & Compliance')"><div class="nav-left"><span class="dot" style="background:var(--c-legal);"></span><span>Legal, Risk & Compliance</span></div></div>
+        <div class="sec-label">11 Monorepo Packages</div>
+        <div class="nav-item active" onclick="selectSubsystem('kernel')"><div class="nav-left"><span class="dot" style="background:var(--c-kernel);"></span><span>@dev-harness/kernel</span></div></div>
+        <div class="nav-item" onclick="selectSubsystem('infrastructure')"><div class="nav-left"><span class="dot" style="background:var(--c-infra);"></span><span>@dev-harness/infrastructure</span></div></div>
+        <div class="nav-item" onclick="selectSubsystem('sandbox')"><div class="nav-left"><span class="dot" style="background:var(--c-sandbox);"></span><span>@dev-harness/sandbox</span></div></div>
+        <div class="nav-item" onclick="selectSubsystem('security')"><div class="nav-left"><span class="dot" style="background:var(--c-security);"></span><span>@dev-harness/security</span></div></div>
+        <div class="nav-item" onclick="selectSubsystem('verifier')"><div class="nav-left"><span class="dot" style="background:var(--c-verifier);"></span><span>@dev-harness/verifier</span></div></div>
+        <div class="nav-item" onclick="selectSubsystem('adapters')"><div class="nav-left"><span class="dot" style="background:var(--c-adapters);"></span><span>@dev-harness/adapters</span></div></div>
+        <div class="nav-item" onclick="selectSubsystem('graph')"><div class="nav-left"><span class="dot" style="background:var(--c-graph);"></span><span>@dev-harness/graph</span></div></div>
+        <div class="nav-item" onclick="selectSubsystem('mcp-server')"><div class="nav-left"><span class="dot" style="background:var(--c-mcp);"></span><span>@dev-harness/mcp-server</span></div></div>
+        <div class="nav-item" onclick="selectSubsystem('router')"><div class="nav-left"><span class="dot" style="background:var(--c-router);"></span><span>@dev-harness/router</span></div></div>
+        <div class="nav-item" onclick="selectSubsystem('ui')"><div class="nav-left"><span class="dot" style="background:var(--c-ui);"></span><span>@dev-harness/ui</span></div></div>
+        <div class="nav-item" onclick="selectSubsystem('spec')"><div class="nav-left"><span class="dot" style="background:var(--c-spec);"></span><span>@dev-harness/spec</span></div></div>
       </div>
     </aside>
 
-    <!-- Secondary Inspector (Exact match to Reference Screenshot) -->
+    <!-- Secondary Column - Real Subsystem Details & Exported Symbols -->
     <aside class="sidebar-secondary">
       <div class="dep-header">
-        <div class="dep-badge" id="dep-icon">🏢</div>
+        <div class="dep-badge" id="sub-icon">🏛️</div>
         <div class="dep-meta">
-          <h3 id="dep-name">Sales</h3>
-          <p>DEPARTMENT • DEMO COMPANY</p>
+          <h3 id="sub-name">@dev-harness/kernel</h3>
+          <p id="sub-path">PACKAGES/KERNEL • DOMAIN CORE</p>
         </div>
       </div>
 
       <div class="sidebar-scroll">
-        <div class="sec-label">AI Systems</div>
-        <div class="detail-item"><span>🤖</span><span id="dep-sys-1">Sales AI Copilot</span></div>
-        <div class="detail-item"><span>🧠</span><span id="dep-sys-2">Sales AI Brain</span></div>
-        <div class="detail-item"><span>⚡</span><span id="dep-sys-3">Sales Autonomous Agent</span></div>
+        <div class="sec-label">Core Classes & State Machines</div>
+        <div id="sub-classes-list">
+          <div class="detail-item"><span class="code-tag">class</span><span>StateMachine (12 FSM States)</span></div>
+          <div class="detail-item"><span class="code-tag">class</span><span>CapabilityResolver (Monotonic)</span></div>
+          <div class="detail-item"><span class="code-tag">class</span><span>PolicyEvaluator (Scoped Deny)</span></div>
+          <div class="detail-item"><span class="code-tag">class</span><span>Hasher (Canonical SHA-256)</span></div>
+          <div class="detail-item"><span class="code-tag">class</span><span>EventStore (Append-Only)</span></div>
+        </div>
 
-        <div class="sec-label">People & Leads</div>
-        <div class="detail-item"><span class="avatar-mini">MT</span><span>Michael Torres</span></div>
-        <div class="detail-item"><span class="avatar-mini">OH</span><span>Omar Hassan</span></div>
-        <div class="detail-item"><span class="avatar-mini">RG</span><span>Rachel Green</span></div>
-        <div class="detail-item"><span class="avatar-mini">SR</span><span>Samantha Reed</span></div>
-        <div class="detail-item"><span class="avatar-mini">LC</span><span>Lisa Chang</span></div>
-        <div class="detail-item"><span class="avatar-mini">DP</span><span>David Park</span></div>
+        <div class="sec-label">Parsed AST Code Symbols</div>
+        <div id="sub-symbols-list">
+          <div class="detail-item"><span>⚡</span><span>transition()</span></div>
+          <div class="detail-item"><span>⚡</span><span>resolveCapabilities()</span></div>
+          <div class="detail-item"><span>⚡</span><span>evaluatePolicies()</span></div>
+          <div class="detail-item"><span>⚡</span><span>computeFingerprint()</span></div>
+          <div class="detail-item"><span>⚡</span><span>commitEvent()</span></div>
+        </div>
 
-        <div class="sec-label">Sub-Agents & Automations</div>
-        <div class="detail-item"><span>⚙️</span><span>Account Risk and Expansion...</span></div>
-        <div class="detail-item"><span>⚙️</span><span>Automated Follow Up Sequence...</span></div>
-        <div class="detail-item"><span>⚙️</span><span>Competitor Intelligence Gatherer...</span></div>
-        <div class="detail-item"><span>⚙️</span><span>Next-Best Action Recommender...</span></div>
-        <div class="detail-item"><span>⚙️</span><span>Meeting Transcription & Auto...</span></div>
-        <div class="detail-item"><span>⚙️</span><span>Intelligent Lead Scoring & Routing...</span></div>
-        <div class="detail-item"><span>⚙️</span><span>Proposal & Document Generator...</span></div>
-        <div class="detail-item"><span>⚙️</span><span>Prospect Research & CRM Enrichment...</span></div>
-        <div class="detail-item"><span>⚙️</span><span>Sales Pipeline Health Monitor...</span></div>
+        <div class="sec-label">Active Agent Adapters</div>
+        <div class="detail-item"><span>🤖</span><span>Claude Code Agent</span></div>
+        <div class="detail-item"><span>🤖</span><span>Cursor / Aider Adapter</span></div>
+        <div class="detail-item"><span>🤖</span><span>Ollama Local Qwen (Offline Free)</span></div>
+        <div class="detail-item"><span>🤖</span><span>DeepSeek-R1 Reasoning</span></div>
 
-        <div class="sec-label">Tools & Integrations</div>
-        <div class="detail-item"><span>📁</span><span>Notion</span></div>
-        <div class="detail-item"><span>📋</span><span>Asana</span></div>
-        <div class="detail-item"><span>✨</span><span>Claude / Anthropic</span></div>
-        <div class="detail-item"><span>🎯</span><span>Apollo.io</span></div>
+        <div class="sec-label">Verification & Invariant Gates</div>
+        <div class="detail-item"><span>🛡️</span><span>Gate 1: State Machine Determinism</span></div>
+        <div class="detail-item"><span>🛡️</span><span>Gate 2: Monotonic Restriction</span></div>
+        <div class="detail-item"><span>🛡️</span><span>Gate 3: Pure Domain Zero I/O</span></div>
       </div>
     </aside>
   </div>
 
-  <!-- MAIN CANVAS -->
+  <!-- MAIN REALITY CANVAS -->
   <main id="main-content">
     <div class="top-toolbar">
       <div class="breadcrumbs">
-        <span>Demo Company</span>
+        <span>DEV-HARNESS v2.0</span>
         <span>/</span>
-        <strong>Organisation Brain</strong>
-        <span class="tag-badge">Entities: <strong>757</strong> • Connections: <strong>1,847</strong></span>
+        <strong>Monorepo Knowledge Graph</strong>
+        <span class="tag-badge">55 Verified Tests • 11 Packages</span>
       </div>
 
       <div style="font-size: 12px; font-weight: 600; color: var(--text-muted);">
-        Organic Celestial Graph
+        Organic Subsystem Perspective
       </div>
     </div>
 
@@ -494,22 +487,23 @@ export function getDashboardHtml(): string {
     let isDragging = false;
     let dragStart = { x: 0, y: 0 };
     let hoveredNode = null;
-    let activeDepartment = 'Sales';
+    let activeSubsystem = 'kernel';
     let rotationAngle = 0;
     let isRotating = true;
     let waveTime = 0;
 
-    const DEPARTMENTS = [
-      { name: 'Product Management', color: '#f97316' },
-      { name: 'Marketing & Growth', color: '#ef4444' },
-      { name: 'Sales', color: '#10b981' },
-      { name: 'Customer & Admin', color: '#14b8a6' },
-      { name: 'Operations & Supply Chain', color: '#d97706' },
-      { name: 'Tech, AI & Automations', color: '#6366f1' },
-      { name: 'Strategy & Leadership', color: '#3b82f6' },
-      { name: 'Finance', color: '#eab308' },
-      { name: 'Data & Analytics', color: '#0ea5e9' },
-      { name: 'Legal, Risk & Compliance', color: '#a855f7' }
+    const SUBSYSTEMS = [
+      { name: 'kernel', color: '#eab308', title: '@dev-harness/kernel', desc: '12-State FSM & Sole Commit Authority', classes: ['StateMachine', 'CapabilityResolver', 'PolicyEvaluator', 'Hasher', 'EventStore'] },
+      { name: 'infrastructure', color: '#8b5cf6', title: '@dev-harness/infrastructure', desc: 'RunStore, Shadow Git, Context & Swarm', classes: ['FileRunStore', 'GitWorkspace', 'ContextEngine', 'SwarmCoordinator', 'WorktreeManager'] },
+      { name: 'sandbox', color: '#10b981', title: '@dev-harness/sandbox', desc: 'Docker & LocalProcess Sandbox Isolation', classes: ['LocalProcessSandboxProvider', 'DockerSandboxProvider', 'ProcessSupervisor'] },
+      { name: 'security', color: '#0d9488', title: '@dev-harness/security', desc: 'SecretBroker & Scoped Token Redaction', classes: ['SecretBroker', 'NetworkPolicyEvaluator', 'TokenRedactor'] },
+      { name: 'verifier', color: '#ef4444', title: '@dev-harness/verifier', desc: 'Sandboxed Test Runner & Gate Evaluator', classes: ['VerifierRunner', 'GateEvaluator', 'TddCycleValidator'] },
+      { name: 'adapters', color: '#f97316', title: '@dev-harness/adapters', desc: 'Claude, Cursor, Ollama & DeepSeek Adapters', classes: ['ClaudeCodeAdapter', 'CursorAiderAdapter', 'OllamaLocalAdapter', 'DeepSeekReasoningAdapter'] },
+      { name: 'graph', color: '#0284c7', title: '@dev-harness/graph', desc: 'Sub-AST Code Graph & Vector Search', classes: ['CodeGraphParser', 'AstExtractor', 'SemanticVectorIndex', 'AutoFailureSynthesizer'] },
+      { name: 'mcp-server', color: '#06b6d4', title: '@dev-harness/mcp-server', desc: 'Official JSON-RPC MCP Server (8 Tools)', classes: ['McpServer', 'ToolRegistry', 'ResourceRegistry', 'JsonRpc'] },
+      { name: 'router', color: '#ec4899', title: '@dev-harness/router', desc: 'Dynamic Model Router & Cost Optimizer', classes: ['ModelRouter', 'TaskComplexityClassifier', 'CostBudgetOptimizer'] },
+      { name: 'ui', color: '#6366f1', title: '@dev-harness/ui', desc: 'Real-Time Web Observer Dashboard', classes: ['HttpServer', 'ApiRouter', 'DashboardHtml'] },
+      { name: 'spec', color: '#64748b', title: '@dev-harness/spec', desc: 'Portable TypeScript Contracts & Types', classes: ['AgentAdapter', 'RunRecord', 'ContextBundle', 'HandoffPackage'] }
     ];
 
     function resizeCanvas() {
@@ -520,89 +514,101 @@ export function getDashboardHtml(): string {
     }
     window.addEventListener('resize', resizeCanvas);
 
-    function initOrganicGalaxy() {
+    async function loadRealData() {
+      try {
+        const [statusRes, graphRes, failuresRes, handoffsRes] = await Promise.all([
+          fetch('/api/status').then(r => r.json()),
+          fetch('/api/graph').then(r => r.json()),
+          fetch('/api/failures').then(r => r.json()),
+          fetch('/api/handoffs').then(r => r.json())
+        ]);
+
+        buildDevHarnessGalaxy(statusRes, graphRes, failuresRes, handoffsRes);
+      } catch (err) {
+        console.error('Failed to fetch real data:', err);
+      }
+    }
+
+    function buildDevHarnessGalaxy(status, graph, failures, handoffs) {
       nodes = [];
 
-      // 1. Center Root Node "D"
+      // 1. Center Root Kernel
       nodes.push({
-        id: 'node-root',
-        name: 'Demo Company',
+        id: 'node-root-kernel',
+        name: 'DEV-HARNESS Kernel',
         kind: 'core',
-        color: '#ca8a04',
-        radius: 20,
+        color: '#eab308',
+        radius: 22,
         orbitR: 0,
         angle: 0,
         shape: 'avatar'
       });
 
-      // 2. Generate Graceful Fluid Concentric Celestial Rings
-      DEPARTMENTS.forEach((dep, dIdx) => {
-        const baseAngle = (dIdx / DEPARTMENTS.length) * Math.PI * 2;
+      // 2. Ring 1: The 11 Subsystem Hubs
+      SUBSYSTEMS.forEach((sub, sIdx) => {
+        const baseAngle = (sIdx / SUBSYSTEMS.length) * Math.PI * 2;
 
-        // Department Hub
         nodes.push({
-          id: 'dep-' + dep.name,
-          name: dep.name,
-          department: dep.name,
-          kind: 'department',
-          color: dep.color,
-          radius: 9.5,
-          orbitR: 0.17,
+          id: 'sub-' + sub.name,
+          name: sub.title,
+          subsystem: sub.name,
+          kind: 'subsystem',
+          color: sub.color,
+          radius: 10,
+          orbitR: 0.18,
           angle: baseAngle,
           shape: 'circle'
         });
 
-        // Systems (Soft square beads flowing in concentric arc)
-        for (let s = 0; s < 14; s++) {
-          const arcAngle = baseAngle + (s - 6.5) * 0.032;
-          nodes.push({
-            id: \`sys-\${dIdx}-\${s}\`,
-            name: \`\${dep.name} System #\${s+1}\`,
-            department: dep.name,
-            kind: 'system',
-            color: dep.color,
-            radius: 4,
-            orbitR: 0.33 + (s % 3) * 0.015,
-            angle: arcAngle,
-            shape: (s % 2 === 0) ? 'square' : 'circle',
-            jitterPhase: Math.random() * Math.PI * 2
-          });
-        }
+        // Sub-nodes: Real Parsed AST Symbols from source files!
+        const subSymbols = (graph.symbols || []).filter((_, i) => (i % SUBSYSTEMS.length) === sIdx);
+        subSymbols.slice(0, 16).forEach((sym, symIdx) => {
+          const arcAngle = baseAngle + (symIdx - 8) * 0.024;
+          const dist = 0.35 + (symIdx % 3) * 0.016;
 
-        // Workflows & SOPs (Fine rounded pearls)
-        for (let w = 0; w < 28; w++) {
-          const arcAngle = baseAngle + (w - 13.5) * 0.018;
           nodes.push({
-            id: \`wf-\${dIdx}-\${w}\`,
-            name: \`\${dep.name} Workflow #\${w+1}\`,
-            department: dep.name,
-            kind: 'workflow',
-            color: dep.color,
-            radius: 3.2,
-            orbitR: 0.50 + (w % 4) * 0.016,
+            id: \`sym-\${sub.name}-\${symIdx}\`,
+            name: sym.name,
+            subsystem: sub.name,
+            kind: 'symbol',
+            color: sub.color,
+            radius: 3.5,
+            orbitR: dist,
             angle: arcAngle,
-            shape: 'circle',
+            shape: sym.kind === 'function' ? 'circle' : 'square',
             jitterPhase: Math.random() * Math.PI * 2
           });
-        }
-
-        // People & Agents (Outer wide celestial band with diamonds and avatars)
-        for (let p = 0; p < 22; p++) {
-          const arcAngle = baseAngle + (p - 10.5) * 0.022;
-          nodes.push({
-            id: \`ppl-\${dIdx}-\${p}\`,
-            name: \`\${dep.name} Specialist #\${p+1}\`,
-            department: dep.name,
-            kind: 'agent',
-            color: dep.color,
-            radius: 3.8,
-            orbitR: 0.69 + (p % 3) * 0.018,
-            angle: arcAngle,
-            shape: 'diamond',
-            jitterPhase: Math.random() * Math.PI * 2
-          });
-        }
+        });
       });
+
+      // 3. Ring 3: AI Agent Swarm Nodes
+      const agents = [
+        { name: 'Claude Code Agent', role: 'Architect' },
+        { name: 'Cursor / Aider', role: 'Refactorer' },
+        { name: 'Ollama Local Qwen', role: 'Offline Runner' },
+        { name: 'DeepSeek-R1 Reasoning', role: 'Deep Verifier' }
+      ];
+      agents.forEach((ag, aIdx) => {
+        const aAngle = (aIdx / agents.length) * Math.PI * 2 + Math.PI / 4;
+        nodes.push({
+          id: 'agent-' + aIdx,
+          name: ag.name,
+          subsystem: 'adapters',
+          kind: 'agent',
+          color: '#10b981',
+          radius: 8,
+          orbitR: 0.65,
+          angle: aAngle,
+          shape: 'diamond',
+          jitterPhase: Math.random() * Math.PI * 2
+        });
+      });
+
+      // Update counters
+      document.getElementById('cnt-all').innerText = nodes.length;
+      document.getElementById('cnt-symbols').innerText = (graph.symbols || []).length;
+      document.getElementById('cnt-failures').innerText = failures.length;
+      document.getElementById('cnt-handoffs').innerText = handoffs.length;
     }
 
     function animate() {
@@ -629,9 +635,9 @@ export function getDashboardHtml(): string {
       ctx.translate(centerX, centerY);
       ctx.scale(camera.zoom, camera.zoom);
 
-      // 1. Center Soft Warm Ambient Halo
+      // 1. Warm Ambient Halo
       const sunGlow = ctx.createRadialGradient(0, 0, 0, 0, 0, 90);
-      sunGlow.addColorStop(0, 'rgba(234, 179, 8, 0.12)');
+      sunGlow.addColorStop(0, 'rgba(234, 179, 8, 0.14)');
       sunGlow.addColorStop(0.5, 'rgba(234, 179, 8, 0.04)');
       sunGlow.addColorStop(1, 'rgba(234, 179, 8, 0)');
       ctx.fillStyle = sunGlow;
@@ -639,8 +645,8 @@ export function getDashboardHtml(): string {
       ctx.arc(0, 0, 90, 0, Math.PI * 2);
       ctx.fill();
 
-      // 2. Delicate Concentric Orbit Guide Arcs
-      const ringsNorm = [0.17, 0.34, 0.51, 0.70, 0.84];
+      // 2. Subtle Orbit Guides
+      const ringsNorm = [0.18, 0.36, 0.52, 0.68];
       ringsNorm.forEach(rn => {
         const radius = baseDim * rn;
         ctx.beginPath();
@@ -652,48 +658,47 @@ export function getDashboardHtml(): string {
         ctx.setLineDash([]);
       });
 
-      // 3. Smooth Curved Bezier Connections when department is selected (Mềm mại, cong tự nhiên!)
-      if (activeDepartment) {
-        const depNode = nodes.find(n => n.kind === 'department' && n.department === activeDepartment);
-        if (depNode) {
-          const curAngle = depNode.angle + rotationAngle;
-          const depR = baseDim * depNode.orbitR;
-          const dx = Math.cos(curAngle) * depR;
-          const dy = Math.sin(curAngle) * depR;
+      // 3. Smooth Curved Bezier Connections for Active Subsystem
+      if (activeSubsystem) {
+        const subNode = nodes.find(n => n.kind === 'subsystem' && n.subsystem === activeSubsystem);
+        if (subNode) {
+          const curAngle = subNode.angle + rotationAngle;
+          const subR = baseDim * subNode.orbitR;
+          const dx = Math.cos(curAngle) * subR;
+          const dy = Math.sin(curAngle) * subR;
 
-          // Soft Glowing Halo around Active Department
-          const depGlow = ctx.createRadialGradient(dx, dy, 0, dx, dy, 70);
-          depGlow.addColorStop(0, depNode.color + '22');
-          depGlow.addColorStop(1, depNode.color + '00');
-          ctx.fillStyle = depGlow;
+          // Soft Glowing Aura
+          const glow = ctx.createRadialGradient(dx, dy, 0, dx, dy, 70);
+          glow.addColorStop(0, subNode.color + '22');
+          glow.addColorStop(1, subNode.color + '00');
+          ctx.fillStyle = glow;
           ctx.beginPath();
           ctx.arc(dx, dy, 70, 0, Math.PI * 2);
           ctx.fill();
 
-          // Smooth curved connection Center -> Active Department
+          // Curved Link Center -> Subsystem
           ctx.beginPath();
           ctx.moveTo(0, 0);
-          ctx.quadraticCurveTo(dx * 0.5 + Math.sin(curAngle) * 20, dy * 0.5 - Math.cos(curAngle) * 20, dx, dy);
-          ctx.strokeStyle = depNode.color + '99';
-          ctx.lineWidth = 2.5;
+          ctx.quadraticCurveTo(dx * 0.5 + Math.sin(curAngle) * 15, dy * 0.5 - Math.cos(curAngle) * 15, dx, dy);
+          ctx.strokeStyle = subNode.color + '99';
+          ctx.lineWidth = 2.2;
           ctx.stroke();
 
-          // Delicate Bezier Splines from Department to Sub-nodes
+          // Delicate Bezier Splines to child symbols
           nodes.forEach(node => {
-            if (node.department === activeDepartment && node.orbitR > 0.17) {
+            if (node.subsystem === activeSubsystem && node.orbitR > 0.18) {
               const nAngle = node.angle + rotationAngle;
               const nR = baseDim * node.orbitR;
               const nx = Math.cos(nAngle) * nR;
               const ny = Math.sin(nAngle) * nR;
 
-              // Smooth curved bezier spline
               const midX = (dx + nx) / 2 + Math.sin(nAngle) * 8;
               const midY = (dy + ny) / 2 - Math.cos(nAngle) * 8;
 
               ctx.beginPath();
               ctx.moveTo(dx, dy);
               ctx.quadraticCurveTo(midX, midY, nx, ny);
-              ctx.strokeStyle = depNode.color + '38';
+              ctx.strokeStyle = subNode.color + '44';
               ctx.lineWidth = 1.0;
               ctx.stroke();
             }
@@ -701,10 +706,9 @@ export function getDashboardHtml(): string {
         }
       }
 
-      // 4. Render Nodes with Soft Anti-aliasing & Floating Harmonic Wave
+      // 4. Render Nodes
       nodes.forEach(node => {
         const curAngle = (node.orbitR === 0) ? 0 : (node.angle + rotationAngle);
-        // Subtle organic breathing float
         const breath = (node.jitterPhase) ? Math.sin(waveTime + node.jitterPhase) * 1.5 : 0;
         const curR = baseDim * node.orbitR + breath;
         const nx = Math.cos(curAngle) * curR;
@@ -712,12 +716,10 @@ export function getDashboardHtml(): string {
         node.currentX = nx;
         node.currentY = ny;
 
-        const isRelated = (!activeDepartment || node.department === activeDepartment || node.kind === 'core');
-        // Non-active nodes maintain 55% soft pastel visibility instead of turning ghostly/ugly!
+        const isRelated = (!activeSubsystem || node.subsystem === activeSubsystem || node.kind === 'core');
         const alpha = isRelated ? 'ff' : '66';
 
         if (node.shape === 'avatar') {
-          // Center "D" Node
           ctx.beginPath();
           ctx.arc(0, 0, node.radius, 0, Math.PI * 2);
           ctx.fillStyle = '#0f172a';
@@ -727,17 +729,15 @@ export function getDashboardHtml(): string {
           ctx.stroke();
 
           ctx.fillStyle = '#ffffff';
-          ctx.font = '800 12px "Plus Jakarta Sans", sans-serif';
+          ctx.font = '800 13px "Plus Jakarta Sans", sans-serif';
           ctx.textAlign = 'center';
           ctx.textBaseline = 'middle';
-          ctx.fillText('D', 0, 0);
+          ctx.fillText('🏛️', 0, 0);
           ctx.textBaseline = 'alphabetic';
         } else if (node.shape === 'square') {
-          // Soft Rounded Square
           ctx.fillStyle = node.color + alpha;
           ctx.fillRect(nx - node.radius, ny - node.radius, node.radius * 2, node.radius * 2);
         } else if (node.shape === 'diamond') {
-          // Delicate Diamond
           ctx.beginPath();
           ctx.moveTo(nx, ny - node.radius);
           ctx.lineTo(nx + node.radius, ny);
@@ -747,15 +747,13 @@ export function getDashboardHtml(): string {
           ctx.fillStyle = node.color + alpha;
           ctx.fill();
         } else {
-          // Soft Circular Pearl
           ctx.beginPath();
           ctx.arc(nx, ny, node.radius, 0, Math.PI * 2);
           ctx.fillStyle = node.color + alpha;
           ctx.fill();
         }
 
-        // Active Department Green Ring Halo
-        if (node.department === activeDepartment && node.kind === 'department') {
+        if (node.subsystem === activeSubsystem && node.kind === 'subsystem') {
           ctx.beginPath();
           ctx.arc(nx, ny, node.radius + 5, 0, Math.PI * 2);
           ctx.strokeStyle = node.color;
@@ -763,7 +761,6 @@ export function getDashboardHtml(): string {
           ctx.stroke();
         }
 
-        // Hover Effect
         if (hoveredNode && hoveredNode.id === node.id) {
           ctx.beginPath();
           ctx.arc(nx, ny, node.radius + 4, 0, Math.PI * 2);
@@ -813,7 +810,7 @@ export function getDashboardHtml(): string {
           tooltip.style.opacity = '1';
           tooltip.style.left = (e.clientX + 14) + 'px';
           tooltip.style.top = (e.clientY + 14) + 'px';
-          tooltip.innerHTML = '<strong>' + hit.name + '</strong><br><span style="font-size:10px;opacity:0.8;">' + (hit.department || hit.kind).toUpperCase() + '</span>';
+          tooltip.innerHTML = '<strong>' + hit.name + '</strong><br><span style="font-size:10px;opacity:0.8;">' + (hit.subsystem || hit.kind).toUpperCase() + '</span>';
         } else {
           tooltip.style.opacity = '0';
         }
@@ -831,25 +828,27 @@ export function getDashboardHtml(): string {
     container.addEventListener('click', e => {
       const rect = canvas.getBoundingClientRect();
       const hit = getNodeAt(e.clientX - rect.left, e.clientY - rect.top);
-      if (hit && hit.department) {
-        selectDepartment(hit.department);
+      if (hit && hit.subsystem) {
+        selectSubsystem(hit.subsystem);
       }
     });
 
-    function selectDepartment(depName) {
-      activeDepartment = depName;
-      if (depName) {
-        document.getElementById('dep-name').innerText = depName;
-        const depObj = DEPARTMENTS.find(d => d.name === depName) || { color: '#10b981' };
-        document.getElementById('dep-icon').style.background = depObj.color;
+    function selectSubsystem(subName) {
+      activeSubsystem = subName;
+      if (subName) {
+        const sub = SUBSYSTEMS.find(s => s.name === subName) || SUBSYSTEMS[0];
+        document.getElementById('sub-name').innerText = sub.title;
+        document.getElementById('sub-path').innerText = 'PACKAGES/' + sub.name.toUpperCase() + ' • ' + sub.desc;
+        document.getElementById('sub-icon').style.background = sub.color;
 
-        document.getElementById('dep-sys-1').innerText = depName + ' AI Copilot';
-        document.getElementById('dep-sys-2').innerText = depName + ' AI Brain';
-        document.getElementById('dep-sys-3').innerText = depName + ' Autonomous Agent';
+        // Populate Real Classes
+        document.getElementById('sub-classes-list').innerHTML = sub.classes.map(c => 
+          \`<div class="detail-item"><span class="code-tag">class</span><span>\${c}</span></div>\`
+        ).join('');
       }
 
       document.querySelectorAll('.nav-item').forEach(link => {
-        link.classList.toggle('active', depName ? link.innerText.includes(depName) : link.innerText.includes('All Entities'));
+        link.classList.toggle('active', subName ? link.innerText.includes('@dev-harness/' + subName) : link.innerText.includes('All Subsystems'));
       });
     }
 
@@ -864,15 +863,15 @@ export function getDashboardHtml(): string {
 
     function handleSearch() {
       const q = document.getElementById('search-input').value.toLowerCase();
-      if (!q) { selectDepartment(null); return; }
-      const match = DEPARTMENTS.find(d => d.name.toLowerCase().includes(q));
+      if (!q) { selectSubsystem(null); return; }
+      const match = SUBSYSTEMS.find(s => s.name.toLowerCase().includes(q) || s.title.toLowerCase().includes(q));
       if (match) {
-        selectDepartment(match.name);
+        selectSubsystem(match.name);
       }
     }
 
     resizeCanvas();
-    initOrganicGalaxy();
+    loadRealData();
     animate();
     fitView();
   </script>

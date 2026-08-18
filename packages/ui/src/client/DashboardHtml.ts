@@ -484,7 +484,6 @@ export function getDashboardHtml(): string {
 
     .hud-btn:hover { background: var(--border-soft); }
 
-    /* 🎯 HIGH-CONTRAST HOVER TOOLTIP */
     #tooltip {
       position: absolute;
       pointer-events: none;
@@ -650,6 +649,7 @@ export function getDashboardHtml(): string {
     let activeSubsystem = 'kernel';
     let showLabels = true;
     let enableForces = true;
+    let physicsAlpha = 1.0;
 
     const SUBSYSTEMS = [
       { name: 'kernel', color: '#facc15', title: '@dev-harness/kernel', desc: '12-State FSM & Sole Commit Authority', classes: ['StateMachine', 'CapabilityResolver', 'PolicyEvaluator', 'Hasher', 'EventStore'] },
@@ -684,16 +684,19 @@ export function getDashboardHtml(): string {
           fetch('/api/handoffs').then(r => r.json())
         ]);
 
-        buildObsidianForceGraph(statusRes, graphRes, failuresRes, handoffsRes);
+        buildStableObsidianGraph(statusRes, graphRes, failuresRes, handoffsRes);
       } catch (err) {
         console.error('Failed to fetch data:', err);
       }
     }
 
-    function buildObsidianForceGraph(status, graph, failures, handoffs) {
+    // 🌟 PRE-SPACED STABLE OBSIDIAN GRAPH (No exploding supernova!)
+    function buildStableObsidianGraph(status, graph, failures, handoffs) {
       nodes = [];
       links = [];
+      physicsAlpha = 1.0;
 
+      // 1. Center Core Kernel
       const rootNode = {
         id: 'node-root-kernel',
         name: 'DEV-HARNESS Kernel',
@@ -708,9 +711,10 @@ export function getDashboardHtml(): string {
       };
       nodes.push(rootNode);
 
+      // 2. Package Hub Nodes pre-arranged in a stable ring of 130px radius
       SUBSYSTEMS.forEach((sub, sIdx) => {
         const angle = (sIdx / SUBSYSTEMS.length) * Math.PI * 2;
-        const dist = 140;
+        const dist = 130;
         const subNode = {
           id: 'sub-' + sub.name,
           name: sub.title,
@@ -720,16 +724,17 @@ export function getDashboardHtml(): string {
           radius: 9,
           x: Math.cos(angle) * dist,
           y: Math.sin(angle) * dist,
-          vx: (Math.random() - 0.5) * 2,
-          vy: (Math.random() - 0.5) * 2,
+          vx: 0,
+          vy: 0,
           isHub: true
         };
         nodes.push(subNode);
-        links.push({ source: rootNode.id, target: subNode.id, length: 140, strength: 0.8 });
+        links.push({ source: rootNode.id, target: subNode.id, length: 130, strength: 0.7 });
 
+        // Pre-space classes gently around each package hub
         sub.classes.forEach((clsName, cIdx) => {
-          const cAngle = angle + (cIdx - 2) * 0.3;
-          const cDist = dist + 65 + Math.random() * 30;
+          const cAngle = angle + (cIdx - 2) * 0.22;
+          const cDist = dist + 55 + (cIdx % 2) * 15;
           const clsNode = {
             id: \`cls-\${sub.name}-\${cIdx}\`,
             name: clsName,
@@ -739,22 +744,25 @@ export function getDashboardHtml(): string {
             radius: 5,
             x: Math.cos(cAngle) * cDist,
             y: Math.sin(cAngle) * cDist,
-            vx: (Math.random() - 0.5) * 2,
-            vy: (Math.random() - 0.5) * 2
+            vx: 0,
+            vy: 0
           };
           nodes.push(clsNode);
-          links.push({ source: subNode.id, target: clsNode.id, length: 70, strength: 0.6 });
+          links.push({ source: subNode.id, target: clsNode.id, length: 60, strength: 0.6 });
         });
       });
 
+      // 3. Pre-space AST Symbols in gentle sunflower rings
       const allSymbols = graph.symbols || [];
       allSymbols.slice(0, 100).forEach((sym, sIdx) => {
         const subIdx = sIdx % SUBSYSTEMS.length;
         const parentHub = nodes.find(n => n.id === 'sub-' + SUBSYSTEMS[subIdx].name);
         if (!parentHub) return;
 
-        const symAngle = Math.random() * Math.PI * 2;
-        const symDist = 80 + Math.random() * 50;
+        const goldenAngle = 2.39996; // 137.5 degrees
+        const symAngle = (subIdx / SUBSYSTEMS.length) * Math.PI * 2 + (sIdx * 0.15);
+        const symDist = 190 + (sIdx % 4) * 18;
+
         const symNode = {
           id: \`ast-\${sIdx}\`,
           name: sym.name,
@@ -762,16 +770,17 @@ export function getDashboardHtml(): string {
           kind: 'symbol',
           color: SUBSYSTEMS[subIdx].color,
           radius: 3.5,
-          x: parentHub.x + Math.cos(symAngle) * symDist,
-          y: parentHub.y + Math.sin(symAngle) * symDist,
-          vx: (Math.random() - 0.5) * 1.5,
-          vy: (Math.random() - 0.5) * 1.5,
+          x: Math.cos(symAngle) * symDist,
+          y: Math.sin(symAngle) * symDist,
+          vx: 0,
+          vy: 0,
           data: sym
         };
         nodes.push(symNode);
         links.push({ source: parentHub.id, target: symNode.id, length: 65, strength: 0.4 });
       });
 
+      // 4. Stable Interconnections
       links.push({ source: 'sub-infrastructure', target: 'sub-kernel', length: 110, strength: 0.5 });
       links.push({ source: 'sub-router', target: 'sub-adapters', length: 100, strength: 0.5 });
       links.push({ source: 'sub-verifier', target: 'sub-sandbox', length: 100, strength: 0.5 });
@@ -784,22 +793,25 @@ export function getDashboardHtml(): string {
       document.getElementById('cnt-symbols').innerText = allSymbols.length;
     }
 
+    // ⚡ CALM & STABLE PHYSICS (No runaway explosion!)
     function updatePhysics() {
-      if (!enableForces) return;
+      if (!enableForces || physicsAlpha <= 0.01) return;
 
       const nodeMap = new Map();
       nodes.forEach(n => nodeMap.set(n.id, n));
 
+      // 1. Soft Repulsion with max distance clamp
       for (let i = 0; i < nodes.length; i++) {
         for (let j = i + 1; j < nodes.length; j++) {
           const n1 = nodes[i];
           const n2 = nodes[j];
           const dx = n2.x - n1.x;
           const dy = n2.y - n1.y;
-          const distSq = dx * dx + dy * dy + 1;
-          if (distSq < 40000) {
+          const distSq = dx * dx + dy * dy;
+          if (distSq > 1 && distSq < 14400) { // Max 120px interaction
             const dist = Math.sqrt(distSq);
-            const force = (n1.isHub || n2.isHub ? 1200 : 350) / distSq;
+            const rawForce = 45 / distSq;
+            const force = Math.min(1.2, rawForce) * physicsAlpha;
             const fx = (dx / dist) * force;
             const fy = (dy / dist) * force;
 
@@ -809,6 +821,7 @@ export function getDashboardHtml(): string {
         }
       }
 
+      // 2. Spring attraction
       links.forEach(link => {
         const n1 = nodeMap.get(link.source);
         const n2 = nodeMap.get(link.target);
@@ -818,27 +831,38 @@ export function getDashboardHtml(): string {
         const dy = n2.y - n1.y;
         const dist = Math.hypot(dx, dy) || 1;
         const displacement = dist - link.length;
-        const force = displacement * 0.035 * link.strength;
+        const rawForce = displacement * 0.02 * link.strength;
+        const force = Math.max(-1.5, Math.min(1.5, rawForce)) * physicsAlpha;
 
         const fx = (dx / dist) * force;
         const fy = (dy / dist) * force;
 
-        if (n1 !== draggedNode) { n1.vx -= fx; n1.vy -= fy; }
+        if (n1 !== draggedNode) { n1.vx += fx; n1.vy += fy; }
         if (n2 !== draggedNode) { n2.vx += fx; n2.vy += fy; }
       });
 
+      // 3. Center Gravity & Velocity clamping
       nodes.forEach(node => {
         if (node === draggedNode) return;
-        const grav = 0.015;
-        node.vx -= node.x * grav * 0.1;
-        node.vy -= node.y * grav * 0.1;
+        
+        // Gentle center pull
+        node.vx -= node.x * 0.002 * physicsAlpha;
+        node.vy -= node.y * 0.002 * physicsAlpha;
 
-        node.vx *= 0.88;
-        node.vy *= 0.88;
+        // Velocity clamp to prevent explosion
+        node.vx = Math.max(-2.5, Math.min(2.5, node.vx * 0.82));
+        node.vy = Math.max(-2.5, Math.min(2.5, node.vy * 0.82));
 
         node.x += node.vx;
         node.y += node.vy;
+
+        // Hard boundary box to keep everything beautifully in view
+        node.x = Math.max(-380, Math.min(380, node.x));
+        node.y = Math.max(-380, Math.min(380, node.y));
       });
+
+      // Gradual thermal decay (settles peacefully after ~120 frames)
+      physicsAlpha *= 0.992;
     }
 
     function animate() {
@@ -847,7 +871,6 @@ export function getDashboardHtml(): string {
       requestAnimationFrame(animate);
     }
 
-    // 🎨 HIGH-CONTRAST HIGH-DPI RENDERER
     function render() {
       const container = document.getElementById('canvas-container');
       const width = container.clientWidth;
@@ -893,7 +916,7 @@ export function getDashboardHtml(): string {
         ctx.stroke();
       });
 
-      // 2. Draw Nodes & High-Contrast Labels
+      // 2. Draw Nodes
       nodes.forEach(node => {
         const isHovered = hoveredNode && hoveredNode.id === node.id;
         const isSubSelected = !activeSubsystem || node.subsystem === activeSubsystem || node.kind === 'core';
@@ -928,7 +951,6 @@ export function getDashboardHtml(): string {
           ctx.stroke();
         }
 
-        // 3. HIGH-CONTRAST LABELS WITH TRANSLUCENT BACKDROP PILL
         if (showLabels && (node.isHub || isHovered)) {
           const labelText = node.name;
           ctx.font = node.isHub ? '800 11px "Plus Jakarta Sans", sans-serif' : '700 10px "Plus Jakarta Sans", sans-serif';
@@ -977,6 +999,7 @@ export function getDashboardHtml(): string {
       const hit = getNodeAt(e.clientX - rect.left, e.clientY - rect.top);
       if (hit) {
         draggedNode = hit;
+        physicsAlpha = 0.5; // Re-awaken physics slightly on drag
       } else {
         isDraggingCanvas = true;
         dragStart = { x: e.clientX - camera.x, y: e.clientY - camera.y };
@@ -1014,11 +1037,12 @@ export function getDashboardHtml(): string {
       draggedNode = null;
     });
 
+    // Controlled zoom with safe factor
     container.addEventListener('wheel', e => {
       e.preventDefault();
-      const factor = e.deltaY < 0 ? 1.08 : 0.92;
-      camera.zoom = Math.max(0.3, Math.min(3.5, camera.zoom * factor));
-    });
+      const factor = e.deltaY < 0 ? 1.05 : 0.95;
+      camera.zoom = Math.max(0.4, Math.min(2.5, camera.zoom * factor));
+    }, { passive: false });
 
     container.addEventListener('click', e => {
       const rect = canvas.getBoundingClientRect();
@@ -1081,13 +1105,16 @@ export function getDashboardHtml(): string {
     }
 
     function toggleLabels() { showLabels = document.getElementById('chk-labels').checked; }
-    function toggleForces() { enableForces = document.getElementById('chk-forces').checked; }
+    function toggleForces() {
+      enableForces = document.getElementById('chk-forces').checked;
+      if (enableForces) physicsAlpha = 0.5;
+    }
 
-    function zoomIn() { camera.zoom = Math.min(3.5, camera.zoom * 1.2); }
-    function zoomOut() { camera.zoom = Math.max(0.3, camera.zoom / 1.2); }
+    function zoomIn() { camera.zoom = Math.min(2.5, camera.zoom * 1.15); }
+    function zoomOut() { camera.zoom = Math.max(0.4, camera.zoom / 1.15); }
     function resetPhysics() {
       camera = { x: 0, y: 0, zoom: 0.95 };
-      nodes.forEach(n => { n.vx = (Math.random() - 0.5) * 4; n.vy = (Math.random() - 0.5) * 4; });
+      physicsAlpha = 0.8;
     }
 
     function handleSearch() {

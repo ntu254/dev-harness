@@ -267,7 +267,7 @@ export function getDashboardHtml(): string {
       color: #2563eb;
     }
 
-    /* 2. MAIN ASTROLABE CANVAS */
+    /* 2. MAIN CANVAS VIEW */
     #main-content {
       flex: 1;
       display: flex;
@@ -397,6 +397,37 @@ export function getDashboardHtml(): string {
       color: var(--text-muted);
     }
 
+    .action-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .action-btn {
+      flex: 1;
+      background: #0f172a;
+      color: #ffffff;
+      border: none;
+      border-radius: 6px;
+      padding: 8px 10px;
+      font-size: 11.5px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      text-decoration: none;
+    }
+
+    .action-btn.secondary {
+      background: var(--bg-base);
+      color: var(--text-main);
+      border: 1px solid var(--border-soft);
+    }
+
+    .action-btn:hover { opacity: 0.9; }
+
     .code-box {
       background: #0f172a;
       color: #e2e8f0;
@@ -435,20 +466,24 @@ export function getDashboardHtml(): string {
 
     .hud-btn:hover { background: var(--bg-base); }
 
+    /* 🎯 SNUG, COMPACT POPOVER HOVER (Öm sát con trỏ, không che node) */
     #tooltip {
       position: absolute;
       pointer-events: none;
       background: rgba(15, 23, 42, 0.95);
-      backdrop-filter: blur(8px);
+      backdrop-filter: blur(10px);
       color: #ffffff;
-      padding: 6px 12px;
-      border-radius: 6px;
-      font-size: 11px;
+      padding: 4px 9px;
+      border-radius: 5px;
+      font-size: 10.5px;
       font-weight: 600;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.18);
       opacity: 0;
-      transition: opacity 0.1s ease;
+      transform: translate(6px, -18px);
+      transition: opacity 0.08s ease, transform 0.08s ease;
       z-index: 40;
+      white-space: nowrap;
+      border: 1px solid rgba(255, 255, 255, 0.12);
     }
   </style>
 </head>
@@ -456,7 +491,6 @@ export function getDashboardHtml(): string {
 
   <!-- DUAL SIDEBAR -->
   <div id="sidebar-wrapper">
-    <!-- Primary Subsystem Directory -->
     <aside class="sidebar-primary">
       <div class="org-header">
         <div class="org-avatar">🏛️</div>
@@ -496,7 +530,6 @@ export function getDashboardHtml(): string {
       </div>
     </aside>
 
-    <!-- Secondary Subsystem Inspector -->
     <aside class="sidebar-secondary">
       <div class="dep-header">
         <div class="dep-badge" id="sub-icon">🏛️</div>
@@ -556,7 +589,6 @@ export function getDashboardHtml(): string {
       </div>
     </div>
 
-    <!-- CANVAS VIEW -->
     <div id="canvas-container">
       <canvas id="galaxy-canvas"></canvas>
 
@@ -570,7 +602,7 @@ export function getDashboardHtml(): string {
       <div id="tooltip"></div>
     </div>
 
-    <!-- INSPECTOR DRAWER -->
+    <!-- CODE INSPECTOR DRAWER WITH ACTIONABLE IDE & COPY BUTTONS -->
     <aside id="inspector-drawer">
       <div class="insp-head">
         <span class="insp-badge" id="insp-badge" style="background:#eab30822; color:#eab308;">CLASS</span>
@@ -578,7 +610,13 @@ export function getDashboardHtml(): string {
       </div>
 
       <h3 id="insp-title" style="font-size: 16px; font-weight: 800; margin-bottom: 4px;">StateMachine</h3>
-      <p id="insp-file" style="font-family:'JetBrains Mono',monospace; font-size: 11px; color:var(--text-muted); margin-bottom: 16px;">packages/kernel/src/StateMachine.ts</p>
+      <p id="insp-file" style="font-family:'JetBrains Mono',monospace; font-size: 11px; color:var(--text-muted); margin-bottom: 12px;">packages/kernel/src/StateMachine.ts</p>
+
+      <!-- Actionable Buttons: Open in VS Code & Copy Path -->
+      <div class="action-row">
+        <a id="insp-ide-link" href="#" class="action-btn">💻 Open in IDE</a>
+        <button class="action-btn secondary" onclick="copyFilePath()">📋 Copy Path</button>
+      </div>
 
       <div style="margin-bottom: 16px;">
         <h4 style="font-size: 11px; font-weight: 700; color: var(--text-faint); text-transform: uppercase; margin-bottom: 6px;">TypeScript Signature</h4>
@@ -641,11 +679,9 @@ export function getDashboardHtml(): string {
       }
     }
 
-    // 🌟 COMPLETE REDESIGN: CONTINUOUS DENSE CELESTIAL ASTROLABE (No isolated caterpillars!)
     function buildContinuousAstrolabeGalaxy(status, graph, failures, handoffs) {
       nodes = [];
 
-      // 1. Center Core Node (Pulsing Dark Sun with 🏛️)
       nodes.push({
         id: 'node-root-kernel',
         name: 'DEV-HARNESS Kernel',
@@ -657,7 +693,6 @@ export function getDashboardHtml(): string {
         shape: 'avatar'
       });
 
-      // 2. Ring 1: Continuous Golden/Amber Package Hubs (11 Nodes)
       SUBSYSTEMS.forEach((sub, sIdx) => {
         const angle = (sIdx / SUBSYSTEMS.length) * Math.PI * 2;
         nodes.push({
@@ -673,7 +708,6 @@ export function getDashboardHtml(): string {
         });
       });
 
-      // 3. Ring 2: CONTINUOUS DENSE PURPLE & INDIGO RIBBON (88 Nodes evenly surrounding perimeter)
       const totalRing2 = 88;
       for (let i = 0; i < totalRing2; i++) {
         const angle = (i / totalRing2) * Math.PI * 2;
@@ -694,7 +728,6 @@ export function getDashboardHtml(): string {
         });
       }
 
-      // 4. Ring 3: CONTINUOUS DENSE HIGH-CAPACITY AST CONSTELLATION (144 Pearls evenly flowing)
       const allSymbols = graph.symbols || [];
       const totalRing3 = 144;
       for (let j = 0; j < totalRing3; j++) {
@@ -718,7 +751,6 @@ export function getDashboardHtml(): string {
         });
       }
 
-      // 5. Ring 4: CONTINUOUS OUTER CELESTIAL ORBIT (Swarm Agents, Failures, Handoffs - 64 Nodes)
       const totalRing4 = 64;
       for (let k = 0; k < totalRing4; k++) {
         const angle = (k / totalRing4) * Math.PI * 2;
@@ -769,7 +801,6 @@ export function getDashboardHtml(): string {
       ctx.translate(centerX, centerY);
       ctx.scale(camera.zoom, camera.zoom);
 
-      // 1. Center Soft Warm Diffuse Light
       const centerAura = ctx.createRadialGradient(0, 0, 0, 0, 0, 110);
       centerAura.addColorStop(0, 'rgba(234, 179, 8, 0.16)');
       centerAura.addColorStop(0.5, 'rgba(234, 179, 8, 0.05)');
@@ -779,7 +810,6 @@ export function getDashboardHtml(): string {
       ctx.arc(0, 0, 110, 0, Math.PI * 2);
       ctx.fill();
 
-      // 2. Elegant Astrolabe Orbit Rings & Compass Ticks
       const ringsNorm = [0.20, 0.38, 0.56, 0.76];
       ringsNorm.forEach((rn, rIdx) => {
         const radius = baseDim * rn;
@@ -791,7 +821,6 @@ export function getDashboardHtml(): string {
         ctx.stroke();
         ctx.setLineDash([]);
 
-        // Subtle Compass Degree Ticks along outer orbit
         if (rIdx === ringsNorm.length - 1) {
           for (let deg = 0; deg < 360; deg += 30) {
             const rad = (deg * Math.PI) / 180;
@@ -810,7 +839,6 @@ export function getDashboardHtml(): string {
         }
       });
 
-      // 3. Curved Bezier Connections radiating across the dense rings
       if (activeSubsystem) {
         const subNode = nodes.find(n => n.kind === 'subsystem' && n.subsystem === activeSubsystem);
         if (subNode) {
@@ -819,7 +847,6 @@ export function getDashboardHtml(): string {
           const dx = Math.cos(curAngle) * subR;
           const dy = Math.sin(curAngle) * subR;
 
-          // Glowing Aura around selected Package Hub
           const glow = ctx.createRadialGradient(dx, dy, 0, dx, dy, 75);
           glow.addColorStop(0, subNode.color + '26');
           glow.addColorStop(1, subNode.color + '00');
@@ -828,7 +855,6 @@ export function getDashboardHtml(): string {
           ctx.arc(dx, dy, 75, 0, Math.PI * 2);
           ctx.fill();
 
-          // Smooth curved connection: Center -> Selected Hub
           ctx.beginPath();
           ctx.moveTo(0, 0);
           ctx.quadraticCurveTo(dx * 0.5 + Math.sin(curAngle) * 14, dy * 0.5 - Math.cos(curAngle) * 14, dx, dy);
@@ -836,7 +862,6 @@ export function getDashboardHtml(): string {
           ctx.lineWidth = 2.4;
           ctx.stroke();
 
-          // Radiating Bezier Ribbons across the active sector
           nodes.forEach(node => {
             if (node.subsystem === activeSubsystem && node.orbitR > 0.20) {
               const nAngle = node.angle + rotationAngle;
@@ -858,7 +883,6 @@ export function getDashboardHtml(): string {
         }
       }
 
-      // 4. Render All Nodes in Uniform High-Density Harmony
       nodes.forEach(node => {
         const curAngle = (node.orbitR === 0) ? 0 : (node.angle + rotationAngle);
         const breath = (node.jitterPhase) ? Math.sin(waveTime + node.jitterPhase) * 1.2 : 0;
@@ -869,11 +893,9 @@ export function getDashboardHtml(): string {
         node.currentY = ny;
 
         const isRelated = (!activeSubsystem || node.subsystem === activeSubsystem || node.kind === 'core');
-        // Unselected nodes remain delicate soft pastel beads at 55% opacity (No ugly blank holes!)
         const alpha = isRelated ? 'ff' : '66';
 
         if (node.shape === 'avatar') {
-          // Center Core Sun Node
           ctx.beginPath();
           ctx.arc(0, 0, node.radius, 0, Math.PI * 2);
           ctx.fillStyle = '#0f172a';
@@ -889,11 +911,9 @@ export function getDashboardHtml(): string {
           ctx.fillText('🏛️', 0, 0);
           ctx.textBaseline = 'alphabetic';
         } else if (node.shape === 'square') {
-          // Square Bead
           ctx.fillStyle = node.color + alpha;
           ctx.fillRect(nx - node.radius, ny - node.radius, node.radius * 2, node.radius * 2);
         } else if (node.shape === 'diamond') {
-          // Diamond Jewel
           ctx.beginPath();
           ctx.moveTo(nx, ny - node.radius);
           ctx.lineTo(nx + node.radius, ny);
@@ -903,14 +923,12 @@ export function getDashboardHtml(): string {
           ctx.fillStyle = node.color + alpha;
           ctx.fill();
         } else {
-          // Soft Circular Pearl
           ctx.beginPath();
           ctx.arc(nx, ny, node.radius, 0, Math.PI * 2);
           ctx.fillStyle = node.color + alpha;
           ctx.fill();
         }
 
-        // Selected Package Hub Halo
         if (node.subsystem === activeSubsystem && node.kind === 'subsystem') {
           ctx.beginPath();
           ctx.arc(nx, ny, node.radius + 5, 0, Math.PI * 2);
@@ -919,7 +937,6 @@ export function getDashboardHtml(): string {
           ctx.stroke();
         }
 
-        // Hover Effect
         if (hoveredNode && hoveredNode.id === node.id) {
           ctx.beginPath();
           ctx.arc(nx, ny, node.radius + 4, 0, Math.PI * 2);
@@ -967,9 +984,10 @@ export function getDashboardHtml(): string {
         hoveredNode = hit;
         if (hit) {
           tooltip.style.opacity = '1';
-          tooltip.style.left = (e.clientX + 14) + 'px';
-          tooltip.style.top = (e.clientY + 14) + 'px';
-          tooltip.innerHTML = '<strong>' + hit.name + '</strong><br><span style="font-size:10px;opacity:0.8;">' + (hit.subsystem || hit.kind).toUpperCase() + '</span>';
+          // 🎯 Snug, close placement right next to cursor
+          tooltip.style.left = (e.clientX + 6) + 'px';
+          tooltip.style.top = (e.clientY - 24) + 'px';
+          tooltip.innerHTML = '<strong>' + hit.name + '</strong> • <span style="font-size:9.5px;opacity:0.85;">' + (hit.subsystem || hit.kind).toUpperCase() + '</span>';
         } else {
           tooltip.style.opacity = '0';
         }
@@ -1017,12 +1035,23 @@ export function getDashboardHtml(): string {
 
       document.getElementById('insp-title').innerText = symName;
       const pkg = activeSubsystem || 'kernel';
-      document.getElementById('insp-file').innerText = \`packages/\${pkg}/src/\${symName}.ts\`;
+      const filePath = \`packages/\${pkg}/src/\${symName}.ts\`;
+      document.getElementById('insp-file').innerText = filePath;
+
+      // Real vscode:// deep link
+      document.getElementById('insp-ide-link').href = \`vscode://file/e:/conducting-ai/\${filePath}\`;
 
       document.getElementById('insp-signature').innerText = \`export class \${symName} {
   public execute(task: TaskContext): Promise<VerificationResult>;
   public readonly signatureHash: string = "sha256:4f8a...";
 }\`;
+    }
+
+    function copyFilePath() {
+      const filePath = document.getElementById('insp-file').innerText;
+      navigator.clipboard.writeText(filePath).then(() => {
+        alert('Đã sao chép đường dẫn file: ' + filePath);
+      });
     }
 
     function closeInspector() {

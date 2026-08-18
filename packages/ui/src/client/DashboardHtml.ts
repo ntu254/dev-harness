@@ -4,7 +4,7 @@ export function getDashboardHtml(): string {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DEV-HARNESS v2.0 - High-Contrast Obsidian Knowledge Graph</title>
+  <title>DEV-HARNESS v2.0 - Obsidian Knowledge Graph & Swarm Control</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -16,7 +16,6 @@ export function getDashboardHtml(): string {
       --border-soft: #1e293b;
       --border-subtle: #334155;
       
-      /* High-contrast crisp white typography for Dark mode */
       --text-main: #ffffff;
       --text-muted: #cbd5e1;
       --text-faint: #94a3b8;
@@ -158,8 +157,6 @@ export function getDashboardHtml(): string {
       width: 100%;
       color: var(--text-main);
     }
-
-    .search-box input::placeholder { color: var(--text-faint); }
 
     .sidebar-scroll {
       flex: 1;
@@ -322,7 +319,7 @@ export function getDashboardHtml(): string {
       font-weight: 700;
     }
 
-    /* OBSIDIAN GRAPH CONTROLS PILL */
+    /* OBSIDIAN CONTROLS */
     .obsidian-controls {
       position: absolute;
       top: 56px;
@@ -582,7 +579,7 @@ export function getDashboardHtml(): string {
       <div class="breadcrumbs">
         <span>DEV-HARNESS</span>
         <span>/</span>
-        <strong>High-Contrast Obsidian Graph</strong>
+        <strong>Obsidian-Style Force Graph</strong>
         <span class="tag-badge">55 Tests Passed</span>
       </div>
 
@@ -846,7 +843,6 @@ export function getDashboardHtml(): string {
       requestAnimationFrame(animate);
     }
 
-    // 🎨 HIGH-CONTRAST RENDERER
     function render() {
       const container = document.getElementById('canvas-container');
       const width = container.clientWidth;
@@ -925,7 +921,7 @@ export function getDashboardHtml(): string {
           ctx.stroke();
         }
 
-        // 🌟 3. HIGH-CONTRAST LABELS WITH TRANSLUCENT BACKDROP PILL
+        // 3. HIGH-CONTRAST LABELS WITH TRANSLUCENT BACKDROP PILL
         if (showLabels && (node.isHub || isHovered)) {
           const labelText = node.name;
           ctx.font = node.isHub ? '800 11px "Plus Jakarta Sans", sans-serif' : '700 10px "Plus Jakarta Sans", sans-serif';
@@ -936,11 +932,9 @@ export function getDashboardHtml(): string {
           const labelX = node.x + node.radius + 6;
           const labelY = node.y;
 
-          // Draw dark pill background behind text for 100% readability
           ctx.fillStyle = 'rgba(15, 23, 42, 0.85)';
           ctx.fillRect(labelX - padX, labelY - 8 - padY, textMetrics.width + padX * 2, 16 + padY);
 
-          // Draw crisp white bold text
           ctx.fillStyle = '#ffffff';
           ctx.textAlign = 'left';
           ctx.textBaseline = 'middle';

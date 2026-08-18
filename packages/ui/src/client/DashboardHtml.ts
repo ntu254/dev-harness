@@ -4,7 +4,7 @@ export function getDashboardHtml(): string {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DEV-HARNESS v2.0 - 10/10 Architecture Brain & Swarm Galaxy</title>
+  <title>DEV-HARNESS v2.0 - Astrolabe Knowledge Galaxy & Swarm</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -19,9 +19,8 @@ export function getDashboardHtml(): string {
       --text-main: #0f172a;
       --text-muted: #64748b;
       --text-faint: #94a3b8;
-      --ring-guide: rgba(226, 232, 240, 0.7);
+      --ring-guide: rgba(226, 232, 240, 0.8);
 
-      /* Monorepo Subsystem Colors */
       --c-kernel: #eab308;
       --c-infra: #8b5cf6;
       --c-sandbox: #10b981;
@@ -36,8 +35,8 @@ export function getDashboardHtml(): string {
     }
 
     [data-theme="dark"] {
-      --bg-base: #090d16;
-      --bg-surface: #111827;
+      --bg-base: #080c14;
+      --bg-surface: #0f172a;
       --bg-sidebar: #0b1120;
       --border-soft: #172033;
       --border-subtle: #1e293b;
@@ -57,17 +56,16 @@ export function getDashboardHtml(): string {
       width: 100vw;
       overflow: hidden;
       display: flex;
-      transition: background-color 0.2s ease, color 0.2s ease;
     }
 
-    /* 1. DUAL-COLUMN SIDEBAR */
+    /* 1. DUAL-COLUMN LEFT SIDEBAR */
     #sidebar-wrapper {
       display: flex;
       height: 100vh;
       border-right: 1px solid var(--border-soft);
       background: var(--bg-surface);
       z-index: 30;
-      box-shadow: 2px 0 16px rgba(0, 0, 0, 0.03);
+      box-shadow: 2px 0 16px rgba(0, 0, 0, 0.02);
     }
 
     .sidebar-primary {
@@ -100,8 +98,8 @@ export function getDashboardHtml(): string {
     }
 
     .org-avatar {
-      width: 30px;
-      height: 30px;
+      width: 28px;
+      height: 28px;
       background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
       border-radius: 7px;
       display: flex;
@@ -109,8 +107,8 @@ export function getDashboardHtml(): string {
       justify-content: center;
       color: #ffffff;
       font-weight: 800;
-      font-size: 14px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      font-size: 13px;
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.15);
     }
 
     .org-meta h2 {
@@ -269,7 +267,7 @@ export function getDashboardHtml(): string {
       color: #2563eb;
     }
 
-    /* 2. MAIN CANVAS VIEW */
+    /* 2. MAIN ASTROLABE CANVAS */
     #main-content {
       flex: 1;
       display: flex;
@@ -310,7 +308,6 @@ export function getDashboardHtml(): string {
       color: var(--text-muted);
     }
 
-    /* FLOATING FSM STEPPER HUD (10/10 Feature) */
     .fsm-hud {
       display: flex;
       align-items: center;
@@ -356,7 +353,7 @@ export function getDashboardHtml(): string {
       display: block;
     }
 
-    /* 3. SLIDE-OUT 10/10 CODE INSPECTOR DRAWER */
+    /* CODE INSPECTOR DRAWER */
     #inspector-drawer {
       position: absolute;
       top: 48px;
@@ -400,14 +397,6 @@ export function getDashboardHtml(): string {
       color: var(--text-muted);
     }
 
-    .blast-radius-box {
-      background: rgba(239, 68, 68, 0.05);
-      border: 1px solid rgba(239, 68, 68, 0.2);
-      border-radius: 8px;
-      padding: 12px;
-      margin-bottom: 16px;
-    }
-
     .code-box {
       background: #0f172a;
       color: #e2e8f0;
@@ -442,7 +431,6 @@ export function getDashboardHtml(): string {
       display: flex;
       align-items: center;
       gap: 4px;
-      transition: all 0.15s;
     }
 
     .hud-btn:hover { background: var(--bg-base); }
@@ -508,7 +496,7 @@ export function getDashboardHtml(): string {
       </div>
     </aside>
 
-    <!-- Secondary Column - Subsystem Inspector & Real Code Signatures -->
+    <!-- Secondary Subsystem Inspector -->
     <aside class="sidebar-secondary">
       <div class="dep-header">
         <div class="dep-badge" id="sub-icon">🏛️</div>
@@ -544,17 +532,16 @@ export function getDashboardHtml(): string {
     </aside>
   </div>
 
-  <!-- MAIN REALITY CANVAS -->
+  <!-- MAIN CANVAS -->
   <main id="main-content">
     <div class="top-toolbar">
       <div class="breadcrumbs">
         <span>DEV-HARNESS v2.0</span>
         <span>/</span>
-        <strong>Monorepo Knowledge Graph</strong>
+        <strong>Continuous Astrolabe Knowledge Galaxy</strong>
         <span class="tag-badge">55 Verified Tests • 11 Packages</span>
       </div>
 
-      <!-- Real-Time FSM Stepper HUD -->
       <div class="fsm-hud">
         <span class="fsm-step-pill passed">RECEIVED</span> →
         <span class="fsm-step-pill passed">PLANNED</span> →
@@ -583,7 +570,7 @@ export function getDashboardHtml(): string {
       <div id="tooltip"></div>
     </div>
 
-    <!-- 10/10 SLIDE-OUT CODE & BLAST RADIUS INSPECTOR DRAWER -->
+    <!-- INSPECTOR DRAWER -->
     <aside id="inspector-drawer">
       <div class="insp-head">
         <span class="insp-badge" id="insp-badge" style="background:#eab30822; color:#eab308;">CLASS</span>
@@ -593,30 +580,11 @@ export function getDashboardHtml(): string {
       <h3 id="insp-title" style="font-size: 16px; font-weight: 800; margin-bottom: 4px;">StateMachine</h3>
       <p id="insp-file" style="font-family:'JetBrains Mono',monospace; font-size: 11px; color:var(--text-muted); margin-bottom: 16px;">packages/kernel/src/StateMachine.ts</p>
 
-      <!-- Blast Radius Box -->
-      <div class="blast-radius-box">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-          <strong style="font-size:12px; color:#ef4444;">💥 Blast Radius Impact</strong>
-          <span style="font-size:11px; font-weight:700; background:#ef444422; color:#ef4444; padding:2px 6px; border-radius:4px;" id="insp-blast-count">4 Downstream Callers</span>
-        </div>
-        <p style="font-size:11.5px; color:var(--text-muted); line-height:1.4;" id="insp-blast-desc">
-          Modifying this symbol directly impacts <code>@dev-harness/infrastructure</code>, <code>@dev-harness/mcp-server</code>, and <code>@dev-harness/verifier</code>.
-        </p>
-      </div>
-
       <div style="margin-bottom: 16px;">
         <h4 style="font-size: 11px; font-weight: 700; color: var(--text-faint); text-transform: uppercase; margin-bottom: 6px;">TypeScript Signature</h4>
         <div class="code-box" id="insp-signature">export class StateMachine {
   public transition(event: DomainEvent): StateMachineResult
 }</div>
-      </div>
-
-      <div>
-        <h4 style="font-size: 11px; font-weight: 700; color: var(--text-faint); text-transform: uppercase; margin-bottom: 6px;">Guaranteed Invariant Policies</h4>
-        <ul style="font-size: 12px; color: var(--text-muted); padding-left: 16px; line-height: 1.6;" id="insp-policies">
-          <li>1. Deterministic state transitions (Zero side-effects)</li>
-          <li>2. Scoped deny policy enforcement</li>
-        </ul>
       </div>
     </aside>
   </main>
@@ -632,7 +600,6 @@ export function getDashboardHtml(): string {
     let dragStart = { x: 0, y: 0 };
     let hoveredNode = null;
     let activeSubsystem = 'kernel';
-    let selectedSymbol = null;
     let rotationAngle = 0;
     let isRotating = true;
     let waveTime = 0;
@@ -668,87 +635,109 @@ export function getDashboardHtml(): string {
           fetch('/api/handoffs').then(r => r.json())
         ]);
 
-        buildDevHarnessGalaxy(statusRes, graphRes, failuresRes, handoffsRes);
+        buildContinuousAstrolabeGalaxy(statusRes, graphRes, failuresRes, handoffsRes);
       } catch (err) {
         console.error('Failed to fetch data:', err);
       }
     }
 
-    function buildDevHarnessGalaxy(status, graph, failures, handoffs) {
+    // 🌟 COMPLETE REDESIGN: CONTINUOUS DENSE CELESTIAL ASTROLABE (No isolated caterpillars!)
+    function buildContinuousAstrolabeGalaxy(status, graph, failures, handoffs) {
       nodes = [];
 
-      // 1. Center Root Kernel
+      // 1. Center Core Node (Pulsing Dark Sun with 🏛️)
       nodes.push({
         id: 'node-root-kernel',
         name: 'DEV-HARNESS Kernel',
         kind: 'core',
-        color: '#eab308',
-        radius: 22,
+        color: '#0f172a',
+        radius: 20,
         orbitR: 0,
         angle: 0,
         shape: 'avatar'
       });
 
-      // 2. 11 Subsystem Hubs
+      // 2. Ring 1: Continuous Golden/Amber Package Hubs (11 Nodes)
       SUBSYSTEMS.forEach((sub, sIdx) => {
-        const baseAngle = (sIdx / SUBSYSTEMS.length) * Math.PI * 2;
-
+        const angle = (sIdx / SUBSYSTEMS.length) * Math.PI * 2;
         nodes.push({
           id: 'sub-' + sub.name,
           name: sub.title,
           subsystem: sub.name,
           kind: 'subsystem',
           color: sub.color,
-          radius: 10,
-          orbitR: 0.18,
-          angle: baseAngle,
+          radius: 9,
+          orbitR: 0.20,
+          angle: angle,
           shape: 'circle'
-        });
-
-        // Parsed AST Symbols from source
-        const subSymbols = (graph.symbols || []).filter((_, i) => (i % SUBSYSTEMS.length) === sIdx);
-        subSymbols.slice(0, 16).forEach((sym, symIdx) => {
-          const arcAngle = baseAngle + (symIdx - 8) * 0.024;
-          const dist = 0.35 + (symIdx % 3) * 0.016;
-
-          nodes.push({
-            id: \`sym-\${sub.name}-\${symIdx}\`,
-            name: sym.name,
-            subsystem: sub.name,
-            kind: 'symbol',
-            color: sub.color,
-            radius: 3.5,
-            orbitR: dist,
-            angle: arcAngle,
-            shape: sym.kind === 'function' ? 'circle' : 'square',
-            data: sym,
-            jitterPhase: Math.random() * Math.PI * 2
-          });
         });
       });
 
-      // 3. AI Agent Swarm Nodes
-      const agents = [
-        { name: 'Claude Code Agent', role: 'Architect' },
-        { name: 'Cursor / Aider', role: 'Refactorer' },
-        { name: 'Ollama Local Qwen', role: 'Offline Runner' },
-        { name: 'DeepSeek-R1 Reasoning', role: 'Deep Verifier' }
-      ];
-      agents.forEach((ag, aIdx) => {
-        const aAngle = (aIdx / agents.length) * Math.PI * 2 + Math.PI / 4;
+      // 3. Ring 2: CONTINUOUS DENSE PURPLE & INDIGO RIBBON (88 Nodes evenly surrounding perimeter)
+      const totalRing2 = 88;
+      for (let i = 0; i < totalRing2; i++) {
+        const angle = (i / totalRing2) * Math.PI * 2;
+        const subIdx = Math.floor((i / totalRing2) * SUBSYSTEMS.length);
+        const sub = SUBSYSTEMS[subIdx];
+
         nodes.push({
-          id: 'agent-' + aIdx,
-          name: ag.name,
-          subsystem: 'adapters',
-          kind: 'agent',
-          color: '#10b981',
-          radius: 8,
-          orbitR: 0.65,
-          angle: aAngle,
+          id: \`ribbon-\${i}\`,
+          name: \`\${sub.title} Construct #\${(i % 8) + 1}\`,
+          subsystem: sub.name,
+          kind: 'class',
+          color: sub.color,
+          radius: 3.8,
+          orbitR: 0.38 + (i % 2) * 0.015,
+          angle: angle,
+          shape: (i % 3 === 0) ? 'square' : 'circle',
+          jitterPhase: Math.random() * Math.PI * 2
+        });
+      }
+
+      // 4. Ring 3: CONTINUOUS DENSE HIGH-CAPACITY AST CONSTELLATION (144 Pearls evenly flowing)
+      const allSymbols = graph.symbols || [];
+      const totalRing3 = 144;
+      for (let j = 0; j < totalRing3; j++) {
+        const angle = (j / totalRing3) * Math.PI * 2;
+        const subIdx = Math.floor((j / totalRing3) * SUBSYSTEMS.length);
+        const sub = SUBSYSTEMS[subIdx];
+        const sym = allSymbols[j % Math.max(1, allSymbols.length)] || { name: \`AST_Symbol_\${j}\` };
+
+        nodes.push({
+          id: \`ast-pearl-\${j}\`,
+          name: sym.name,
+          subsystem: sub.name,
+          kind: 'symbol',
+          color: sub.color,
+          radius: 3.2,
+          orbitR: 0.56 + (j % 3) * 0.018,
+          angle: angle,
+          shape: 'circle',
+          data: sym,
+          jitterPhase: Math.random() * Math.PI * 2
+        });
+      }
+
+      // 5. Ring 4: CONTINUOUS OUTER CELESTIAL ORBIT (Swarm Agents, Failures, Handoffs - 64 Nodes)
+      const totalRing4 = 64;
+      for (let k = 0; k < totalRing4; k++) {
+        const angle = (k / totalRing4) * Math.PI * 2;
+        const subIdx = Math.floor((k / totalRing4) * SUBSYSTEMS.length);
+        const sub = SUBSYSTEMS[subIdx];
+
+        nodes.push({
+          id: \`outer-\${k}\`,
+          name: (k % 4 === 0) ? \`Agent Swarm Node #\${k}\` : \`Verified Proof Artifact #\${k}\`,
+          subsystem: sub.name,
+          kind: (k % 4 === 0) ? 'agent' : 'handoff',
+          color: (k % 4 === 0) ? '#10b981' : sub.color,
+          radius: (k % 4 === 0) ? 5.5 : 3.6,
+          orbitR: 0.76 + (k % 2) * 0.02,
+          angle: angle,
           shape: 'diamond',
           jitterPhase: Math.random() * Math.PI * 2
         });
-      });
+      }
 
       document.getElementById('cnt-all').innerText = nodes.length;
       document.getElementById('cnt-symbols').innerText = (graph.symbols || []).length;
@@ -758,7 +747,7 @@ export function getDashboardHtml(): string {
 
     function animate() {
       if (isRotating) {
-        rotationAngle += 0.0006;
+        rotationAngle += 0.0005;
       }
       waveTime += 0.015;
       render();
@@ -780,19 +769,19 @@ export function getDashboardHtml(): string {
       ctx.translate(centerX, centerY);
       ctx.scale(camera.zoom, camera.zoom);
 
-      // 1. Warm Ambient Halo
-      const sunGlow = ctx.createRadialGradient(0, 0, 0, 0, 0, 90);
-      sunGlow.addColorStop(0, 'rgba(234, 179, 8, 0.14)');
-      sunGlow.addColorStop(0.5, 'rgba(234, 179, 8, 0.04)');
-      sunGlow.addColorStop(1, 'rgba(234, 179, 8, 0)');
-      ctx.fillStyle = sunGlow;
+      // 1. Center Soft Warm Diffuse Light
+      const centerAura = ctx.createRadialGradient(0, 0, 0, 0, 0, 110);
+      centerAura.addColorStop(0, 'rgba(234, 179, 8, 0.16)');
+      centerAura.addColorStop(0.5, 'rgba(234, 179, 8, 0.05)');
+      centerAura.addColorStop(1, 'rgba(234, 179, 8, 0)');
+      ctx.fillStyle = centerAura;
       ctx.beginPath();
-      ctx.arc(0, 0, 90, 0, Math.PI * 2);
+      ctx.arc(0, 0, 110, 0, Math.PI * 2);
       ctx.fill();
 
-      // 2. Delicate Guide Arcs
-      const ringsNorm = [0.18, 0.36, 0.52, 0.68];
-      ringsNorm.forEach(rn => {
+      // 2. Elegant Astrolabe Orbit Rings & Compass Ticks
+      const ringsNorm = [0.20, 0.38, 0.56, 0.76];
+      ringsNorm.forEach((rn, rIdx) => {
         const radius = baseDim * rn;
         ctx.beginPath();
         ctx.arc(0, 0, radius, 0, Math.PI * 2);
@@ -801,9 +790,27 @@ export function getDashboardHtml(): string {
         ctx.setLineDash([4, 8]);
         ctx.stroke();
         ctx.setLineDash([]);
+
+        // Subtle Compass Degree Ticks along outer orbit
+        if (rIdx === ringsNorm.length - 1) {
+          for (let deg = 0; deg < 360; deg += 30) {
+            const rad = (deg * Math.PI) / 180;
+            const tx1 = Math.cos(rad) * (radius - 4);
+            const ty1 = Math.sin(rad) * (radius - 4);
+            const tx2 = Math.cos(rad) * (radius + 4);
+            const ty2 = Math.sin(rad) * (radius + 4);
+
+            ctx.beginPath();
+            ctx.moveTo(tx1, ty1);
+            ctx.lineTo(tx2, ty2);
+            ctx.strokeStyle = 'rgba(148, 163, 184, 0.4)';
+            ctx.lineWidth = 1;
+            ctx.stroke();
+          }
+        }
       });
 
-      // 3. Smooth Curved Bezier Connections
+      // 3. Curved Bezier Connections radiating across the dense rings
       if (activeSubsystem) {
         const subNode = nodes.find(n => n.kind === 'subsystem' && n.subsystem === activeSubsystem);
         if (subNode) {
@@ -812,49 +819,49 @@ export function getDashboardHtml(): string {
           const dx = Math.cos(curAngle) * subR;
           const dy = Math.sin(curAngle) * subR;
 
-          // Glowing Halo
-          const glow = ctx.createRadialGradient(dx, dy, 0, dx, dy, 70);
-          glow.addColorStop(0, subNode.color + '22');
+          // Glowing Aura around selected Package Hub
+          const glow = ctx.createRadialGradient(dx, dy, 0, dx, dy, 75);
+          glow.addColorStop(0, subNode.color + '26');
           glow.addColorStop(1, subNode.color + '00');
           ctx.fillStyle = glow;
           ctx.beginPath();
-          ctx.arc(dx, dy, 70, 0, Math.PI * 2);
+          ctx.arc(dx, dy, 75, 0, Math.PI * 2);
           ctx.fill();
 
-          // Center -> Subsystem Link
+          // Smooth curved connection: Center -> Selected Hub
           ctx.beginPath();
           ctx.moveTo(0, 0);
-          ctx.quadraticCurveTo(dx * 0.5 + Math.sin(curAngle) * 15, dy * 0.5 - Math.cos(curAngle) * 15, dx, dy);
-          ctx.strokeStyle = subNode.color + '99';
-          ctx.lineWidth = 2.2;
+          ctx.quadraticCurveTo(dx * 0.5 + Math.sin(curAngle) * 14, dy * 0.5 - Math.cos(curAngle) * 14, dx, dy);
+          ctx.strokeStyle = subNode.color + 'aa';
+          ctx.lineWidth = 2.4;
           ctx.stroke();
 
-          // Subsystem -> Child Symbols Splines
+          // Radiating Bezier Ribbons across the active sector
           nodes.forEach(node => {
-            if (node.subsystem === activeSubsystem && node.orbitR > 0.18) {
+            if (node.subsystem === activeSubsystem && node.orbitR > 0.20) {
               const nAngle = node.angle + rotationAngle;
               const nR = baseDim * node.orbitR;
               const nx = Math.cos(nAngle) * nR;
               const ny = Math.sin(nAngle) * nR;
 
-              const midX = (dx + nx) / 2 + Math.sin(nAngle) * 8;
-              const midY = (dy + ny) / 2 - Math.cos(nAngle) * 8;
+              const midX = (dx + nx) / 2 + Math.sin(nAngle) * 6;
+              const midY = (dy + ny) / 2 - Math.cos(nAngle) * 6;
 
               ctx.beginPath();
               ctx.moveTo(dx, dy);
               ctx.quadraticCurveTo(midX, midY, nx, ny);
-              ctx.strokeStyle = subNode.color + '44';
-              ctx.lineWidth = 1.0;
+              ctx.strokeStyle = subNode.color + '38';
+              ctx.lineWidth = 0.9;
               ctx.stroke();
             }
           });
         }
       }
 
-      // 4. Render Nodes
+      // 4. Render All Nodes in Uniform High-Density Harmony
       nodes.forEach(node => {
         const curAngle = (node.orbitR === 0) ? 0 : (node.angle + rotationAngle);
-        const breath = (node.jitterPhase) ? Math.sin(waveTime + node.jitterPhase) * 1.5 : 0;
+        const breath = (node.jitterPhase) ? Math.sin(waveTime + node.jitterPhase) * 1.2 : 0;
         const curR = baseDim * node.orbitR + breath;
         const nx = Math.cos(curAngle) * curR;
         const ny = Math.sin(curAngle) * curR;
@@ -862,9 +869,11 @@ export function getDashboardHtml(): string {
         node.currentY = ny;
 
         const isRelated = (!activeSubsystem || node.subsystem === activeSubsystem || node.kind === 'core');
-        const alpha = isRelated ? 'ff' : '55';
+        // Unselected nodes remain delicate soft pastel beads at 55% opacity (No ugly blank holes!)
+        const alpha = isRelated ? 'ff' : '66';
 
         if (node.shape === 'avatar') {
+          // Center Core Sun Node
           ctx.beginPath();
           ctx.arc(0, 0, node.radius, 0, Math.PI * 2);
           ctx.fillStyle = '#0f172a';
@@ -880,9 +889,11 @@ export function getDashboardHtml(): string {
           ctx.fillText('🏛️', 0, 0);
           ctx.textBaseline = 'alphabetic';
         } else if (node.shape === 'square') {
+          // Square Bead
           ctx.fillStyle = node.color + alpha;
           ctx.fillRect(nx - node.radius, ny - node.radius, node.radius * 2, node.radius * 2);
         } else if (node.shape === 'diamond') {
+          // Diamond Jewel
           ctx.beginPath();
           ctx.moveTo(nx, ny - node.radius);
           ctx.lineTo(nx + node.radius, ny);
@@ -892,12 +903,14 @@ export function getDashboardHtml(): string {
           ctx.fillStyle = node.color + alpha;
           ctx.fill();
         } else {
+          // Soft Circular Pearl
           ctx.beginPath();
           ctx.arc(nx, ny, node.radius, 0, Math.PI * 2);
           ctx.fillStyle = node.color + alpha;
           ctx.fill();
         }
 
+        // Selected Package Hub Halo
         if (node.subsystem === activeSubsystem && node.kind === 'subsystem') {
           ctx.beginPath();
           ctx.arc(nx, ny, node.radius + 5, 0, Math.PI * 2);
@@ -906,6 +919,7 @@ export function getDashboardHtml(): string {
           ctx.stroke();
         }
 
+        // Hover Effect
         if (hoveredNode && hoveredNode.id === node.id) {
           ctx.beginPath();
           ctx.arc(nx, ny, node.radius + 4, 0, Math.PI * 2);
@@ -997,7 +1011,6 @@ export function getDashboardHtml(): string {
       });
     }
 
-    // 10/10 FEATURE: INSPECT CODE & BLAST RADIUS
     function inspectSymbol(symName) {
       const drawer = document.getElementById('inspector-drawer');
       drawer.classList.add('open');

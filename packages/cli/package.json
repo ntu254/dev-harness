@@ -21,6 +21,8 @@
     "@dev-harness/verifier": "*",
     "@dev-harness/adapters": "*",
     "@dev-harness/graph": "*",
-    "@dev-harness/mcp-server": "*"
+    "@dev-harness/mcp-server": "*",
+    "@dev-harness/router": "*",
+    "@dev-harness/ui": "*"
   }
 }

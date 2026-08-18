@@ -17,6 +17,7 @@ export default defineConfig({
       '@dev-harness/graph': path.resolve(__dirname, './packages/graph/src/index.ts'),
       '@dev-harness/mcp-server': path.resolve(__dirname, './packages/mcp-server/src/index.ts'),
       '@dev-harness/router': path.resolve(__dirname, './packages/router/src/index.ts'),
+      '@dev-harness/ui': path.resolve(__dirname, './packages/ui/src/index.ts'),
     },
     coverage: {
       provider: 'v8',

@@ -1,13 +1,13 @@
 {
   "name": "dev-harness-root",
-  "version": "1.0.0-spec",
+  "version": "2.0.0-spec",
   "private": true,
   "description": "Portable Runtime & Workspace Specification for AI Software Agents",
   "workspaces": [
     "packages/*"
   ],
   "scripts": {
-    "build": "npm run build --workspaces",
+    "build": "npm run build --workspace=@dev-harness/spec && npm run build --workspace=@dev-harness/kernel && npm run build --workspace=@dev-harness/infrastructure && npm run build --workspace=@dev-harness/sandbox && npm run build --workspace=@dev-harness/security && npm run build --workspace=@dev-harness/verifier && npm run build --workspace=@dev-harness/adapters && npm run build --workspace=@dev-harness/graph && npm run build --workspace=@dev-harness/mcp-server && npm run build --workspace=@dev-harness/router && npm run build --workspace=@dev-harness/ui && npm run build --workspace=dev-harness",
     "test": "vitest run",
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit -p tsconfig.base.json"

@@ -15,7 +15,9 @@
       "@dev-harness/verifier": ["../verifier/dist/index.d.ts"],
       "@dev-harness/adapters": ["../adapters/dist/index.d.ts"],
       "@dev-harness/graph": ["../graph/dist/index.d.ts"],
-      "@dev-harness/mcp-server": ["../mcp-server/dist/index.d.ts"]
+      "@dev-harness/mcp-server": ["../mcp-server/dist/index.d.ts"],
+      "@dev-harness/router": ["../router/dist/index.d.ts"],
+      "@dev-harness/ui": ["../ui/dist/index.d.ts"]
     }
   },
   "references": [
@@ -27,7 +29,9 @@
     { "path": "../verifier" },
     { "path": "../adapters" },
     { "path": "../graph" },
-    { "path": "../mcp-server" }
+    { "path": "../mcp-server" },
+    { "path": "../router" },
+    { "path": "../ui" }
   ],
   "include": ["src/**/*"]
 }

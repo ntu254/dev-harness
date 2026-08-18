@@ -1,0 +1,24 @@
+{
+  "name": "dev-harness",
+  "version": "1.0.0-spec",
+  "description": "CLI tool for DEV-HARNESS",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "dev-harness": "./bin/dev-harness.js"
+  },
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@dev-harness/spec": "*",
+    "@dev-harness/kernel": "*",
+    "@dev-harness/infrastructure": "*",
+    "@dev-harness/sandbox": "*",
+    "@dev-harness/security": "*",
+    "@dev-harness/verifier": "*",
+    "@dev-harness/adapters": "*"
+  }
+}

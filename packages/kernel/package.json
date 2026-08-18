@@ -1,0 +1,22 @@
+{
+  "name": "@dev-harness/kernel",
+  "version": "1.0.0-spec",
+  "description": "Pure Domain Core for DEV-HARNESS",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@dev-harness/spec": "*"
+  }
+}

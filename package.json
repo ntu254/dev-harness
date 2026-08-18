@@ -1,0 +1,20 @@
+{
+  "name": "dev-harness-root",
+  "version": "1.0.0-spec",
+  "private": true,
+  "description": "Portable Runtime & Workspace Specification for AI Software Agents",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit -p tsconfig.base.json"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.7.0",
+    "vitest": "^3.0.0"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "id": "default-tdd-policy",
+  "description": "Enforce TDD for features and regression tests for bugfixes",
+  "scope": {
+    "paths": [
+      "src/**"
+    ]
+  },
+  "enforcedStrategy": "tdd_red_green"
+}

@@ -1,0 +1,29 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "composite": true,
+    "declaration": true,
+    "declarationMap": true,
+    "paths": {
+      "@dev-harness/spec": ["../spec/dist/index.d.ts"],
+      "@dev-harness/kernel": ["../kernel/dist/index.d.ts"],
+      "@dev-harness/infrastructure": ["../infrastructure/dist/index.d.ts"],
+      "@dev-harness/sandbox": ["../sandbox/dist/index.d.ts"],
+      "@dev-harness/security": ["../security/dist/index.d.ts"],
+      "@dev-harness/verifier": ["../verifier/dist/index.d.ts"],
+      "@dev-harness/adapters": ["../adapters/dist/index.d.ts"]
+    }
+  },
+  "references": [
+    { "path": "../spec" },
+    { "path": "../kernel" },
+    { "path": "../infrastructure" },
+    { "path": "../sandbox" },
+    { "path": "../security" },
+    { "path": "../verifier" },
+    { "path": "../adapters" }
+  ],
+  "include": ["src/**/*"]
+}

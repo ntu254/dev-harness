@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "composite": true,
+    "declaration": true,
+    "declarationMap": true
+  },
+  "references": [
+    { "path": "../spec" },
+    { "path": "../kernel" },
+    { "path": "../sandbox" }
+  ],
+  "include": ["src/**/*"]
+}

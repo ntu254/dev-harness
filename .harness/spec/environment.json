@@ -1,0 +1,17 @@
+{
+  "baseImage": "node:20-alpine",
+  "toolchains": {
+    "node": ">=20.0.0",
+    "typescript": ">=5.0.0"
+  },
+  "resourceLimits": {
+    "cpuCores": 2,
+    "memoryMb": 2048,
+    "timeoutSeconds": 30
+  },
+  "networkAllowlist": [
+    "registry.npmjs.org",
+    "pypi.org",
+    "github.com"
+  ]
+}

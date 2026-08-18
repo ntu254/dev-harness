@@ -1,0 +1,21 @@
+# Dependencies
+node_modules/
+
+# Build Outputs
+dist/
+*.tsbuildinfo
+
+# Test Coverage
+coverage/
+
+# DEV-HARNESS Ephemeral Runtime (Local / Run logs)
+.harness/runtime/
+
+# Environment Variables
+.env
+.env.local
+.env.*.local
+
+# OS Files
+.DS_Store
+Thumbs.db
